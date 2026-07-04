@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>H2EO — Learning Intelligence Ecosystem</title>
+  <meta name="description" content="H2EO helps organizations, educators, professionals, and learners discover strengths, accelerate growth, and transform how learning happens through intelligent learning systems." />
+
+  <!-- Preload key fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+
+  <style>
+    /* ── Hero ─────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(155deg, #f8fbff 0%, #edf4f9 40%, #e8f6f4 100%);
+      padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-20);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--h2eo-teal-muted), transparent 70%);
+      top: -100px; right: -100px;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(26,58,107,0.4), transparent 70%);
+      bottom: -50px; left: -100px;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, var(--h2eo-gold-soft), transparent 70%);
+      top: 30%; right: 15%;
+      opacity: 0.5;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: rgba(13,148,136,0.1);
+      border: 1px solid rgba(13,148,136,0.2);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--h2eo-teal);
+      border-radius: 50%;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: var(--space-6);
+      color: var(--text-primary);
+    }
+    .hero h1 .accent { color: var(--h2eo-teal); }
+
+    .hero-sub {
+      font-size: var(--text-xl);
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin-bottom: var(--space-10);
+    }
+
+    .hero-trust {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+      margin-top: var(--space-10);
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero-trust-item::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--h2eo-teal);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ecosystem-map {
+      position: relative;
+      width: 420px;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .eco-center {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: var(--shadow-xl);
+      border: 2px solid rgba(13,148,136,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .eco-center img { width: 64px; height: auto; }
+
+    .eco-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(13,148,136,0.2);
+    }
+    .ring-1 { width: 220px; height: 220px; animation: spin 30s linear infinite; }
+    .ring-2 { width: 360px; height: 360px; animation: spin 50s linear infinite reverse; }
+
+    .eco-node {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      text-decoration: none;
+    }
+    .eco-node-icon {
+      width: 56px; height: 56px;
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: transform var(--duration-base) var(--ease-spring), box-shadow var(--duration-base);
+    }
+    .eco-node:hover .eco-node-icon {
+      transform: scale(1.15);
+      box-shadow: var(--shadow-xl);
+    }
+    .eco-node-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .node-hero   { top: 10px;  left: 50%; transform: translateX(-50%); }
+    .node-superpow { top: 50%;   left: 10px; transform: translateY(-50%); }
+    .node-ai       { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .node-workforce{ top: 50%;   right: 10px; transform: translateY(-50%); }
+
+    .eco-connector {
+      position: absolute;
+      top: 50%; left: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--h2eo-teal), transparent);
+      transform-origin: left center;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-sub { margin: 0 auto var(--space-10); }
+      .hero-trust { justify-content: center; }
+      .hero .btn-group { justify-content: center; }
+      .hero-visual { display: none; }
+    }
+
+    /* ── Choose Your Path ──────────────────────────────────────────────── */
+    .paths-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-5);
+    }
+    @media (max-width: 1024px) { .paths-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px)  { .paths-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── Superpowers section ───────────────────────────────────────────── */
+    .superpowers-section {
+      background: linear-gradient(180deg, var(--surface-soft) 0%, var(--white) 100%);
+    }
+
+    .sp-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 960px) { .sp-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .sp-grid { grid-template-columns: 1fr; } }
+
+    /* ── Stats bar ─────────────────────────────────────────────────────── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .stats-bar .stat-item {
+      background: var(--white);
+      padding: var(--space-8) var(--space-6);
+      text-align: center;
+    }
+    .stats-bar .stat-num {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--h2eo-teal);
+    }
+    .stats-bar .stat-desc {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: var(--space-2);
+    }
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .stats-bar { grid-template-columns: 1fr; }
+    }
+
+    /* ── Offerings tiers ───────────────────────────────────────────────── */
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 768px) { .offerings-grid { grid-template-columns: 1fr; } }
+
+    .offering-tier {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border-subtle);
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      position: relative;
+      overflow: hidden;
+    }
+    .offering-tier.featured {
+      border-color: var(--h2eo-teal);
+      box-shadow: var(--shadow-teal);
+    }
+    .tier-tag {
+      position: absolute;
+      top: var(--space-5);
+      right: var(--space-5);
+    }
+    .offering-icon {
+      width: 48px; height: 48px;
+      background: var(--surface-teal-tint);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .offerings-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .offerings-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .offerings-list li::before {
+      content: '✓';
+      width: 18px;
+      height: 18px;
+      background: rgba(13,148,136,0.1);
+      color: var(--h2eo-teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Dark CTA section ──────────────────────────────────────────────── */
+    .cta-dark {
+      background: linear-gradient(135deg, var(--h2eo-navy) 0%, #112240 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-dark-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .cta-orb-1 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(13,148,136,0.25), transparent 70%);
+      top: -100px; right: -50px;
+    }
+    .cta-orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(30,79,160,0.3), transparent 70%);
+      bottom: -80px; left: -50px;
+    }
+
+    /* ── Testimonials ──────────────────────────────────────────────────── */
+    .testimonials-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 768px) { .testimonials-track { grid-template-columns: 1fr; } }
+
+    /* ── How it works steps ────────────────────────────────────────────── */
+    .steps-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+      position: relative;
+    }
+    .steps-track::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(50% / 3);
+      right: calc(50% / 3);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--h2eo-teal), transparent);
+    }
+    .step-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .step-number {
+      width: 56px; height: 56px;
+      background: var(--white);
+      border: 2px solid var(--h2eo-teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      color: var(--h2eo-teal);
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+    @media (max-width: 700px) {
+      .steps-track { grid-template-columns: 1fr; }
+      .steps-track::before { display: none; }
+    }
+
+    /* Contact section */
+    .contact-cols {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .contact-cols { grid-template-columns: 1fr; } }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: var(--surface-off);
+    }
+    .contact-info-icon {
+      width: 40px; height: 40px;
+      background: var(--surface-teal-tint);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────────────────────── -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-brand">
+    <img src="images/h2eo-logo.png" alt="H2EO" class="nav-logo" />
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="about.html">About</a></li>
+    <li>
+      <a href="#solutions">Solutions
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="nav-dropdown" role="menu">
+        <a href="organizations.html" role="menuitem">
+          Organizations
+          <span>Enterprise &amp; institutional learning</span>
+        </a>
+        <a href="educators.html" role="menuitem">
+          Educators
+          <span>Classroom &amp; training tools</span>
+        </a>
+        <a href="professionals.html" role="menuitem">
+          Professionals
+          <span>Career growth &amp; workforce dev</span>
+        </a>
+        <a href="adults.html" role="menuitem">
+          Adult Learners
+          <span>Lifelong learning pathways</span>
+        </a>
+        <a href="students.html" role="menuitem">
+          Students
+          <span>Personalized student learning paths</span>
+        </a>
+        <a href="k12.html" role="menuitem">
+          K–12 &amp; Parents
+          <span>Student &amp; parent resources</span>
+        </a>
+      </div>
+    </li>
+    <li><a href="profile.html">Superpowers™</a></li>
+    <li><a href="hero/login.html">Hero LMS</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li>
+      <a href="#resources">Resources
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="nav-dropdown" role="menu">
+        <a href="resources.html" role="menuitem">
+          Resources
+          <span>Guides, tools &amp; downloads</span>
+        </a>
+        <a href="insights.html" role="menuitem">
+          Insights
+          <span>Learning science articles &amp; news</span>
+        </a>
+      </div>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <a href="hero/login.html" class="nav-login">Sign In</a>
+    <a href="contact.html" class="nav-cta btn">Book Consultation</a>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+  <ul role="list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="organizations.html">Organizations</a></li>
+    <li><a href="educators.html">Educators</a></li>
+    <li><a href="professionals.html">Professionals</a></li>
+    <li><a href="adults.html">Adult Learners</a></li>
+    <li><a href="students.html">Students</a></li>
+    <li><a href="k12.html">K–12</a></li>
+    <li><a href="profile.html">Academic Superpowers™</a></li>
+    <li><a href="hero/login.html">Hero LMS</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="mobile-menu-footer">
+    <a href="hero/login.html" class="btn btn-secondary btn-block">Sign In</a>
+    <a href="contact.html" class="btn btn-primary btn-block">Book Consultation</a>
+  </div>
+</div>
+
+<!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content page-enter">
+        <div class="hero-eyebrow">
+          <div class="dot" aria-hidden="true"></div>
+          <span class="eyebrow">Learning Intelligence Ecosystem</span>
+        </div>
+        <h1>
+          Unlock Human Potential Through<br/>
+          <span class="accent">Intelligent Learning</span>
+        </h1>
+        <p class="hero-sub">
+          Helping organizations, educators, professionals, and learners discover strengths, accelerate growth, and transform how learning happens.
+        </p>
+        <div class="btn-group">
+          <a href="#solutions" class="btn btn-primary btn-lg">Explore Solutions</a>
+          <a href="profile.html" class="btn btn-secondary btn-lg">Take Assessment</a>
+          <a href="contact.html" class="btn btn-ghost">Book Consultation →</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item">Designed by educators</div>
+          <div class="hero-trust-item">Grounded in learning science</div>
+          <div class="hero-trust-item">Built for real lives</div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="ecosystem-map">
+          <div class="eco-ring ring-1"></div>
+          <div class="eco-ring ring-2"></div>
+
+          <div class="eco-center float-slow">
+            <img src="images/h2eo-logo.png" alt="" />
+          </div>
+
+          <a href="hero/login.html" class="eco-node node-hero float-mid">
+            <div class="eco-node-icon">🚀</div>
+            <span class="eco-node-label">Hero LMS</span>
+          </a>
+          <a href="profile.html" class="eco-node node-superpow float-fast">
+            <div class="eco-node-icon">⚡</div>
+            <span class="eco-node-label">Superpowers</span>
+          </a>
+          <a href="resources.html" class="eco-node node-ai float-slow">
+            <div class="eco-node-icon">🤖</div>
+            <span class="eco-node-label">AI Systems</span>
+          </a>
+          <a href="organizations.html" class="eco-node node-workforce float-mid">
+            <div class="eco-node-icon">🏢</div>
+            <span class="eco-node-label">Workforce</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Trust Strip ─────────────────────────────────────────────────────────── -->
+<div class="trust-strip" role="list" aria-label="Trust indicators">
+  <div class="trust-item" role="listitem">Designed by educators</div>
+  <div class="trust-item" role="listitem">Informed by learning science</div>
+  <div class="trust-item" role="listitem">Built for real people, real lives</div>
+  <div class="trust-item" role="listitem">Education should adapt to the learner</div>
+</div>
+
+<!-- ── Stats ───────────────────────────────────────────────────────────────── -->
+<section class="section-sm bg-white">
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-num" data-count="4" data-suffix="+">4+</div>
+        <div class="stat-desc">Learning archetypes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="28">28</div>
+        <div class="stat-desc">Assessment questions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="2018">2018</div>
+        <div class="stat-desc">Founded</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="100" data-suffix="%">100%</div>
+        <div class="stat-desc">Learner-centered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Choose Your Path ────────────────────────────────────────────────────── -->
+<section class="section bg-off" id="solutions">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Who We Serve</span>
+      <h2>Choose Your Path</h2>
+      <p>H2EO adapts to who you are — whether you lead organizations, teach, grow professionally, or learn for life.</p>
+    </div>
+
+    <div class="paths-grid">
+      <a href="organizations.html" class="path-card reveal stagger-1">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">🏢</div>
+        <h3>Organizations</h3>
+        <p>Enterprise learning systems, workforce development, and institutional transformation.</p>
+        <div class="card-arrow">Learn more <span>→</span></div>
+      </a>
+
+      <a href="educators.html" class="path-card reveal stagger-2">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">📚</div>
+        <h3>Educators</h3>
+        <p>Classroom frameworks, differentiated instruction, and educator training programs.</p>
+        <div class="card-arrow">Learn more <span>→</span></div>
+      </a>
+
+      <a href="professionals.html" class="path-card reveal stagger-3">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">💼</div>
+        <h3>Professionals</h3>
+        <p>Career-aligned learning, AI readiness, and professional growth series.</p>
+        <div class="card-arrow">Learn more <span>→</span></div>
+      </a>
+
+      <a href="adults.html" class="path-card reveal stagger-4">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">🎯</div>
+        <h3>Adult Learners</h3>
+        <p>Flexible learning paths for lifelong learners and college students.</p>
+        <div class="card-arrow">Learn more <span>→</span></div>
+      </a>
+
+      <a href="k12.html" class="path-card reveal stagger-5">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">🌟</div>
+        <h3>K–12 &amp; Parents</h3>
+        <p>Student discovery, family support, and school-ready learning tools.</p>
+        <div class="card-arrow">Learn more <span>→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────────────────────────────── -->
+<section class="section bg-white" id="how-it-works">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">The H2EO Method</span>
+      <h2>How H2EO Works</h2>
+      <p>A proven three-step framework that adapts learning to the individual — not the other way around.</p>
+    </div>
+
+    <div class="steps-track">
+      <div class="step-card reveal stagger-1">
+        <div class="step-number">1</div>
+        <h3>Discover How You Learn</h3>
+        <p>Start with the Academic Superpowers™ Framework — a science-informed approach that reveals your natural learning strengths across four powerful archetypes.</p>
+        <a href="profile.html" class="btn btn-ghost">Take Assessment →</a>
+      </div>
+      <div class="step-card reveal stagger-2">
+        <div class="step-number">2</div>
+        <h3>Learn Through Adaptive Paths</h3>
+        <p>Follow learning experiences that adjust to your thinking style, pace, and goals — without forcing you into a one-size-fits-all system.</p>
+        <a href="hero/login.html" class="btn btn-ghost">Explore Hero LMS →</a>
+      </div>
+      <div class="step-card reveal stagger-3">
+        <div class="step-number">3</div>
+        <h3>Grow Through Practice</h3>
+        <p>Build real skills through projects, guided reflection, coaching-style feedback, and a supportive learning community built for your archetype.</p>
+        <a href="contact.html" class="btn btn-ghost">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Academic Superpowers ────────────────────────────────────────────────── -->
+<section class="section superpowers-section" id="superpowers">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">The Framework</span>
+      <h2>Academic Superpowers™</h2>
+      <p><strong>Four Lenses. Infinite Learners.</strong> Understanding how you process information, solve problems, and stay motivated is the foundation of everything at H2EO.</p>
+    </div>
+
+    <div class="sp-grid">
+      <div class="superpower-card reveal stagger-1" style="--card-accent: #0d9488;">
+        <div class="card-icon">
+          <img src="images/handson.svg" alt="Hands-on Hero icon" />
+        </div>
+        <div>
+          <div class="badge badge-teal" style="margin-bottom: var(--space-3);">Hands-on Hero</div>
+          <h3>The Hands-on Hero</h3>
+          <p style="font-size:var(--text-sm); margin-top: var(--space-2);">"Learning by doing creates lasting understanding." Thrives with structure, clear steps, and tangible progress.</p>
+        </div>
+        <div class="tag-list" style="margin-top: auto;">
+          <span class="badge badge-gray">Practical</span>
+          <span class="badge badge-gray">Results-driven</span>
+          <span class="badge badge-gray">Adaptive</span>
+        </div>
+      </div>
+
+      <div class="superpower-card reveal stagger-2" style="--card-accent: #1e4fa0;">
+        <div class="card-icon" style="background: rgba(26,58,107,0.06);">
+          <img src="images/mastermind.svg" alt="Mastermind icon" />
+        </div>
+        <div>
+          <div class="badge badge-blue" style="margin-bottom: var(--space-3);">Mastermind</div>
+          <h3>The Mastermind</h3>
+          <p style="font-size:var(--text-sm); margin-top: var(--space-2);">"Strategy and insight pave the path to success." Learns through patterns, systems, and big-picture reasoning.</p>
+        </div>
+        <div class="tag-list" style="margin-top: auto;">
+          <span class="badge badge-gray">Strategic</span>
+          <span class="badge badge-gray">Systems thinker</span>
+          <span class="badge badge-gray">Leader</span>
+        </div>
+      </div>
+
+      <div class="superpower-card reveal stagger-3" style="--card-accent: #d4a843;">
+        <div class="card-icon" style="background: rgba(212,168,67,0.08);">
+          <img src="images/crusader.svg" alt="Creative Crusader icon" />
+        </div>
+        <div>
+          <div class="badge badge-gold" style="margin-bottom: var(--space-3);">Creative Crusader</div>
+          <h3>The Creative Crusader</h3>
+          <p style="font-size:var(--text-sm); margin-top: var(--space-2);">"With creativity as my guide, I'll help you reach new heights." Connects learning to people, purpose, and impact.</p>
+        </div>
+        <div class="tag-list" style="margin-top: auto;">
+          <span class="badge badge-gray">Creative</span>
+          <span class="badge badge-gray">Empathetic</span>
+          <span class="badge badge-gray">Collaborative</span>
+        </div>
+      </div>
+
+      <div class="superpower-card reveal stagger-4" style="--card-accent: #6366f1;">
+        <div class="card-icon" style="background: rgba(99,102,241,0.06);">
+          <img src="images/brainiac.svg" alt="Brainiac icon" />
+        </div>
+        <div>
+          <div class="badge" style="background:rgba(99,102,241,0.1);color:#4f46e5; margin-bottom: var(--space-3);">The Brainiac</div>
+          <h3>The Brainiac</h3>
+          <p style="font-size:var(--text-sm); margin-top: var(--space-2);">"I see the details so you can see the big picture!" Learns through creativity, imagination, and analytical depth.</p>
+        </div>
+        <div class="tag-list" style="margin-top: auto;">
+          <span class="badge badge-gray">Analytical</span>
+          <span class="badge badge-gray">Detail-oriented</span>
+          <span class="badge badge-gray">Pattern recognition</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center reveal" style="margin-top: var(--space-12);">
+      <a href="profile.html" class="btn btn-primary btn-lg">Find Your Academic Superpowers™</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services Available ──────────────────────────────────────────────────── -->
+<section class="section bg-white" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">What We Offer</span>
+      <h2>What You Can Do at H2EO</h2>
+      <p>From immediate services to future-forward platforms — H2EO is growing intentionally with learners at the center.</p>
+    </div>
+
+    <div class="offerings-grid">
+      <!-- Available Now -->
+      <div class="offering-tier featured reveal stagger-1">
+        <div class="offering-icon">🎯</div>
+        <div class="tier-tag"><span class="badge badge-green">Available Now</span></div>
+        <h3>Tutoring, Coaching &amp; Workshops</h3>
+        <ul class="offerings-list">
+          <li>1:1 tutoring for K-12 and adult learners</li>
+          <li>Personalized academic &amp; life coaching</li>
+          <li>Study skills &amp; learning strategy workshops</li>
+          <li>Academic Superpowers™ assessments with debriefs</li>
+          <li>Small-group sessions by need and level</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary" style="margin-top: auto;">Book a Consultation</a>
+      </div>
+
+      <!-- In Development -->
+      <div class="offering-tier reveal stagger-2">
+        <div class="offering-icon">🔬</div>
+        <div class="tier-tag"><span class="badge badge-blue">In Development</span></div>
+        <h3>Skill Pathways &amp; Career-Aligned Learning</h3>
+        <ul class="offerings-list">
+          <li>Software &amp; Tech Foundations</li>
+          <li>Web &amp; Database Developer Pathway</li>
+          <li>Leadership for Learners</li>
+          <li>Portfolio-based project learning</li>
+          <li>Adaptive mastery paths by Superpower type</li>
+        </ul>
+        <p style="font-size:var(--text-sm); color: var(--text-muted); margin-top: auto;"><strong>Early access opportunities opening soon.</strong></p>
+      </div>
+
+      <!-- Future Vision -->
+      <div class="offering-tier reveal stagger-3">
+        <div class="offering-icon">🌐</div>
+        <div class="tier-tag"><span class="badge badge-gray">Coming Soon</span></div>
+        <h3>Platforms, Partnerships &amp; Impact</h3>
+        <ul class="offerings-list">
+          <li>Educator &amp; facilitator toolkits</li>
+          <li>Curriculum licensing for schools</li>
+          <li>LMS integrations &amp; enterprise tools</li>
+          <li>AI-assisted personalized learning tools</li>
+          <li>Institutional and community partnerships</li>
+        </ul>
+        <p style="font-size:var(--text-sm); color: var(--text-muted); font-style:italic; margin-top:auto;">H2EO is growing intentionally — with learners at the center.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ────────────────────────────────────────────────────────── -->
+<section class="section bg-soft" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Stories</span>
+      <h2>Learners &amp; Educators Transformed</h2>
+    </div>
+
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal stagger-1">
+        <p class="testimonial-text">The Academic Superpowers assessment changed how I understand my students. I now design lessons that actually connect with how they naturally think.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MJ</div>
+          <div>
+            <div class="testimonial-name">M. Johnson</div>
+            <div class="testimonial-role">Middle School Educator</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal stagger-2">
+        <p class="testimonial-text">I finally understand why I struggled in traditional school. Discovering I'm a Hands-on Hero completely reframed how I approach professional development.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">TP</div>
+          <div>
+            <div class="testimonial-name">T. Patterson</div>
+            <div class="testimonial-role">Operations Manager</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal stagger-3">
+        <p class="testimonial-text">The H2EO framework gave our organization a shared language for how our team learns. Training outcomes improved significantly within one quarter.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">KR</div>
+          <div>
+            <div class="testimonial-name">K. Reynolds</div>
+            <div class="testimonial-role">Learning &amp; Development Director</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Dark CTA ────────────────────────────────────────────────────────────── -->
+<section class="section cta-dark" aria-label="Call to action">
+  <div class="cta-dark-orb cta-orb-1" aria-hidden="true"></div>
+  <div class="cta-dark-orb cta-orb-2" aria-hidden="true"></div>
+  <div class="container" style="position: relative; z-index: 1; text-align: center;">
+    <div class="reveal">
+      <span class="eyebrow" style="color: var(--h2eo-teal-muted);">Start Today</span>
+      <h2 style="color: white; margin-top: var(--space-4); margin-bottom: var(--space-6);">Education That Adapts to You.</h2>
+      <p class="lead" style="color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto var(--space-10);">
+        Whether you're returning to learning, building new skills, or redefining your path — H2EO meets you where you are.
+      </p>
+      <div class="btn-group flex-center">
+        <a href="profile.html" class="btn btn-primary btn-xl">Take the Assessment</a>
+        <a href="contact.html" class="btn btn-outline-white btn-xl">Book a Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact Form ────────────────────────────────────────────────────────── -->
+<section class="section bg-white" id="contact">
+  <div class="container">
+    <div class="contact-cols">
+      <div class="reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 style="margin-top: var(--space-4); margin-bottom: var(--space-6);">Connect with H2EO</h2>
+        <p class="lead" style="margin-bottom: var(--space-8);">Ready to transform how learning happens in your organization or life? Let's start a conversation.</p>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div>
+              <div style="font-weight:600; font-size:var(--text-sm);">Email Us</div>
+              <div style="font-size:var(--text-sm); color:var(--text-muted);">support@heretoeducateothers.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🌐</div>
+            <div>
+              <div style="font-weight:600; font-size:var(--text-sm);">Website</div>
+              <div style="font-size:var(--text-sm); color:var(--text-muted);">www.heretoeducateothers.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">⚡</div>
+            <div>
+              <div style="font-weight:600; font-size:var(--text-sm);">Quick Assessment</div>
+              <div style="font-size:var(--text-sm); color:var(--text-muted);">Discover your Academic Superpowers™ in 10 minutes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card reveal stagger-2">
+        <form data-contact-form style="display: flex; flex-direction: column; gap: var(--space-5);">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First Name *</label>
+              <input class="form-input" type="text" id="firstName" name="firstName" required placeholder="Your first name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last Name *</label>
+              <input class="form-input" type="text" id="lastName" name="lastName" required placeholder="Your last name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-input" type="email" id="email" name="email" required placeholder="you@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="interest">Area of Interest *</label>
+            <select class="form-select" id="interest" name="interest" required>
+              <option value="">Select an option…</option>
+              <option value="tutoring-k12">K-12 Tutoring</option>
+              <option value="tutoring-adult">Adult Tutoring</option>
+              <option value="coaching">Academic &amp; Learning Coaching</option>
+              <option value="workshops">Study Skills Workshops</option>
+              <option value="assessment">Academic Superpowers™ Assessment</option>
+              <option value="organization">Organizational Training</option>
+              <option value="workforce">Workforce Development</option>
+              <option value="consultation">General Consultation</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Tell Us About Your Goals *</label>
+            <textarea class="form-textarea" id="message" name="message" rows="4" required placeholder="Share your learning goals, challenges, or questions…"></textarea>
+          </div>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="newsletter" />
+            <span class="checkbox-box"></span>
+            I'd like to receive educational insights and updates from H2EO
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/h2eo-logo.png" alt="H2EO - Here to Educate Others" class="footer-logo" />
+        <p class="footer-desc">Here to Educate Others (H2EO) is a Learning Intelligence Ecosystem helping organizations, educators, professionals, and learners discover strengths and transform how learning happens.</p>
+        <div class="footer-social" aria-label="Social media links">
+          <a href="#" class="footer-social-link" aria-label="Facebook">f</a>
+          <a href="#" class="footer-social-link" aria-label="YouTube">▶</a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Solutions</h5>
+        <ul class="footer-links-list">
+          <li><a href="organizations.html">Organizations</a></li>
+          <li><a href="educators.html">Educators</a></li>
+          <li><a href="professionals.html">Professionals</a></li>
+          <li><a href="adults.html">Adult Learners</a></li>
+          <li><a href="k12.html">K–12 &amp; Parents</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul class="footer-links-list">
+          <li><a href="profile.html">Academic Superpowers™</a></li>
+          <li><a href="hero/login.html">Hero LMS</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul class="footer-links-list">
+          <li><a href="about.html">About H2EO</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="hero/login.html">Sign In</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2025 Here to Educate Others (H2EO), LLC. All rights reserved.</p>
+      <nav class="footer-legal" aria-label="Legal links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+<script src="js/core.js"></script>
+</body>
+</html>

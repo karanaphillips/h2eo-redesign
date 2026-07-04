@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Students — H2EO Learning Intelligence Ecosystem</title>
+  <meta name="description" content="H2EO for students: discover your Academic Superpowers™, access personalized courses, and learn in the way that fits how your brain actually works." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    .page-hero { padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-20); background: linear-gradient(155deg, #f0f9f7 0%, #f8fbff 60%, #edf4f9 100%); position: relative; overflow: hidden; }
+    .sp-student-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+    @media (max-width: 640px) { .sp-student-grid { grid-template-columns: 1fr; } }
+    .sp-student-card { border-radius: var(--radius-xl); padding: var(--space-8); border: 1.5px solid transparent; display: flex; flex-direction: column; gap: var(--space-4); transition: box-shadow var(--duration-base), transform var(--duration-base); }
+    .sp-student-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .how-step { display: flex; gap: var(--space-5); align-items: flex-start; }
+    .step-bubble { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+    .quote-card { background: var(--white); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); padding: var(--space-8); position: relative; }
+    .quote-card::before { content: '"'; position: absolute; top: var(--space-4); left: var(--space-6); font-size: 5rem; color: var(--h2eo-teal); opacity: 0.15; font-family: var(--font-display); line-height: 1; }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<section class="page-hero">
+  <div style="position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,0.15),transparent 70%);border-radius:50%;filter:blur(70px);top:-80px;right:-80px;pointer-events:none;"></div>
+  <div class="container">
+    <div class="reveal" style="max-width:720px;">
+      <span class="eyebrow">For Students</span>
+      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-6);">Learn the Way Your Brain Actually Works</h1>
+      <p class="lead" style="margin-bottom:var(--space-10);">You're not a bad student — you might just be learning the wrong way. H2EO helps you discover your Academic Superpowers™ and build a learning path that actually fits how you think, focus, and grow.</p>
+      <div class="btn-group">
+        <a href="profile.html" class="btn btn-primary btn-lg">Discover My Superpowers</a>
+        <a href="hero/index.html" class="btn btn-secondary btn-lg">Go to Hero LMS</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-item">Built for real students</div>
+  <div class="trust-item">No labels, just strengths</div>
+  <div class="trust-item">Self-paced &amp; personalized</div>
+</div>
+
+<!-- What is a superpower -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Your Unique Strengths</span>
+      <h2>What's Your Academic Superpower™?</h2>
+      <p>Every learner has a dominant way of thinking, engaging, and making sense of the world. The Academic Superpowers™ framework identifies yours — so everything from how you study to the courses you take can be aligned to your strengths.</p>
+    </div>
+    <div class="sp-student-grid">
+      <div class="sp-student-card reveal stagger-1" style="background:rgba(13,148,136,0.04);border-color:rgba(13,148,136,0.15);">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <img src="images/handson.svg" alt="Hands-on Hero" style="width:48px;height:48px;" />
+          <span class="badge badge-teal">Hands-on Hero</span>
+        </div>
+        <h4>You learn by doing</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-secondary);">You thrive in labs, workshops, and projects. You grasp concepts quickly when you can try them out — and you lose interest fast when forced to sit still and listen.</p>
+      </div>
+      <div class="sp-student-card reveal stagger-2" style="background:rgba(26,58,107,0.04);border-color:rgba(26,58,107,0.12);">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <img src="images/mastermind.svg" alt="Mastermind" style="width:48px;height:48px;" />
+          <span class="badge badge-blue">Mastermind</span>
+        </div>
+        <h4>You learn by strategizing</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-secondary);">You see the big picture before the details. You love debate, case studies, and systems. You need context and autonomy — not just step-by-step instructions.</p>
+      </div>
+      <div class="sp-student-card reveal stagger-3" style="background:rgba(212,168,67,0.05);border-color:rgba(212,168,67,0.18);">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <img src="images/crusader.svg" alt="Creative Crusader" style="width:48px;height:48px;" />
+          <span class="badge badge-gold">Creative Crusader</span>
+        </div>
+        <h4>You learn by connecting</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-secondary);">You think in stories, relationships, and purpose. Collaborative, creative, and mission-driven — you need to understand WHY before you'll commit to HOW.</p>
+      </div>
+      <div class="sp-student-card reveal stagger-4" style="background:rgba(99,102,241,0.04);border-color:rgba(99,102,241,0.12);">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <img src="images/brainiac.svg" alt="The Brainiac" style="width:48px;height:48px;" />
+          <span class="badge" style="background:rgba(99,102,241,0.1);color:#4f46e5;">The Brainiac</span>
+        </div>
+        <h4>You learn by analyzing</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-secondary);">You go deep, not wide. Research, complexity, and mastery are your natural habitat. You need time to think — and access to the full picture before you commit.</p>
+      </div>
+    </div>
+    <div class="text-center reveal" style="margin-top:var(--space-10);">
+      <a href="profile.html" class="btn btn-primary btn-lg">Find Out Which One You Are</a>
+    </div>
+  </div>
+</section>
+
+<!-- How it works for students -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Your Journey</span>
+      <h2>How H2EO Works for Students</h2>
+    </div>
+    <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-8);">
+      <div class="how-step reveal stagger-1">
+        <div class="step-bubble" style="background:var(--surface-teal-tint);">⚡</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Take the Assessment (10–15 min)</h4>
+          <p style="color:var(--text-secondary);">A simple, forced-choice assessment that reveals your dominant learning archetype — no right or wrong answers, just honest insights about how your brain learns best.</p>
+        </div>
+      </div>
+      <div class="how-step reveal stagger-2">
+        <div class="step-bubble" style="background:rgba(26,58,107,0.06);">🗺️</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">See Your Personalized Profile</h4>
+          <p style="color:var(--text-secondary);">Get a full breakdown of your Academic Superpower™ — including how you naturally learn, what types of environments help you focus, and which study strategies actually work for you.</p>
+        </div>
+      </div>
+      <div class="how-step reveal stagger-3">
+        <div class="step-bubble" style="background:rgba(212,168,67,0.1);">📚</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Access Matched Courses &amp; Paths</h4>
+          <p style="color:var(--text-secondary);">Explore courses in the Hero LMS that are organized and taught in ways that match your archetype — so you're not fighting the format just to understand the content.</p>
+        </div>
+      </div>
+      <div class="how-step reveal stagger-4">
+        <div class="step-bubble" style="background:rgba(99,102,241,0.06);">📈</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Track Your Growth Over Time</h4>
+          <p style="color:var(--text-secondary);">Your Hero LMS dashboard shows your progress, upcoming lessons, and milestones — giving you a clear picture of how far you've come and what's next.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial-style quotes -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Student Perspectives</span>
+      <h2>Learning Differently Changes Everything</h2>
+    </div>
+    <div class="grid-3" style="gap:var(--space-6);">
+      <div class="quote-card reveal stagger-1">
+        <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-6);position:relative;z-index:1;">"I always thought I was bad at school. Turns out I'm a Hands-on Hero and I've been stuck in lecture-only classes my whole life. Knowing that changed how I study everything."</p>
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <div style="width:40px;height:40px;background:var(--surface-teal-tint);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--h2eo-teal);">M</div>
+          <div>
+            <div style="font-weight:600;font-size:var(--text-sm);">Marcus T.</div>
+            <div style="font-size:var(--text-xs);color:var(--text-muted);">College Freshman</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal stagger-2">
+        <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-6);position:relative;z-index:1;">"The assessment showed I'm a Mastermind, which explained why I always want the 'why' before the 'how.' Now I start every study session with the big picture and it actually sticks."</p>
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <div style="width:40px;height:40px;background:rgba(26,58,107,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--h2eo-mid-blue);">A</div>
+          <div>
+            <div style="font-weight:600;font-size:var(--text-sm);">Amara K.</div>
+            <div style="font-size:var(--text-xs);color:var(--text-muted);">High School Junior</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal stagger-3">
+        <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-6);position:relative;z-index:1;">"I'm a Creative Crusader. I always struggled with tests that felt disconnected from real life — now I know to link every concept to something meaningful before I memorize it."</p>
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <div style="width:40px;height:40px;background:rgba(212,168,67,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--h2eo-gold);">J</div>
+          <div>
+            <div style="font-weight:600;font-size:var(--text-sm);">Jordan P.</div>
+            <div style="font-size:var(--text-xs);color:var(--text-muted);">Adult Learner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-dark">
+  <div class="container" style="position:relative;z-index:1;text-align:center;">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Your Learning Starts Here</span>
+      <h2 style="color:white;margin-top:var(--space-4);margin-bottom:var(--space-6);">Ready to Learn as Yourself?</h2>
+      <p class="lead" style="color:rgba(255,255,255,0.7);max-width:520px;margin:0 auto var(--space-10);">The assessment is free. The insight is permanent. Take 10 minutes today and build a smarter learning path for everything that comes next.</p>
+      <div class="btn-group flex-center">
+        <a href="profile.html" class="btn btn-primary btn-xl">Take the Assessment</a>
+        <a href="hero/index.html" class="btn btn-outline-white btn-xl">Access Hero LMS</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>

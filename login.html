@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — H2EO Platform</title>
+  <meta name="description" content="Sign in to your H2EO Platform account to continue your personalized learning journey." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+<div class="auth-page">
+  <!-- Form Panel -->
+  <div class="auth-panel">
+    <div class="auth-panel-inner">
+      <a href="index.html" class="auth-logo-wrap">
+        <img src="images/h2eo-logo.png" alt="H2EO" class="auth-logo" />
+        <span class="auth-logo-name">H2EO Platform</span>
+      </a>
+
+      <div class="auth-header">
+        <h1>Welcome back</h1>
+        <p class="auth-subtitle">Sign in to continue your learning journey.</p>
+      </div>
+
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrapper">
+            <input class="form-input has-icon-right" type="password" id="password" name="password" required autocomplete="current-password" placeholder="Your password" />
+            <button type="button" class="password-toggle-btn" id="passwordToggle" aria-label="Toggle password visibility">👁</button>
+          </div>
+        </div>
+        <div class="form-row-inline">
+          <label class="checkbox-label" style="font-size:var(--text-sm);">
+            <input type="checkbox" name="rememberMe" />
+            <span class="checkbox-box"></span>
+            Remember me
+          </label>
+          <a href="#" class="forgot-link" id="forgotPasswordLink">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginButton">Sign In</button>
+      </form>
+
+      <div class="auth-divider">or continue with</div>
+
+      <div class="social-btns">
+        <button class="social-btn" id="googleLogin" type="button">
+          <span>G</span> Google
+        </button>
+        <button class="social-btn" id="microsoftLogin" type="button">
+          <span>⊞</span> Microsoft
+        </button>
+      </div>
+
+      <p class="auth-footer-link">Don't have an account? <a href="hero/register.html">Sign up here</a></p>
+      <p class="auth-footer-link">Need help? <a href="contact.html">Contact Support</a></p>
+    </div>
+  </div>
+
+  <!-- Visual Panel -->
+  <div class="auth-visual">
+    <div class="av-orb-1 auth-visual-orb"></div>
+    <div class="av-orb-2 auth-visual-orb"></div>
+    <div class="auth-visual-content">
+      <div class="auth-visual-icon">⚡</div>
+      <h2>Your Learning Intelligence Platform</h2>
+      <p>Access your Academic Superpowers™ profile, personalized learning paths, and AI-powered coaching — all in one place.</p>
+      <div class="auth-features">
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🎯</div>
+          <div class="auth-feature-text">
+            <strong>Superpower-Aligned Learning</strong>
+            Courses and paths tailored to your unique cognitive profile.
+          </div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🤖</div>
+          <div class="auth-feature-text">
+            <strong>AI Coach</strong>
+            Personalized guidance and recommendations at every step.
+          </div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">📊</div>
+          <div class="auth-feature-text">
+            <strong>Progress Analytics</strong>
+            Track growth, streaks, and completion across all your courses.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Password Reset Modal -->
+<div id="resetModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:none;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:var(--radius-xl);padding:var(--space-8);max-width:440px;width:90%;box-shadow:var(--shadow-2xl);">
+    <h3 style="margin-bottom:var(--space-3);">Reset Password</h3>
+    <p style="font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-6);">Enter your email and we'll send you a reset link.</p>
+    <form id="resetForm" style="display:flex;flex-direction:column;gap:var(--space-4);">
+      <div class="form-group">
+        <label class="form-label" for="resetEmail">Email Address</label>
+        <input class="form-input" type="email" id="resetEmail" required placeholder="you@example.com" />
+      </div>
+      <div style="display:flex;gap:var(--space-3);">
+        <button type="button" id="cancelReset" class="btn btn-secondary" style="flex:1;">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="flex:1;">Send Reset Link</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+<script src="js/core.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

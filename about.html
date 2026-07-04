@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About H2EO — Learning Intelligence Ecosystem</title>
+  <meta name="description" content="Learn about H2EO's mission to help organizations, educators, and learners discover strengths and transform how learning happens." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    .page-hero {
+      padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-20);
+      background: linear-gradient(155deg, #f8fbff 0%, #edf4f9 60%, #e8f6f4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; pointer-events: none;
+    }
+    .timeline { display: flex; flex-direction: column; gap: var(--space-6); }
+    .timeline-item {
+      display: flex;
+      gap: var(--space-6);
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 31px;
+      top: 60px;
+      bottom: -24px;
+      width: 1px;
+      background: var(--border-subtle);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-year-badge {
+      width: 64px; height: 64px;
+      background: var(--white);
+      border: 2px solid var(--h2eo-teal);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-sm);
+      color: var(--h2eo-teal);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-body { padding-top: var(--space-3); }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    @media (max-width: 768px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .values-grid { grid-template-columns: 1fr; } }
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .value-icon { font-size: 2rem; }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+    @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+    .cta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; } }
+    .cta-dark {
+      background: linear-gradient(135deg, var(--h2eo-navy) 0%, #0f2d52 60%, #0d3d3a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-dark::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(13,148,136,0.2), transparent 70%);
+      border-radius: 50%; filter: blur(80px);
+      top: -100px; right: -80px; pointer-events: none;
+    }
+    .cta-dark .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- Hero -->
+<section class="page-hero">
+  <div class="page-hero-orb" style="width:500px;height:500px;background:radial-gradient(circle,var(--h2eo-teal-muted),transparent 70%);top:-100px;right:-100px;"></div>
+  <div class="container">
+    <div class="reveal" style="max-width:720px;">
+      <span class="eyebrow">Our Story</span>
+      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-6);">About H2EO</h1>
+      <p class="lead">Here to Educate Others represents a fundamental shift in how we approach learning. We believe every individual possesses unique Academic Superpowers™ that, when properly identified and nurtured, unlock extraordinary potential.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<div class="trust-strip">
+  <div class="trust-item">Designed by educators</div>
+  <div class="trust-item">Informed by learning science</div>
+  <div class="trust-item">Built for real people, real lives</div>
+  <div class="trust-item">Education should adapt to the learner</div>
+</div>
+
+<!-- Mission & Vision -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="grid-2">
+      <div class="reveal">
+        <span class="eyebrow">Our Purpose</span>
+        <h2 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Our Mission</h2>
+        <p>To revolutionize education by creating personalized learning experiences that honor individual cognitive strengths and foster academic excellence. We empower learners of all ages to discover their unique Academic Superpowers™ and achieve their full potential through innovative technology and research-backed methodologies.</p>
+        <a href="profile.html" class="btn btn-primary" style="margin-top:var(--space-8);">Discover Your Superpowers</a>
+      </div>
+      <div class="reveal stagger-2">
+        <span class="eyebrow">Where We're Headed</span>
+        <h2 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Our Vision</h2>
+        <p>A world where every learner's unique cognitive profile is recognized, celebrated, and optimized. We envision educational environments that adapt to individual strengths rather than forcing conformity — creating a generation of confident, capable, and academically empowered individuals across every sector.</p>
+        <a href="contact.html" class="btn btn-secondary" style="margin-top:var(--space-8);">Join the Mission</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="story-grid">
+      <div class="reveal">
+        <span class="eyebrow">How We Got Here</span>
+        <h2 style="margin-top:var(--space-4);margin-bottom:var(--space-6);">Our Story</h2>
+        <p class="lead" style="margin-bottom:var(--space-6);">H2EO was born from a simple yet profound realization: traditional education often overlooks the diverse ways people learn and process information.</p>
+        <p style="margin-bottom:var(--space-4);">Founded by a mother dedicated to education, research, and technology innovation after witnessing her child's academic struggles, H2EO emerged from years of observing students struggle in one-size-fits-all educational environments.</p>
+        <p style="margin-bottom:var(--space-4);">We witnessed brilliant minds labeled as "struggling learners" simply because their cognitive strengths didn't align with conventional teaching methods. Our breakthrough came through extensive research into cognitive diversity and learning preferences.</p>
+        <p>We discovered that every individual possesses a unique combination of intellectual strengths — what we call <strong>Academic Superpowers™</strong>. Today, H2EO stands at the forefront of personalized education, combining assessment technology with comprehensive learning management systems to create truly individualized experiences.</p>
+      </div>
+      <div class="reveal stagger-2">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year-badge">2018</div>
+            <div class="timeline-body">
+              <h4>Research Foundation</h4>
+              <p style="font-size:var(--text-sm); color:var(--text-muted);">Initial research into cognitive diversity and learning preferences begins. The seed of Academic Superpowers™ is planted.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year-badge">2020</div>
+            <div class="timeline-body">
+              <h4>Academic Superpowers™ Framework</h4>
+              <p style="font-size:var(--text-sm); color:var(--text-muted);">Development of the four-archetype Academic Superpowers™ assessment model. Framework validated through pilot programs.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year-badge">2022</div>
+            <div class="timeline-body">
+              <h4>Platform Development</h4>
+              <p style="font-size:var(--text-sm); color:var(--text-muted);">Creation of the H2EO Platform (Hero LMS) learning management system with superpower-aligned learning paths.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year-badge">2026</div>
+            <div class="timeline-body">
+              <h4>Full Integration</h4>
+              <p style="font-size:var(--text-sm); color:var(--text-muted);">Launch of comprehensive K-12, higher education, and professional development programs with enterprise solutions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Superpowers -->
+<section class="section bg-white" id="superpowers">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">The Science Behind It</span>
+      <h2>Academic Superpowers™ Framework</h2>
+      <p>Grounded in decades of cognitive research and educational psychology. Each superpower represents a distinct cognitive profile with unique strengths, learning preferences, and optimal approaches.</p>
+    </div>
+    <div class="grid-2">
+      <div class="superpower-card reveal stagger-1" style="--card-accent:#0d9488;">
+        <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+          <div class="card-icon"><img src="images/handson.svg" alt="Hands-on Hero" /></div>
+          <div>
+            <span class="badge badge-teal" style="margin-bottom:var(--space-2);">Hands-on Hero</span>
+            <h3 style="margin-top:var(--space-2);">The Hands-on Hero</h3>
+            <p style="font-style:italic;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-1);">"Learning by doing creates lasting understanding!"</p>
+          </div>
+        </div>
+        <p style="font-size:var(--text-sm);">Experiential learner who thrives with direct application. Excels at finding practical solutions to real-world challenges, adapts to dynamic environments, and focuses on tangible outcomes.</p>
+        <div class="tag-list"><span class="badge badge-gray">Practical</span><span class="badge badge-gray">Results-driven</span><span class="badge badge-gray">Adaptive</span><span class="badge badge-gray">Operations</span></div>
+      </div>
+      <div class="superpower-card reveal stagger-2" style="--card-accent:#1e4fa0;">
+        <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+          <div class="card-icon" style="background:rgba(26,58,107,0.06);"><img src="images/mastermind.svg" alt="Mastermind" /></div>
+          <div>
+            <span class="badge badge-blue" style="margin-bottom:var(--space-2);">Mastermind</span>
+            <h3 style="margin-top:var(--space-2);">The Mastermind</h3>
+            <p style="font-style:italic;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-1);">"Strategy and insight pave the path to success!"</p>
+          </div>
+        </div>
+        <p style="font-size:var(--text-sm);">Strategic thinker with exceptional ability to see the big picture. Natural talent for understanding complex systems, anticipating trends, and instinctive understanding of organizational dynamics.</p>
+        <div class="tag-list"><span class="badge badge-gray">Strategic</span><span class="badge badge-gray">Systems thinker</span><span class="badge badge-gray">Leadership</span><span class="badge badge-gray">Consulting</span></div>
+      </div>
+      <div class="superpower-card reveal stagger-3" style="--card-accent:#d4a843;">
+        <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+          <div class="card-icon" style="background:rgba(212,168,67,0.08);"><img src="images/crusader.svg" alt="Creative Crusader" /></div>
+          <div>
+            <span class="badge badge-gold" style="margin-bottom:var(--space-2);">Creative Crusader</span>
+            <h3 style="margin-top:var(--space-2);">The Creative Crusader</h3>
+            <p style="font-style:italic;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-1);">"With creativity as my guide, I'll help you reach new heights!"</p>
+          </div>
+        </div>
+        <p style="font-size:var(--text-sm);">Innovative thinker with strong capacity for empathy and cross-disciplinary thinking. Connects learning to people, purpose, and real-world impact with collaborative spirit.</p>
+        <div class="tag-list"><span class="badge badge-gray">Creative</span><span class="badge badge-gray">Empathetic</span><span class="badge badge-gray">Collaborative</span><span class="badge badge-gray">Design</span></div>
+      </div>
+      <div class="superpower-card reveal stagger-4" style="--card-accent:#6366f1;">
+        <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+          <div class="card-icon" style="background:rgba(99,102,241,0.06);"><img src="images/brainiac.svg" alt="The Brainiac" /></div>
+          <div>
+            <span class="badge" style="background:rgba(99,102,241,0.1);color:#4f46e5;margin-bottom:var(--space-2);">Brainiac</span>
+            <h3 style="margin-top:var(--space-2);">The Brainiac</h3>
+            <p style="font-style:italic;font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-1);">"I see the details so you can see the big picture!"</p>
+          </div>
+        </div>
+        <p style="font-size:var(--text-sm);">Analytical powerhouse with exceptional pattern recognition and detail orientation. Thrives on precision, sequential thinking, and evidence-based conclusions. Natural researcher.</p>
+        <div class="tag-list"><span class="badge badge-gray">Analytical</span><span class="badge badge-gray">Detail-oriented</span><span class="badge badge-gray">Research</span><span class="badge badge-gray">Engineering</span></div>
+      </div>
+    </div>
+    <div class="text-center reveal" style="margin-top:var(--space-12);">
+      <a href="profile.html" class="btn btn-primary btn-lg">Take the Academic Superpowers™ Assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">What Guides Us</span>
+      <h2>Our Core Values</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal stagger-1">
+        <div class="value-icon">💡</div>
+        <h3>Innovation</h3>
+        <p style="font-size:var(--text-sm);">We continuously push the boundaries of educational technology to create more effective and engaging learning experiences.</p>
+      </div>
+      <div class="value-card reveal stagger-2">
+        <div class="value-icon">❤️</div>
+        <h3>Inclusivity</h3>
+        <p style="font-size:var(--text-sm);">We believe every learner deserves an education that honors their unique strengths and supports their individual journey.</p>
+      </div>
+      <div class="value-card reveal stagger-3">
+        <div class="value-icon">⭐</div>
+        <h3>Excellence</h3>
+        <p style="font-size:var(--text-sm);">We maintain the highest standards in educational content, technology development, and student support services.</p>
+      </div>
+      <div class="value-card reveal stagger-4">
+        <div class="value-icon">🤝</div>
+        <h3>Collaboration</h3>
+        <p style="font-size:var(--text-sm);">We foster partnerships with educators, institutions, and learners to continuously improve our platform and services.</p>
+      </div>
+      <div class="value-card reveal stagger-5">
+        <div class="value-icon">🛡️</div>
+        <h3>Integrity</h3>
+        <p style="font-size:var(--text-sm);">We operate with transparency, honesty, and ethical practices in all our interactions and business decisions.</p>
+      </div>
+      <div class="value-card reveal stagger-6">
+        <div class="value-icon">🌍</div>
+        <h3>Impact</h3>
+        <p style="font-size:var(--text-sm);">We measure our success by the positive transformation we create in learners' lives and educational communities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Join CTA -->
+<section class="section cta-dark">
+  <div class="container" style="position:relative;z-index:1;text-align:center;">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Join Us</span>
+      <h2 style="color:white;margin-top:var(--space-4);margin-bottom:var(--space-6);">Join Our Educational Revolution</h2>
+      <p class="lead" style="color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto var(--space-10);">Whether you're an educator, student, parent, or institution — you can be part of the movement to personalize education and unlock human potential.</p>
+      <div class="cta-grid">
+        <div class="glass-card" style="padding:var(--space-6);text-align:center;">
+          <div style="font-size:2rem;margin-bottom:var(--space-4);">📚</div>
+          <h3 style="color:white;margin-bottom:var(--space-3);">For Educators</h3>
+          <p style="color:rgba(255,255,255,0.65);font-size:var(--text-sm);margin-bottom:var(--space-5);">Discover how to identify and nurture Academic Superpowers™ in your students.</p>
+          <a href="educators.html" class="btn btn-outline-white">Learn More</a>
+        </div>
+        <div class="glass-card" style="padding:var(--space-6);text-align:center;">
+          <div style="font-size:2rem;margin-bottom:var(--space-4);">⚡</div>
+          <h3 style="color:white;margin-bottom:var(--space-3);">For Learners</h3>
+          <p style="color:rgba(255,255,255,0.65);font-size:var(--text-sm);margin-bottom:var(--space-5);">Take the Academic Superpowers™ assessment and unlock your learning potential.</p>
+          <a href="profile.html" class="btn btn-primary">Take Assessment</a>
+        </div>
+        <div class="glass-card" style="padding:var(--space-6);text-align:center;">
+          <div style="font-size:2rem;margin-bottom:var(--space-4);">🏢</div>
+          <h3 style="color:white;margin-bottom:var(--space-3);">For Institutions</h3>
+          <p style="color:rgba(255,255,255,0.65);font-size:var(--text-sm);margin-bottom:var(--space-5);">Implement the H2EO framework and transform your educational programs.</p>
+          <a href="organizations.html" class="btn btn-outline-white">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>

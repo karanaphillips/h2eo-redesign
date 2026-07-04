@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Academic Superpowers™ Results — H2EO</title>
+  <meta name="description" content="View your Academic Superpowers™ profile results from H2EO." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/style-compat.css" />
+  <style>
+    .results-page { min-height: 100vh; background: var(--surface-off); padding-top: calc(var(--nav-height) + var(--space-12)); padding-bottom: var(--space-20); }
+    .results-card { background: var(--white); border-radius: var(--radius-2xl); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-lg); overflow: hidden; max-width: 720px; margin: 0 auto; }
+    .results-hero { background: linear-gradient(135deg, var(--h2eo-navy), #0f2d52); padding: var(--space-10); position: relative; overflow: hidden; }
+    .results-hero::before { content: ''; position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(13,148,136,0.3), transparent 70%); border-radius: 50%; filter: blur(60px); top: -80px; right: -40px; pointer-events: none; }
+    .results-body { padding: var(--space-10); }
+    .sp-icon { width: 88px; height: 88px; border-radius: var(--radius-xl); object-fit: contain; border: 3px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); padding: var(--space-2); }
+    .sp-icon-placeholder { width: 88px; height: 88px; border-radius: var(--radius-xl); background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .trait-pill { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); background: var(--surface-teal-tint); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; color: var(--h2eo-teal); }
+    .action-strip { padding: var(--space-8) var(--space-10); background: var(--surface-off); border-top: 1px solid var(--border-subtle); display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: center; }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<div class="results-page">
+  <div class="container">
+    <div class="results-card reveal" id="resultsCard">
+      <!-- Loading state -->
+      <div id="resultsLoading" style="text-align:center;padding:var(--space-16);">
+        <div style="width:36px;height:36px;border:3px solid var(--border-subtle);border-top-color:var(--h2eo-teal);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto var(--space-4);"></div>
+        <p style="color:var(--text-muted);">Loading your results…</p>
+      </div>
+      <style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+    </div>
+  </div>
+</div>
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+<script>
+(function () {
+  function renderEmpty() {
+    document.getElementById('resultsCard').innerHTML = `
+      <div style="text-align:center;padding:var(--space-16) var(--space-10);">
+        <div style="font-size:3rem;margin-bottom:var(--space-4);">⚡</div>
+        <h2 style="margin-bottom:var(--space-3);">No Assessment on File</h2>
+        <p style="color:var(--text-muted);max-width:400px;margin:0 auto var(--space-8);">
+          Take the Academic Superpowers™ assessment to discover your unique learning archetype and unlock a personalized experience.
+        </p>
+        <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
+          <a href="profile.html" class="btn btn-primary btn-lg">Take the Assessment</a>
+          <a href="index.html" class="btn btn-secondary btn-lg">Back to Home</a>
+        </div>
+      </div>`;
+  }
+
+  function renderResult(data) {
+    const imgSrc = data.image || '';
+    const imgEl = imgSrc
+      ? `<img src="${imgSrc}" alt="${data.name}" class="sp-icon" />`
+      : `<div class="sp-icon-placeholder">⚡</div>`;
+
+    const completedDate = data.completedAt
+      ? new Date(data.completedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      : null;
+
+    const traits = Array.isArray(data.traits) && data.traits.length
+      ? data.traits.map(t => `<span class="trait-pill">${t}</span>`).join('')
+      : '';
+
+    document.getElementById('resultsCard').innerHTML = `
+      <div class="results-hero">
+        <div style="position:relative;z-index:1;">
+          <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Your Academic Superpowers™</span>
+          <div style="display:flex;align-items:center;gap:var(--space-6);margin-top:var(--space-5);flex-wrap:wrap;">
+            ${imgEl}
+            <div>
+              <h2 style="color:white;margin-bottom:var(--space-2);">${data.name || 'Your Superpower'}</h2>
+              ${data.motto ? `<p style="color:rgba(255,255,255,0.75);font-style:italic;font-size:var(--text-lg);">"${data.motto}"</p>` : ''}
+              ${completedDate ? `<p style="color:rgba(255,255,255,0.5);font-size:var(--text-sm);margin-top:var(--space-3);">Completed ${completedDate}</p>` : ''}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="results-body">
+        ${data.description ? `
+          <div style="margin-bottom:var(--space-8);">
+            <h3 style="margin-bottom:var(--space-3);">About Your Superpower</h3>
+            <p style="color:var(--text-secondary);line-height:1.75;">${data.description}</p>
+          </div>` : ''}
+        ${traits ? `
+          <div style="margin-bottom:var(--space-8);">
+            <h4 style="margin-bottom:var(--space-4);">Your Learning Traits</h4>
+            <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">${traits}</div>
+          </div>` : ''}
+        ${data.strengths ? `
+          <div style="background:var(--surface-off);border-radius:var(--radius-xl);padding:var(--space-6);margin-bottom:var(--space-8);">
+            <h4 style="margin-bottom:var(--space-3);">Your Strengths</h4>
+            <p style="color:var(--text-secondary);">${data.strengths}</p>
+          </div>` : ''}
+      </div>
+      <div class="action-strip">
+        <a href="hero/index.html" class="btn btn-primary">Go to Hero LMS</a>
+        <a href="profile.html" class="btn btn-secondary">Retake Assessment</a>
+        <a href="index.html" class="btn btn-ghost" style="margin-left:auto;">Back to Home</a>
+      </div>`;
+  }
+
+  try {
+    const raw = localStorage.getItem('heroUser');
+    const user = raw ? JSON.parse(raw) : null;
+    const resultKey = user?.email ? `heroAssessment:${user.email}` : null;
+    const resultRaw = resultKey ? localStorage.getItem(resultKey) : null;
+
+    if (!resultRaw) {
+      renderEmpty();
+      return;
+    }
+
+    const data = JSON.parse(resultRaw);
+    renderResult(data);
+  } catch {
+    renderEmpty();
+  }
+})();
+</script>
+</body>
+</html>

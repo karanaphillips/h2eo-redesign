@@ -1,0 +1,114 @@
+/* Compatibility shim — bridges old CSS class names used in profile.html and results.html
+   to the new design system, while preserving all assessment functionality. */
+
+/* Nav compatibility */
+nav { display: none; } /* replaced by site-nav via nav-partial.js */
+header nav { display: block; } /* revert for pages without partial */
+
+/* Old color vars remapped */
+:root {
+  --primary-color: var(--h2eo-mid-blue);
+  --secondary-color: #991b1b;
+  --accent-color: var(--h2eo-teal);
+  --gold-accent: var(--h2eo-gold);
+  --charcoal: var(--text-primary);
+  --slate-gray: var(--text-secondary);
+  --light-gray: var(--surface-soft);
+  --paper-white: var(--white);
+  --border-light: var(--border-subtle);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
+  --section-padding: 4rem 0;
+  --container-max-width: var(--container-max);
+  --shadow-subtle: var(--shadow-xs);
+  --shadow-moderate: var(--shadow-md);
+  --shadow-pronounced: var(--shadow-lg);
+}
+
+/* Surface class */
+.surface { background: var(--white); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); }
+
+/* Old btn classes */
+.btn-primary:not([class*="btn btn-"]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  background: var(--h2eo-teal);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast);
+}
+.btn-secondary:not([class*="btn btn-"]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--space-3) - 1px) calc(var(--space-6) - 1px);
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border: 1.5px solid var(--gray-300);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
+}
+
+/* Container */
+.container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-8); }
+
+/* Old section classes from profile/results */
+.survey-hero, .hero-section { padding-top: calc(var(--nav-height) + var(--space-16)) !important; }
+.hero-section { padding-bottom: var(--space-12) !important; }
+
+/* Assessment stats bar on profile page */
+.assessment-stats {
+  display: flex;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  margin-top: var(--space-8);
+}
+.assessment-stats .stat-item {
+  text-align: center;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-6);
+  backdrop-filter: blur(10px);
+}
+.assessment-stats .stat-number {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+}
+.assessment-stats .stat-label {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.75);
+  margin-top: var(--space-1);
+}
+
+/* Old form styles compatibility */
+.contact-form .form-group,
+form .form-group { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
+
+/* On-color trust strip */
+.trust-strip.on-color { background: linear-gradient(135deg, var(--h2eo-navy), var(--h2eo-blue)); }
+.trust-strip.on-color .trust-item, .trust-strip.on-color .trust-tagline { color: rgba(255,255,255,0.75); }
+.trust-strip.on-color .trust-item::before { background: var(--h2eo-teal-muted); }
+
+/* Old animate-on-scroll compatibility */
+.animate-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.animate-on-scroll.in-view { opacity: 1; transform: translateY(0); }
+
+/* Misc */
+.section-cta { margin-top: var(--space-8); display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.lead-text { font-size: var(--text-xl); line-height: 1.65; color: var(--text-secondary); }
+.section-intro { font-size: var(--text-lg); color: var(--text-secondary); max-width: 660px; margin: 0 auto var(--space-6); text-align: center; }
+.section-description { color: var(--text-secondary); text-align: center; max-width: 660px; margin: 0 auto; }

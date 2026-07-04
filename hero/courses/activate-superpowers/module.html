@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module — Activate Your Superpowers™ — Hero Academy</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/typography.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/buttons.css" />
+  <link rel="stylesheet" href="/css/cards.css" />
+  <link rel="stylesheet" href="/css/forms.css" />
+  <link rel="stylesheet" href="/css/utilities.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <style>
+    body { background: var(--surface-off); }
+
+    /* ── Layout ── */
+    .module-layout { display: flex; min-height: calc(100vh - 64px); padding-top: 64px; }
+
+    /* ── Sidebar ── */
+    .module-sidebar {
+      width: 260px; flex-shrink: 0; background: var(--white);
+      border-right: 1px solid var(--border-subtle);
+      position: fixed; top: 64px; left: 0; bottom: 0;
+      overflow-y: auto; display: flex; flex-direction: column;
+      padding: var(--space-5) 0; z-index: 100;
+    }
+    @media (max-width: 900px) { .module-sidebar { display: none; } }
+
+    .sidebar-header { padding: 0 var(--space-5) var(--space-4); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-3); }
+    .sidebar-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding: 0 var(--space-5); margin: var(--space-4) 0 var(--space-2); }
+
+    .module-nav-link {
+      display: flex; align-items: center; gap: var(--space-3);
+      padding: var(--space-3) var(--space-5); font-size: var(--text-sm);
+      font-weight: 500; color: var(--text-secondary); text-decoration: none;
+      transition: background var(--duration-fast), color var(--duration-fast);
+      border-left: 3px solid transparent;
+    }
+    .module-nav-link:hover { background: var(--gray-50); color: var(--text-primary); }
+    .module-nav-link.active { color: var(--h2eo-teal); background: rgba(13,148,136,0.05); border-left-color: var(--h2eo-teal); font-weight: 600; }
+    .module-nav-link.done { color: var(--h2eo-teal); }
+    .module-nav-link .mn { font-size: 11px; color: var(--text-muted); min-width: 18px; font-weight: 700; }
+    .module-nav-link .check { color: var(--h2eo-teal); font-size: 12px; margin-left: auto; }
+
+    .section-nav-link {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-2) var(--space-5) var(--space-2) var(--space-8);
+      font-size: var(--text-xs); color: var(--text-muted); text-decoration: none;
+      border-radius: 0; transition: color var(--duration-fast);
+    }
+    .section-nav-link:hover { color: var(--h2eo-teal); }
+    .section-nav-link.active { color: var(--h2eo-teal); font-weight: 600; }
+
+    /* ── Main content ── */
+    .module-main { margin-left: 260px; flex: 1; min-width: 0; }
+    @media (max-width: 900px) { .module-main { margin-left: 0; } }
+
+    /* ── Module header bar ── */
+    .module-topbar {
+      background: var(--white); border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-4) var(--space-8);
+      display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;
+    }
+    @media (max-width: 600px) { .module-topbar { padding: var(--space-4) var(--space-5); } }
+
+    /* ── Content area ── */
+    .module-content { max-width: 740px; margin: 0 auto; padding: var(--space-8); }
+    @media (max-width: 600px) { .module-content { padding: var(--space-5); } }
+
+    /* ── Framework Steps ── */
+    .framework-steps { display: flex; flex-direction: column; gap: var(--space-4); margin: var(--space-6) 0; }
+    .framework-step {
+      display: flex; gap: var(--space-4); align-items: flex-start;
+      background: var(--white); border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border-subtle); padding: var(--space-5);
+      transition: border-color var(--duration-base), box-shadow var(--duration-base);
+    }
+    .framework-step:hover { border-color: var(--h2eo-teal); box-shadow: var(--shadow-sm); }
+    .step-letter {
+      width: 44px; height: 44px; border-radius: var(--radius-md);
+      background: var(--h2eo-teal); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 800; font-size: var(--text-xl);
+      flex-shrink: 0;
+    }
+    .step-body { flex: 1; }
+    .step-word { font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-1); }
+    .step-desc { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.65; }
+
+    /* ── Archetype Track Card ── */
+    .archetype-track {
+      background: var(--white); border-radius: var(--radius-2xl);
+      border: 2px solid var(--h2eo-teal); padding: var(--space-7);
+      margin: var(--space-8) 0; position: relative;
+    }
+    .track-badge {
+      position: absolute; top: -14px; left: var(--space-6);
+      background: var(--h2eo-teal); color: white;
+      padding: var(--space-1) var(--space-4); border-radius: var(--radius-full);
+      font-size: var(--text-xs); font-weight: 700;
+    }
+
+    /* ── Other archetype tabs ── */
+    .archetype-tabs { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-5); }
+    .archetype-tab {
+      padding: var(--space-2) var(--space-4); border-radius: var(--radius-full);
+      font-size: var(--text-sm); font-weight: 500; cursor: pointer;
+      border: 1.5px solid var(--border-subtle); background: var(--white);
+      transition: all var(--duration-fast); color: var(--text-secondary);
+    }
+    .archetype-tab:hover { border-color: var(--h2eo-teal); color: var(--h2eo-teal); }
+    .archetype-tab.active { background: var(--h2eo-teal); border-color: var(--h2eo-teal); color: white; }
+
+    /* ── Strategy cards ── */
+    .strategy-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-4); }
+    .strategy-card {
+      background: var(--surface-off); border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5); border-left: 4px solid var(--h2eo-teal);
+    }
+    .strategy-title { font-weight: 700; margin-bottom: var(--space-2); font-size: var(--text-base); }
+    .strategy-body { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.65; }
+
+    /* ── Universal tips ── */
+    .tips-section { background: var(--white); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); padding: var(--space-6); margin: var(--space-8) 0; }
+    .tip-item { display: flex; gap: var(--space-4); padding: var(--space-4) 0; border-bottom: 1px solid var(--border-subtle); }
+    .tip-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .tip-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 2px; }
+    .tip-title { font-weight: 600; margin-bottom: var(--space-1); }
+    .tip-body { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.65; }
+
+    /* ── Watch Out ── */
+    .watch-out {
+      background: rgba(212,168,67,0.08); border: 1.5px solid rgba(212,168,67,0.3);
+      border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5);
+      margin-top: var(--space-5);
+    }
+
+    /* ── Challenge section ── */
+    .challenge-card {
+      background: linear-gradient(135deg, var(--h2eo-navy) 0%, #0f2d52 100%);
+      border-radius: var(--radius-2xl); padding: var(--space-8); margin: var(--space-8) 0;
+      position: relative; overflow: hidden;
+    }
+    .challenge-card::before {
+      content: '';
+      position: absolute; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(13,148,136,0.3), transparent 70%);
+      border-radius: 50%; filter: blur(60px); top: -80px; right: -40px; pointer-events: none;
+    }
+    .challenge-inner { position: relative; z-index: 1; }
+
+    /* ── Reflection ── */
+    .reflection-list { display: flex; flex-direction: column; gap: var(--space-3); }
+    .reflection-item {
+      background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);
+      padding: var(--space-4) var(--space-5); display: flex; gap: var(--space-3); align-items: flex-start;
+    }
+    .reflection-num { font-size: var(--text-xs); font-weight: 800; color: var(--h2eo-teal); min-width: 24px; margin-top: 3px; }
+    .reflection-q { font-size: var(--text-sm); color: var(--text-primary); line-height: 1.6; }
+
+    /* ── Navigation footer ── */
+    .module-footer {
+      background: var(--white); border-top: 1px solid var(--border-subtle);
+      padding: var(--space-5) var(--space-8);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    @media (max-width: 600px) { .module-footer { padding: var(--space-4) var(--space-5); } }
+
+    /* ── Section divider ── */
+    .section-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--text-muted); margin: var(--space-10) 0 var(--space-3);
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border-subtle); }
+
+    /* ── Mobile topbar nav ── */
+    .mobile-module-nav {
+      background: var(--white); border-top: 1px solid var(--border-subtle);
+      display: none; overflow-x: auto; white-space: nowrap;
+      padding: var(--space-3) var(--space-4); gap: var(--space-2);
+    }
+    @media (max-width: 900px) { .mobile-module-nav { display: flex; } }
+    .mobile-module-chip {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-2) var(--space-4); border-radius: var(--radius-full);
+      font-size: var(--text-xs); font-weight: 600; border: 1.5px solid var(--border-subtle);
+      background: var(--white); color: var(--text-secondary); text-decoration: none;
+      flex-shrink: 0;
+    }
+    .mobile-module-chip.active { background: var(--h2eo-teal); border-color: var(--h2eo-teal); color: white; }
+    .mobile-module-chip.done { color: var(--h2eo-teal); }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="dashboard-topbar">
+  <a href="index.html" class="dash-brand">
+    <img src="/images/h2eo-logo.png" alt="H2EO" class="dash-logo" />
+    <span class="dash-brand-name">Hero Academy</span>
+  </a>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:var(--space-4);">
+    <span style="font-size:var(--text-sm);color:var(--text-secondary);" id="userDisplay"></span>
+    <a href="index.html" class="btn btn-secondary btn-sm">← Course</a>
+  </div>
+</header>
+
+<!-- Mobile module nav strip -->
+<nav class="mobile-module-nav" id="mobileModuleNav" aria-label="Module navigation"></nav>
+
+<div class="module-layout">
+
+  <!-- Sidebar -->
+  <aside class="module-sidebar" aria-label="Module navigation">
+    <div class="sidebar-header">
+      <div style="font-size:var(--text-xs);font-weight:700;color:var(--text-muted);margin-bottom:var(--space-1);">HERO ACADEMY</div>
+      <div style="font-weight:700;font-size:var(--text-sm);">Activate Your Superpowers™</div>
+    </div>
+    <div class="sidebar-section-title">Modules</div>
+    <nav id="sidebarNav" aria-label="All modules"></nav>
+    <div style="margin-top:auto;padding: var(--space-4) var(--space-5) 0;">
+      <div id="sidebarArchetype" style="background:rgba(13,148,136,0.07);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);margin-bottom:var(--space-3);"></div>
+      <a href="/hero/index.html" class="module-nav-link" style="border-left:none;color:var(--text-muted);">← Dashboard</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="module-main">
+
+    <!-- Module topbar -->
+    <div class="module-topbar" id="moduleTopbar">
+      <div id="moduleTopbarContent" style="flex:1;min-width:0;"></div>
+      <div style="display:flex;align-items:center;gap:var(--space-3);flex-shrink:0;">
+        <span id="topbarProgress" style="font-size:var(--text-xs);color:var(--text-muted);"></span>
+        <button id="markCompleteBtn" class="btn btn-primary btn-sm" style="display:none;">Mark Complete ✓</button>
+      </div>
+    </div>
+
+    <!-- Module content -->
+    <div class="module-content" id="moduleContent">
+      <div style="text-align:center;padding:var(--space-12);">
+        <div style="width:32px;height:32px;border:3px solid var(--border-subtle);border-top-color:var(--h2eo-teal);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto var(--space-4);"></div>
+        <p style="color:var(--text-muted);">Loading module…</p>
+      </div>
+      <style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+    </div>
+
+    <!-- Module footer navigation -->
+    <div class="module-footer" id="moduleFooter">
+      <button id="prevModuleBtn" class="btn btn-secondary" style="display:none;">← Previous</button>
+      <div style="flex:1;"></div>
+      <button id="nextModuleBtn" class="btn btn-primary" style="display:none;">Next Module →</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+<script src="/js/core.js"></script>
+<script src="/hero/js/oauth-config.js"></script>
+<script src="/hero/js/access-control.js"></script>
+<script src="/hero/js/course-data.js"></script>
+<script>
+(function () {
+  const C = window.HERO_COURSE_DATA;
+  if (!C) return;
+
+  /* ── Auth ── */
+  const user = JSON.parse(localStorage.getItem('heroUser') || 'null');
+  if (!user) {
+    sessionStorage.setItem('heroLoginReturn', window.location.href);
+    window.location.href = '/hero/login.html';
+    return;
+  }
+  const uDisplay = document.getElementById('userDisplay');
+  if (uDisplay) uDisplay.textContent = user.name || user.email;
+
+  /* ── Parse URL params ── */
+  const params = new URLSearchParams(window.location.search);
+  const moduleNum = parseInt(params.get('m') || '1', 10);
+  const viewingArchetypeKey = params.get('a') || null;
+
+  /* ── Access Control ── */
+  const access = window.HeroAccess?.canAccessModule(user.email, moduleNum, 'activate-superpowers');
+  if (access && !access.allowed) {
+    showPaywall(access);
+    return;
+  }
+
+  /* ── Paywall UI ── */
+  function showPaywall(accessResult) {
+    // Hide topbar actions
+    document.getElementById('markCompleteBtn')?.remove();
+
+    const content = document.getElementById('moduleContent');
+    if (!content) return;
+
+    let heading, body, btnHTML;
+
+    if (accessResult.reason === 'subscription') {
+      heading = '🔒 Upgrade to Unlock This Module';
+      body    = 'K-12 learners need an active subscription to access modules 2 and beyond. Module 1 is always free!';
+      btnHTML = `
+        <a href="/hero/pricing.html" class="btn btn-primary btn-lg" style="margin-right:12px;">
+          View K-12 Plans →
+        </a>
+        <a href="module.html?m=1" class="btn btn-secondary">
+          ← Back to Module 1 (Free)
+        </a>`;
+    } else if (accessResult.reason === 'purchase') {
+      heading = '🔒 Purchase This Course to Continue';
+      body    = 'Adult learners purchase individual courses. You\'ll get lifetime access to all 8 modules after a one-time payment.';
+      btnHTML = `
+        <a href="/hero/pricing.html" class="btn btn-primary btn-lg" style="margin-right:12px;">
+          Buy Course — $97 →
+        </a>
+        <a href="module.html?m=1" class="btn btn-secondary">
+          ← Back to Module 1 (Free)
+        </a>`;
+    } else {
+      // Shouldn't happen if user is logged in, but handle gracefully
+      sessionStorage.setItem('heroLoginReturn', window.location.href);
+      window.location.href = '/hero/login.html';
+      return;
+    }
+
+    let module = C.getModule(moduleNum);
+    if (!module) module = C.modules[moduleNum - 1] || C.modules[0];
+
+    content.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:var(--space-16) var(--space-8);
+        max-width:560px; margin:0 auto;
+      ">
+        <div style="
+          width:88px;height:88px;border-radius:50%;
+          background:linear-gradient(135deg,#f1f5f9,#e2e8f0);
+          display:flex;align-items:center;justify-content:center;
+          font-size:2.25rem;margin:0 auto var(--space-6);
+        ">🔒</div>
+
+        <h2 style="font-family:var(--font-display);color:var(--h2eo-navy);margin-bottom:var(--space-3);">
+          ${heading}
+        </h2>
+
+        <div style="
+          background:rgba(13,148,136,0.06);
+          border:1px solid rgba(13,148,136,0.2);
+          border-radius:var(--radius-lg);
+          padding:var(--space-5);
+          margin-bottom:var(--space-6);
+          text-align:left;
+        ">
+          <div style="font-weight:700;font-size:var(--text-sm);color:var(--h2eo-navy);margin-bottom:var(--space-2);">
+            ${module.icon} Module ${module.number}: ${module.title}
+          </div>
+          <div style="font-size:var(--text-sm);color:var(--text-secondary);">${module.objective}</div>
+        </div>
+
+        <p style="color:var(--text-secondary);margin-bottom:var(--space-8);line-height:1.65;">${body}</p>
+
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3);">
+          ${btnHTML}
+        </div>
+
+        <p style="margin-top:var(--space-6);font-size:var(--text-sm);color:var(--text-muted);">
+          🎁 Module 1 is always free — <a href="module.html?m=1" style="color:var(--h2eo-teal);">start there</a> if you haven't already.
+        </p>
+      </div>`;
+
+    // Hide progress controls
+    document.getElementById('markCompleteBtn') && (document.getElementById('markCompleteBtn').style.display = 'none');
+    document.getElementById('topbarProgress') && (document.getElementById('topbarProgress').textContent = '');
+  }
+
+  /* ── Resolve archetypes ── */
+  const userArchetypeKey = C.getUserArchetype(user.email);
+  let activeArchetypeKey = C.resolveArchetype(viewingArchetypeKey) || userArchetypeKey || 'strategicArchitect';
+  let module = C.getModule(moduleNum);
+  if (!module) module = C.modules[0];
+
+  /* ── Update document title ── */
+  document.title = `Module ${module.number}: ${module.title} — Hero Academy`;
+
+  /* ── Archetype objects ── */
+  const ARCHETYPE_KEYS = ['strategicArchitect', 'precisionOperator', 'visionIntegrator', 'appliedExecutor'];
+  const ARCHETYPE_ICONS = { strategicArchitect: '🏛️', precisionOperator: '🎯', visionIntegrator: '🔭', appliedExecutor: '⚡' };
+
+  /* ── Build sidebar ── */
+  function buildSidebar() {
+    const nav = document.getElementById('sidebarNav');
+    if (!nav) return;
+    nav.innerHTML = C.modules.map(m => {
+      const prog = C.getModuleProgress(user.email, m.id);
+      const isActive = m.number === module.number;
+      return `
+        <a href="module.html?m=${m.number}" class="module-nav-link ${isActive ? 'active' : ''} ${prog.completed ? 'done' : ''}" title="${m.title}">
+          <span class="mn">${m.number}</span>
+          <span style="flex:1;">${m.icon} ${m.title}</span>
+          ${prog.completed ? '<span class="check">✓</span>' : ''}
+        </a>`;
+    }).join('');
+
+    const archetypeEl = document.getElementById('sidebarArchetype');
+    if (archetypeEl) {
+      const arc = C.archetypes[activeArchetypeKey];
+      if (arc) {
+        archetypeEl.innerHTML = `
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:var(--space-1);">Your Superpower</div>
+          <div style="font-weight:600;font-size:var(--text-sm);">${arc.emoji} ${arc.name}</div>`;
+      } else {
+        archetypeEl.innerHTML = `<div style="font-size:var(--text-xs);color:var(--text-muted);">Take the <a href="/profile.html" style="color:var(--h2eo-teal);">assessment</a> to personalize content.</div>`;
+      }
+    }
+  }
+
+  /* ── Build mobile nav strip ── */
+  function buildMobileNav() {
+    const el = document.getElementById('mobileModuleNav');
+    if (!el) return;
+    el.innerHTML = C.modules.map(m => {
+      const prog = C.getModuleProgress(user.email, m.id);
+      const isActive = m.number === module.number;
+      return `<a href="module.html?m=${m.number}" class="mobile-module-chip ${isActive ? 'active' : ''} ${prog.completed ? 'done' : ''}">${m.icon} ${m.number}</a>`;
+    }).join('');
+  }
+
+  /* ── Build module topbar ── */
+  function buildTopbar() {
+    const container = document.getElementById('moduleTopbarContent');
+    if (!container) return;
+    const prog = C.getModuleProgress(user.email, module.id);
+    const courseProgress = C.getCourseProgress(user.email);
+
+    container.innerHTML = `
+      <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;">
+        <span style="font-size:var(--text-xs);font-weight:700;color:var(--text-muted);">MODULE ${module.number} OF ${C.modules.length}</span>
+        <span style="color:var(--border-subtle);">|</span>
+        <h3 style="margin:0;font-size:var(--text-base);">${module.icon} ${module.title}</h3>
+        ${prog.completed ? '<span class="badge badge-teal" style="font-size:10px;">Completed ✓</span>' : ''}
+      </div>`;
+
+    const progressEl = document.getElementById('topbarProgress');
+    if (progressEl) progressEl.textContent = `${courseProgress.completed}/${courseProgress.total} complete`;
+
+    const markBtn = document.getElementById('markCompleteBtn');
+    if (markBtn) {
+      if (!prog.completed) {
+        markBtn.style.display = 'inline-flex';
+        markBtn.addEventListener('click', () => {
+          C.setModuleComplete(user.email, module.id);
+          markBtn.textContent = '✓ Completed!';
+          markBtn.disabled = true;
+          markBtn.className = 'btn btn-secondary btn-sm';
+          buildSidebar();
+          buildMobileNav();
+          buildTopbar();
+          buildFooter();
+          if (window.Toast) Toast.success('Module Complete!', `Great work finishing Module ${module.number}: ${module.title}`);
+        });
+      } else {
+        markBtn.style.display = 'none';
+      }
+    }
+  }
+
+  /* ── Build footer navigation ── */
+  function buildFooter() {
+    const prevBtn = document.getElementById('prevModuleBtn');
+    const nextBtn = document.getElementById('nextModuleBtn');
+
+    if (module.number > 1) {
+      const prev = C.getModule(module.number - 1);
+      if (prevBtn && prev) {
+        prevBtn.style.display = 'inline-flex';
+        prevBtn.textContent = `← Module ${prev.number}: ${prev.title}`;
+        prevBtn.onclick = () => { window.location.href = `module.html?m=${prev.number}`; };
+      }
+    }
+
+    if (module.number < C.modules.length) {
+      const next = C.getModule(module.number + 1);
+      if (nextBtn && next) {
+        nextBtn.style.display = 'inline-flex';
+        nextBtn.textContent = `Module ${next.number}: ${next.title} →`;
+        nextBtn.onclick = () => { window.location.href = `module.html?m=${next.number}`; };
+      }
+    } else {
+      if (nextBtn) {
+        nextBtn.style.display = 'inline-flex';
+        nextBtn.textContent = '🎉 View Course Summary →';
+        nextBtn.className = 'btn btn-primary btn-sm';
+        nextBtn.onclick = () => { window.location.href = 'index.html'; };
+      }
+    }
+  }
+
+  /* ── Render archetype tab content ── */
+  function renderArchetypePanel(key) {
+    const arc = C.archetypes[key];
+    const content = C.getArchetypeContent(module, key);
+    if (!content) return '<p style="color:var(--text-muted);">Content for this archetype is coming soon.</p>';
+
+    const isUserArchetype = key === userArchetypeKey;
+    const accentColor = module.accentColor || 'var(--h2eo-teal)';
+
+    const strategiesHTML = (content.strategies || []).map(s => `
+      <div class="strategy-card" style="border-left-color:${accentColor};">
+        <div class="strategy-title">${s.title}</div>
+        <div class="strategy-body">${s.body}</div>
+      </div>`).join('');
+
+    const toolsHTML = (content.tools || []).map(t =>
+      `<span style="background:var(--gray-100);border-radius:var(--radius-full);padding:4px 12px;font-size:12px;font-weight:500;color:var(--text-secondary);">${t}</span>`
+    ).join('');
+
+    return `
+      ${isUserArchetype ? `<div style="background:rgba(13,148,136,0.07);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3);">
+        <span>⚡</span>
+        <span style="font-size:var(--text-sm);font-weight:600;color:var(--h2eo-teal);">This is your personalized track — content matched to your Academic Superpower</span>
+      </div>` : ''}
+      <h4 style="margin-bottom:var(--space-2);">${content.headline}</h4>
+      <p style="color:var(--text-secondary);margin-bottom:var(--space-5);line-height:1.65;">${content.intro}</p>
+      <div class="strategy-list">${strategiesHTML}</div>
+      ${content.watchOut ? `
+        <div class="watch-out" style="margin-top:var(--space-5);">
+          <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2);">
+            <span>⚠️</span>
+            <strong style="font-size:var(--text-sm);">Watch Out</strong>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:0;line-height:1.65;">${content.watchOut}</p>
+        </div>` : ''}
+      ${toolsHTML ? `
+        <div style="margin-top:var(--space-5);">
+          <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:var(--space-3);">Recommended Tools</div>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);">${toolsHTML}</div>
+        </div>` : ''}`;
+  }
+
+  /* ── Render full module ── */
+  function renderModule() {
+    const content = document.getElementById('moduleContent');
+    if (!content) return;
+
+    /* Intro paragraphs */
+    const introHTML = (module.intro || []).map(p => `<p style="line-height:1.75;margin-bottom:var(--space-4);">${p}</p>`).join('');
+
+    /* Framework steps */
+    const frameworkHTML = (module.framework?.steps || []).map(s => `
+      <div class="framework-step">
+        <div class="step-letter" style="background:${module.accentColor || 'var(--h2eo-teal)'};">${s.letter}</div>
+        <div class="step-body">
+          <div class="step-word">${s.word}</div>
+          <div class="step-desc">${s.desc}</div>
+        </div>
+      </div>`).join('');
+
+    /* Archetype tabs */
+    const tabsHTML = ARCHETYPE_KEYS.map(k => {
+      const arc = C.archetypes[k];
+      const isActive = k === activeArchetypeKey;
+      const isUser = k === userArchetypeKey;
+      return `<button class="archetype-tab ${isActive ? 'active' : ''}" data-archetype="${k}" title="${arc.brief}">
+        ${arc.emoji} ${arc.name}${isUser ? ' ⚡' : ''}
+      </button>`;
+    }).join('');
+
+    /* Universal tips */
+    const tipsHTML = (module.universalTips || []).map(t => `
+      <div class="tip-item">
+        <span class="tip-icon">💡</span>
+        <div>
+          <div class="tip-title">${t.title}</div>
+          <div class="tip-body">${t.body}</div>
+        </div>
+      </div>`).join('');
+
+    /* Weekly challenge */
+    const arcContent = C.getArchetypeContent(module, activeArchetypeKey);
+    const challengeText = arcContent?.weeklyChallenge || module.universalChallenge || '';
+
+    /* Reflection prompts */
+    const reflectionHTML = (module.reflectionPrompts || []).map((q, i) => `
+      <div class="reflection-item">
+        <span class="reflection-num">${i + 1}</span>
+        <span class="reflection-q">${q}</span>
+      </div>`).join('');
+
+    content.innerHTML = `
+      <!-- Module intro -->
+      <div style="margin-bottom:var(--space-4);">
+        <span class="eyebrow">${module.subtitle}</span>
+        <h1 style="margin-top:var(--space-3);margin-bottom:var(--space-3);">${module.icon} ${module.title}</h1>
+        <p style="color:var(--text-muted);font-size:var(--text-base);line-height:1.6;max-width:640px;">${module.objective}</p>
+      </div>
+
+      <div style="height:1px;background:var(--border-subtle);margin:var(--space-6) 0;"></div>
+
+      <!-- Intro text -->
+      <section id="section-intro">
+        ${introHTML}
+      </section>
+
+      <!-- Framework -->
+      <section id="section-framework">
+        <div class="section-label">The ${module.framework.name} Framework</div>
+        <h2 style="margin-bottom:var(--space-2);">The ${module.framework.name} Method</h2>
+        <p style="color:var(--text-secondary);margin-bottom:var(--space-4);">A step-by-step system for applying ${module.title.toLowerCase()} strategies to any learning situation.</p>
+        <div class="framework-steps">${frameworkHTML}</div>
+      </section>
+
+      <!-- Archetype Tracks -->
+      <section id="section-archetype">
+        <div class="section-label">Personalized Strategy Tracks</div>
+        <h2 style="margin-bottom:var(--space-2);">Your Superpower Track</h2>
+        <p style="color:var(--text-secondary);margin-bottom:var(--space-5);">Select your archetype to see personalized strategies. Browse all four tracks to understand every learning style.</p>
+        <div class="archetype-tabs">${tabsHTML}</div>
+        <div id="archetypePanel" style="background:var(--white);border-radius:var(--radius-xl);border:1.5px solid var(--border-subtle);padding:var(--space-6);">
+          ${renderArchetypePanel(activeArchetypeKey)}
+        </div>
+      </section>
+
+      <!-- Universal tips -->
+      ${tipsHTML ? `
+        <section id="section-tips">
+          <div class="section-label">Universal Strategies</div>
+          <h2 style="margin-bottom:var(--space-4);">Works for Every Learner</h2>
+          <div class="tips-section">${tipsHTML}</div>
+        </section>` : ''}
+
+      <!-- 7-Day Challenge -->
+      ${challengeText ? `
+        <section id="section-challenge">
+          <div class="challenge-card">
+            <div class="challenge-inner">
+              <span class="eyebrow" style="color:var(--h2eo-teal-muted);">7-Day Practice</span>
+              <h2 style="color:white;margin-top:var(--space-3);margin-bottom:var(--space-4);">Your ${module.title} Challenge</h2>
+              <p style="color:rgba(255,255,255,0.8);line-height:1.75;max-width:600px;">${challengeText}</p>
+              <div style="margin-top:var(--space-6);background:rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:var(--space-5);">
+                <div style="color:rgba(255,255,255,0.6);font-size:var(--text-sm);margin-bottom:var(--space-3);">Track your progress:</div>
+                <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;" id="challengeDays"></div>
+              </div>
+            </div>
+          </div>
+        </section>` : ''}
+
+      <!-- Reflection -->
+      ${reflectionHTML ? `
+        <section id="section-reflection">
+          <div class="section-label">Reflection Prompts</div>
+          <h2 style="margin-bottom:var(--space-4);">Reflect on Your Learning</h2>
+          <p style="color:var(--text-secondary);margin-bottom:var(--space-5);">Take 5 minutes to write or think through these questions. Reflection is what moves information from short-term to long-term memory.</p>
+          <div class="reflection-list">${reflectionHTML}</div>
+        </section>` : ''}
+
+      <div style="height:var(--space-12);"></div>`;
+
+    /* ── Wire archetype tabs ── */
+    content.querySelectorAll('.archetype-tab').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const key = e.currentTarget.getAttribute('data-archetype');
+        activeArchetypeKey = key;
+        content.querySelectorAll('.archetype-tab').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        const panel = document.getElementById('archetypePanel');
+        if (panel) panel.innerHTML = renderArchetypePanel(key);
+        // Update URL without reload
+        const url = new URL(window.location.href);
+        url.searchParams.set('a', key);
+        history.replaceState(null, '', url.toString());
+      });
+    });
+
+    /* ── Wire challenge day tracker ── */
+    const daysContainer = document.getElementById('challengeDays');
+    if (daysContainer) {
+      const storageKey = `heroChallenge:${user.email}:activate-superpowers:${module.id}`;
+      let completed = [];
+      try { completed = JSON.parse(localStorage.getItem(storageKey) || '[]'); } catch {}
+
+      function renderDays() {
+        daysContainer.innerHTML = Array.from({ length: 7 }, (_, i) => {
+          const day = i + 1;
+          const done = completed.includes(day);
+          return `<button class="archetype-tab ${done ? 'active' : ''}" data-day="${day}" style="padding:var(--space-2) var(--space-3);min-width:44px;">
+            ${done ? '✓' : ''} Day ${day}
+          </button>`;
+        }).join('');
+        daysContainer.querySelectorAll('[data-day]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const day = parseInt(e.currentTarget.getAttribute('data-day'));
+            if (completed.includes(day)) {
+              completed = completed.filter(d => d !== day);
+            } else {
+              completed.push(day);
+            }
+            localStorage.setItem(storageKey, JSON.stringify(completed));
+            renderDays();
+            if (completed.length === 7 && window.Toast) {
+              Toast.success('7-Day Challenge Complete!', `You've completed the ${module.title} challenge.`);
+            }
+          });
+        });
+      }
+      renderDays();
+    }
+  }
+
+  /* ── Initialize everything ── */
+  buildSidebar();
+  buildMobileNav();
+  buildTopbar();
+  buildFooter();
+  renderModule();
+
+})();
+</script>
+</body>
+</html>

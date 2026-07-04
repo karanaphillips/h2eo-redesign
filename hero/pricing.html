@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero LMS Pricing — H2EO Platform</title>
+  <meta name="description" content="Choose your Hero LMS plan — free Module 1 for everyone, K-12 subscription, or adult per-course purchase." />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/utilities.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body { background: var(--gray-50); margin: 0; padding: 0; }
+
+    /* ── Top bar ── */
+    .price-topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; display: flex; align-items: center;
+      padding: 0 var(--space-8);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .price-topbar a { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .price-topbar img { height: 32px; }
+    .price-topbar .brand-name {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: var(--text-lg); color: var(--h2eo-navy);
+    }
+    .price-topbar-back {
+      margin-left: auto;
+      font-size: var(--text-sm); color: var(--text-muted); text-decoration: none;
+    }
+    .price-topbar-back:hover { color: var(--h2eo-teal); }
+
+    /* ── Hero section ── */
+    .price-hero {
+      padding: 120px var(--space-8) 60px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--h2eo-navy) 0%, #0f2d52 100%);
+      color: white;
+      position: relative; overflow: hidden;
+    }
+    .price-hero::before {
+      content: '';
+      position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(13,148,136,0.25), transparent 70%);
+      border-radius: 50%; filter: blur(80px);
+      top: -100px; right: -60px; pointer-events: none;
+    }
+    .price-hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .price-hero .eyebrow {
+      display: inline-block; font-size: var(--text-sm); font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--h2eo-teal-muted); margin-bottom: var(--space-3);
+    }
+    .price-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 var(--space-4); }
+    .price-hero p { color: rgba(255,255,255,0.72); font-size: var(--text-lg); margin: 0 0 var(--space-6); }
+    .free-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(13,148,136,0.18); border: 1px solid rgba(13,148,136,0.4);
+      border-radius: 30px; padding: 8px 20px;
+      font-size: var(--text-sm); font-weight: 600; color: #5eead4;
+    }
+
+    /* ── Pricing cards section ── */
+    .price-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: var(--space-16) var(--space-8) var(--space-20);
+    }
+
+    .price-section-title {
+      text-align: center; margin-bottom: var(--space-10);
+    }
+    .price-section-title h2 {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--h2eo-navy); margin: 0 0 var(--space-3);
+    }
+    .price-section-title p { color: var(--text-muted); font-size: var(--text-base); margin: 0; }
+
+    /* Divider */
+    .price-divider {
+      display: flex; align-items: center; gap: var(--space-4);
+      margin: var(--space-16) 0 var(--space-10);
+    }
+    .price-divider::before, .price-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border-subtle);
+    }
+    .price-divider span {
+      font-size: var(--text-sm); font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+
+    /* Card grid */
+    .cards-grid {
+      display: grid; gap: var(--space-6);
+      align-items: start;
+    }
+    .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+    .cards-grid.one-col  { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
+
+    /* Price card */
+    .price-card {
+      background: white; border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border-subtle);
+      padding: var(--space-8);
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .price-card:hover {
+      box-shadow: var(--shadow-xl); transform: translateY(-4px);
+      border-color: var(--h2eo-teal);
+    }
+    .price-card.featured {
+      border-color: var(--h2eo-teal);
+      box-shadow: 0 0 0 2px rgba(13,148,136,0.12), var(--shadow-lg);
+    }
+    .price-card-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--h2eo-teal); color: white;
+      border-radius: 20px; padding: 4px 16px;
+      font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .card-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gray-100); border-radius: 6px;
+      padding: 4px 10px; font-size: var(--text-xs); font-weight: 600;
+      color: var(--text-secondary); margin-bottom: var(--space-4);
+    }
+    .price-card h3 {
+      font-family: var(--font-display); font-size: 1.25rem;
+      color: var(--h2eo-navy); margin: 0 0 var(--space-2);
+    }
+    .price-card .card-desc {
+      font-size: var(--text-sm); color: var(--text-muted); margin: 0 0 var(--space-6);
+      line-height: 1.5;
+    }
+    .price-amount {
+      display: flex; align-items: baseline; gap: 4px;
+      margin-bottom: var(--space-6);
+    }
+    .price-amount .dollar { font-size: 1.5rem; font-weight: 700; color: var(--h2eo-navy); }
+    .price-amount .amount { font-size: 2.75rem; font-weight: 800; line-height: 1; color: var(--h2eo-navy); }
+    .price-amount .period { font-size: var(--text-sm); color: var(--text-muted); }
+    .savings-badge {
+      display: inline-block; background: #fef3c7; color: #92400e;
+      border-radius: 6px; padding: 2px 8px;
+      font-size: var(--text-xs); font-weight: 700; margin-left: 8px;
+    }
+    .price-features { list-style: none; padding: 0; margin: 0 0 var(--space-6); }
+    .price-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: var(--space-2) 0;
+      font-size: var(--text-sm); color: var(--text-secondary);
+      border-bottom: 1px solid var(--gray-50);
+    }
+    .price-features li:last-child { border-bottom: none; }
+    .price-features li::before { content: '✓'; color: var(--h2eo-teal); font-weight: 700; flex-shrink: 0; }
+    .price-card .btn { width: 100%; justify-content: center; }
+
+    /* Course card */
+    .course-card {
+      background: white; border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border-subtle);
+      padding: var(--space-8);
+      display: flex; gap: var(--space-6); align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s;
+      max-width: 740px; margin: 0 auto;
+    }
+    .course-card:hover { box-shadow: var(--shadow-xl); transform: translateY(-3px); }
+    .course-icon {
+      width: 72px; height: 72px; border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--h2eo-navy), #1e3a5f);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
+    }
+    .course-info { flex: 1; }
+    .course-info h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--h2eo-navy); margin: 0 0 6px; }
+    .course-info p { font-size: var(--text-sm); color: var(--text-muted); margin: 0 0 16px; line-height: 1.5; }
+    .course-meta { display: flex; gap: var(--space-4); margin-bottom: var(--space-5); }
+    .course-meta span { font-size: var(--text-xs); color: var(--text-muted); }
+    .course-price-row { display: flex; align-items: center; gap: var(--space-4); }
+    .course-price { font-size: 1.75rem; font-weight: 800; color: var(--h2eo-navy); }
+    .course-period { font-size: var(--text-sm); color: var(--text-muted); }
+
+    /* FAQ */
+    .faq-section { max-width: 700px; margin: 0 auto var(--space-20); padding: 0 var(--space-8); }
+    .faq-section h2 {
+      font-family: var(--font-display); font-size: 1.5rem; color: var(--h2eo-navy);
+      text-align: center; margin-bottom: var(--space-8);
+    }
+    details {
+      border-bottom: 1px solid var(--border-subtle); padding: var(--space-5) 0;
+    }
+    summary {
+      font-weight: 600; color: var(--text-primary); cursor: pointer;
+      font-size: var(--text-base); list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-size: 1.25rem; color: var(--h2eo-teal); transition: transform 0.2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { font-size: var(--text-sm); color: var(--text-muted); margin: var(--space-3) 0 0; line-height: 1.6; }
+
+    @media (max-width: 680px) {
+      .cards-grid.two-col { grid-template-columns: 1fr; }
+      .course-card { flex-direction: column; }
+      .course-icon { width: 56px; height: 56px; font-size: 1.5rem; }
+      .price-section { padding: var(--space-10) var(--space-5) var(--space-14); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="price-topbar">
+  <a href="index.html">
+    <img src="../images/h2eo-logo.png" alt="H2EO" />
+    <span class="brand-name">Hero LMS</span>
+  </a>
+  <a href="index.html" class="price-topbar-back">← Back to Dashboard</a>
+</header>
+
+<!-- Hero -->
+<section class="price-hero">
+  <div class="price-hero-inner">
+    <span class="eyebrow">Hero LMS Pricing</span>
+    <h1>Start free. Unlock everything.</h1>
+    <p>Every learner gets Module 1 at no cost. Upgrade anytime to unlock the full course.</p>
+    <div class="free-pill">🎁 Module 1 is free with any login — no credit card needed</div>
+  </div>
+</section>
+
+<!-- K-12 Plans -->
+<section class="price-section">
+
+  <div class="price-section-title">
+    <h2>K-12 Student Plans</h2>
+    <p>One subscription unlocks every module in every course — perfect for active student learners.</p>
+  </div>
+
+  <div class="cards-grid two-col" id="k12Cards">
+
+    <!-- Monthly -->
+    <div class="price-card">
+      <div class="card-tag">🏫 K-12 Student</div>
+      <h3>Monthly Access</h3>
+      <p class="card-desc">Full access to all Hero Academy courses and modules for one month. Cancel any time.</p>
+      <div class="price-amount">
+        <span class="dollar">$</span>
+        <span class="amount">9</span>
+        <span style="font-size:1.5rem;font-weight:800;color:var(--h2eo-navy);">.99</span>
+        <span class="period">/month</span>
+      </div>
+      <ul class="price-features">
+        <li>All 8 modules in every course</li>
+        <li>All 4 archetype learning tracks</li>
+        <li>7-Day challenge trackers</li>
+        <li>Progress & completion badges</li>
+        <li>Cancel any time</li>
+      </ul>
+      <button class="btn btn-secondary" onclick="handleK12Purchase('k12-monthly')">
+        Get Monthly Access
+      </button>
+    </div>
+
+    <!-- Annual (featured) -->
+    <div class="price-card featured">
+      <div class="price-card-badge">⭐ Best Value</div>
+      <div class="card-tag">🏫 K-12 Student</div>
+      <h3>Annual Access <span class="savings-badge">Save 34%</span></h3>
+      <p class="card-desc">Full-year access to all Hero Academy content — the smart choice for the whole school year.</p>
+      <div class="price-amount">
+        <span class="dollar">$</span>
+        <span class="amount">79</span>
+        <span class="period">/year</span>
+      </div>
+      <ul class="price-features">
+        <li>Everything in Monthly, plus:</li>
+        <li>12 months of full access</li>
+        <li>Priority new course releases</li>
+        <li>Academic Superpowers™ deep-dives</li>
+        <li>Locks in current price</li>
+      </ul>
+      <button class="btn btn-primary" onclick="handleK12Purchase('k12-annual')">
+        Get Annual Access
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Adult Courses -->
+  <div class="price-divider">
+    <span>Adult Learner & Professional</span>
+  </div>
+
+  <div class="price-section-title">
+    <h2>Per-Course Purchase</h2>
+    <p>Pay once per course — yours forever. No subscription required.</p>
+  </div>
+
+  <div id="adultCourseCards">
+    <!-- Activate Your Superpowers -->
+    <div class="course-card">
+      <div class="course-icon">⚡</div>
+      <div class="course-info">
+        <h3>Activate Your Superpowers™</h3>
+        <p>Master 8 essential academic and professional skills — reading intelligence, note-taking, memory retention, focus, test-taking, project solving, and more — through your unique cognitive archetype.</p>
+        <div class="course-meta">
+          <span>📚 8 Modules</span>
+          <span>⏱ ~12 hours</span>
+          <span>🎯 4 Archetype Tracks</span>
+          <span>♾️ Lifetime access</span>
+        </div>
+        <div class="course-price-row">
+          <span class="course-price">$97</span>
+          <span class="course-period">one-time · lifetime access</span>
+          <button class="btn btn-primary" style="margin-left:auto;" onclick="handleCoursePurchase('activate-superpowers')">
+            Buy Course
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+
+  <details>
+    <summary>What is Module 1 for free?</summary>
+    <p>Every course starts with a free introductory module. You can explore the content, complete the activities, and even do the 7-day challenge — all without paying anything. It's our way of letting you experience the platform before committing.</p>
+  </details>
+
+  <details>
+    <summary>What's the difference between K-12 and Adult pricing?</summary>
+    <p>K-12 students get a subscription model — one monthly or annual fee unlocks all courses. Adult learners purchase individual courses once and keep access forever. This reflects how each group typically engages with learning content.</p>
+  </details>
+
+  <details>
+    <summary>Can I switch from K-12 to Adult (or vice versa)?</summary>
+    <p>Yes — your account role can be updated in your profile settings. Contact support if you need help migrating an existing subscription or purchase.</p>
+  </details>
+
+  <details>
+    <summary>Is this a real payment or demo mode?</summary>
+    <p>If the Stripe payment links haven't been configured yet by the site owner, you'll see "Demo Mode" when checking out. This lets you simulate a purchase for testing. Real payments require the Stripe links to be set in the configuration file.</p>
+  </details>
+
+  <details>
+    <summary>What happens after I pay?</summary>
+    <p>You'll be redirected back to Hero LMS automatically and your access will be activated immediately. No waiting, no manual steps — just start learning.</p>
+  </details>
+
+  <details>
+    <summary>Do I need a Google or Microsoft account?</summary>
+    <p>No — you can also sign in with your email address. Google and Microsoft OAuth are available as convenient options, but they're not required.</p>
+  </details>
+</section>
+
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+<script src="../js/core.js"></script>
+<script src="js/oauth-config.js"></script>
+<script src="js/access-control.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  function getUser() {
+    try { return JSON.parse(localStorage.getItem('heroUser')); } catch { return null; }
+  }
+
+  function requireLogin(returnPath) {
+    const user = getUser();
+    if (!user?.email) {
+      sessionStorage.setItem('heroLoginReturn', returnPath || window.location.href);
+      window.location.href = '/hero/login.html';
+      return null;
+    }
+    return user;
+  }
+
+  window.handleK12Purchase = function (plan) {
+    const user = requireLogin(window.location.href);
+    if (!user) return;
+    HeroAccess.redirectToSubscription(user.email, plan, '/hero/courses/activate-superpowers/index.html');
+  };
+
+  window.handleCoursePurchase = function (courseId) {
+    const user = requireLogin(window.location.href);
+    if (!user) return;
+    HeroAccess.redirectToCoursePurchase(user.email, courseId, '/hero/courses/activate-superpowers/index.html');
+  };
+})();
+</script>
+</body>
+</html>

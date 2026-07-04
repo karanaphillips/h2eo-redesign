@@ -1,0 +1,84 @@
+/* Typography System */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, var(--text-6xl)); font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-size: clamp(1.75rem, 3.5vw, var(--text-4xl)); font-weight: 700; }
+h3 { font-size: clamp(1.25rem, 2.5vw, var(--text-2xl)); font-weight: 600; }
+h4 { font-size: var(--text-xl); font-weight: 600; }
+h5 { font-size: var(--text-lg); font-weight: 600; }
+h6 { font-size: var(--text-base); font-weight: 600; }
+
+p { color: var(--text-secondary); line-height: 1.75; }
+p + p { margin-top: var(--space-4); }
+
+.lead {
+  font-size: var(--text-xl);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.display-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.eyebrow {
+  font-family: var(--font-accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--h2eo-teal);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--h2eo-teal) 0%, var(--h2eo-mid-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+sup.tm {
+  font-size: 0.52em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 1px;
+  font-weight: 500;
+}
+
+a {
+  color: var(--h2eo-teal);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+a:hover { color: var(--h2eo-mid-blue); }
+
+strong { font-weight: 600; color: var(--text-primary); }
+
+::selection { background: rgba(13,148,136,0.2); color: var(--text-primary); }

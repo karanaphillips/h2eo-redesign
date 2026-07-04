@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact H2EO — Book a Consultation</title>
+  <meta name="description" content="Get in touch with H2EO for personalized education consultations, Academic Superpowers™ assessments, and learning solutions." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    .contact-hero {
+      padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-16);
+      background: linear-gradient(155deg, #f8fbff 0%, #edf4f9 60%, #e8f6f4 100%);
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; } }
+    .contact-info-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+    .contact-info-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-5);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+    .ci-icon {
+      width: 44px; height: 44px;
+      background: var(--surface-teal-tint);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+    @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
+    .faq-item {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-6);
+    }
+    .faq-item h4 { margin-bottom: var(--space-3); font-size: var(--text-base); }
+    .faq-item p { font-size: var(--text-sm); color: var(--text-muted); }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<section class="contact-hero">
+  <div class="container">
+    <div class="reveal" style="max-width:680px;">
+      <span class="eyebrow">Let's Talk</span>
+      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Get in Touch</h1>
+      <p class="lead">Ready to unlock Academic Superpowers™? Let's start a conversation about your educational journey and how H2EO can help you or your organization grow.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="contact-layout">
+      <!-- Left: info -->
+      <div class="reveal">
+        <h2 style="margin-bottom:var(--space-6);">How We Can Help</h2>
+        <p style="margin-bottom:var(--space-8);">Whether you're interested in K-12 programs, adult education, workforce development, or corporate training — we're here to find the perfect learning solution.</p>
+        <div class="contact-info-stack">
+          <div class="contact-info-card">
+            <div class="ci-icon">📧</div>
+            <div>
+              <div style="font-weight:600;font-size:var(--text-sm);margin-bottom:4px;">Email Us</div>
+              <div style="font-size:var(--text-sm);color:var(--text-muted);">support@heretoeducateothers.com</div>
+              <div style="font-size:var(--text-xs);color:var(--text-subtle);margin-top:4px;">We respond within 1–2 business days</div>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon">⚡</div>
+            <div>
+              <div style="font-weight:600;font-size:var(--text-sm);margin-bottom:4px;">Quick Assessment</div>
+              <div style="font-size:var(--text-sm);color:var(--text-muted);">Discover your Academic Superpowers™ in 10 minutes — completely free.</div>
+              <a href="profile.html" style="font-size:var(--text-sm);color:var(--h2eo-teal);font-weight:500;margin-top:6px;display:inline-block;">Start Assessment →</a>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon">🏢</div>
+            <div>
+              <div style="font-weight:600;font-size:var(--text-sm);margin-bottom:4px;">Organizations</div>
+              <div style="font-size:var(--text-sm);color:var(--text-muted);">Looking to implement H2EO for your team or institution? We offer custom enterprise solutions.</div>
+              <a href="organizations.html" style="font-size:var(--text-sm);color:var(--h2eo-teal);font-weight:500;margin-top:6px;display:inline-block;">Learn More →</a>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon">🎓</div>
+            <div>
+              <div style="font-weight:600;font-size:var(--text-sm);margin-bottom:4px;">Platform Login</div>
+              <div style="font-size:var(--text-sm);color:var(--text-muted);">Already have an account? Access Hero LMS and your learning dashboard.</div>
+              <a href="login.html" style="font-size:var(--text-sm);color:var(--h2eo-teal);font-weight:500;margin-top:6px;display:inline-block;">Sign In →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="form-card reveal stagger-2">
+        <h3 style="margin-bottom:var(--space-2);">Send Us a Message</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-6);">Fill out the form and we'll be in touch within 1–2 business days.</p>
+        <form data-contact-form style="display:flex;flex-direction:column;gap:var(--space-5);">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First Name *</label>
+              <input class="form-input" type="text" id="firstName" name="firstName" required placeholder="First name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last Name *</label>
+              <input class="form-input" type="text" id="lastName" name="lastName" required placeholder="Last name" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="email">Email *</label>
+              <input class="form-input" type="email" id="email" name="email" required placeholder="you@example.com" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone</label>
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="Optional" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="interest">I'm Interested In *</label>
+            <select class="form-select" id="interest" name="interest" required>
+              <option value="">Please select…</option>
+              <option value="tutoring-k12">K-12 Tutoring</option>
+              <option value="tutoring-adult">Adult Tutoring</option>
+              <option value="coaching">Academic &amp; Learning Coaching</option>
+              <option value="workshops">Study Skills Workshops</option>
+              <option value="assessment">Academic Superpowers™ Assessment</option>
+              <option value="adult-series">Adult Professional Growth Series</option>
+              <option value="organization">Organizational Training</option>
+              <option value="workforce">Workforce Development</option>
+              <option value="consultation">General Consultation</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="timeline">Preferred Timeline</label>
+            <select class="form-select" id="timeline" name="timeline">
+              <option value="">Select timeline…</option>
+              <option value="asap">As soon as possible</option>
+              <option value="1-2weeks">Within 1–2 weeks</option>
+              <option value="1month">Within a month</option>
+              <option value="3months">Within 3 months</option>
+              <option value="planning">Just planning ahead</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Tell Us About Your Goals *</label>
+            <textarea class="form-textarea" id="message" name="message" rows="5" required placeholder="Share your educational goals, challenges, or questions. The more detail you provide, the better we can assist you."></textarea>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" name="newsletter" />
+            <span class="checkbox-box"></span>
+            I'd like to receive educational insights and program updates from H2EO
+          </label>
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Common Questions</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal stagger-1">
+        <h4>What services are currently available?</h4>
+        <p>We offer K-12 tutoring, adult tutoring, academic and learning coaching, study skills workshops, and the Academic Superpowers™ assessment with personalized debriefs.</p>
+      </div>
+      <div class="faq-item reveal stagger-2">
+        <h4>How do I get started?</h4>
+        <p>Complete the contact form with your area of interest and goals. Our team will follow up by email with next steps and scheduling options within 1–2 business days.</p>
+      </div>
+      <div class="faq-item reveal stagger-3">
+        <h4>Can adults take the Academic Superpowers™ assessment?</h4>
+        <p>Absolutely. Adults can take the assessment and use results to guide tutoring, coaching, and professional growth planning. We have adult-specific archetypes too.</p>
+      </div>
+      <div class="faq-item reveal stagger-4">
+        <h4>Do you offer workshops for groups or organizations?</h4>
+        <p>Yes. We offer study skills and learning strategy workshops for schools, learning pods, community groups, and corporate teams of all sizes.</p>
+      </div>
+      <div class="faq-item reveal stagger-5">
+        <h4>What is the Adult Professional Growth Series?</h4>
+        <p>A focused adult learning series designed to build practical growth strategies — including AI readiness and cognitive leadership — through coaching-centered support.</p>
+      </div>
+      <div class="faq-item reveal stagger-6">
+        <h4>Do you offer enterprise or institutional pricing?</h4>
+        <p>Yes. We offer custom solutions for organizations, schools, and institutions. Contact us to discuss your specific needs and we'll create a tailored proposal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — Hero LMS | H2EO Platform</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/forms.css" />
+  <link rel="stylesheet" href="../css/utilities.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-panel">
+    <div class="auth-panel-inner">
+      <a href="../index.html" class="auth-logo-wrap">
+        <img src="../images/h2eo-logo.png" alt="H2EO" class="auth-logo" />
+        <span class="auth-logo-name">Hero LMS</span>
+      </a>
+      <div class="auth-header">
+        <h1>Create your account</h1>
+        <p class="auth-subtitle">Start your personalized learning journey today.</p>
+      </div>
+      <form class="auth-form" id="registerForm">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="firstName">First Name *</label>
+            <input class="form-input" type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="First name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Last Name *</label>
+            <input class="form-input" type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="Last name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address *</label>
+          <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="role">I am a…</label>
+          <select class="form-select" id="role" name="role">
+            <option value="student">Student / Learner</option>
+            <option value="instructor">Educator / Instructor</option>
+            <option value="professional">Working Professional</option>
+            <option value="admin">Organization Administrator</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password *</label>
+          <div class="input-wrapper">
+            <input class="form-input has-icon-right" type="password" id="password" name="password" required autocomplete="new-password" placeholder="Min. 8 characters" />
+            <button type="button" class="password-toggle-btn" id="passwordToggle">👁</button>
+          </div>
+          <span class="form-hint">Must contain uppercase, lowercase, number, and special character.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">Confirm Password *</label>
+          <input class="form-input" type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" placeholder="Repeat password" />
+        </div>
+        <label class="checkbox-label">
+          <input type="checkbox" name="terms" required /><span class="checkbox-box"></span>
+          I agree to the <a href="#" style="color:var(--h2eo-teal);">Terms of Service</a> and <a href="#" style="color:var(--h2eo-teal);">Privacy Policy</a>
+        </label>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account</button>
+      </form>
+      <div class="auth-divider">or sign up with</div>
+      <div class="social-btns">
+        <button class="social-btn" id="googleLogin" type="button"><span>G</span> Google</button>
+        <button class="social-btn" id="microsoftLogin" type="button"><span>⊞</span> Microsoft</button>
+      </div>
+      <p class="auth-footer-link">Already have an account? <a href="login.html">Sign in</a></p>
+      <p class="auth-footer-link"><a href="../index.html">← Back to H2EO</a></p>
+    </div>
+  </div>
+  <div class="auth-visual">
+    <div class="av-orb-1 auth-visual-orb"></div>
+    <div class="av-orb-2 auth-visual-orb"></div>
+    <div class="auth-visual-content">
+      <div class="auth-visual-icon">🎯</div>
+      <h2>Start with Self-Discovery</h2>
+      <p>After creating your account, take the Academic Superpowers™ assessment to unlock personalized learning paths designed for how you think.</p>
+      <div class="auth-features">
+        <div class="auth-feature">
+          <div class="auth-feature-icon">✓</div>
+          <div class="auth-feature-text"><strong>Free Assessment</strong>Discover your unique learning archetype.</div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">⚡</div>
+          <div class="auth-feature-text"><strong>Instant Results</strong>Get your profile immediately after completing.</div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🚀</div>
+          <div class="auth-feature-text"><strong>Personalized Paths</strong>Courses and coaching aligned to your Superpower.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+<script src="../js/core.js"></script>
+<script>window._loginRedirect = 'login.html';</script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Hero LMS | H2EO Platform</title>
+  <meta name="description" content="Access your Hero LMS account to continue your personalized learning journey with Academic Superpowers™." />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/forms.css" />
+  <link rel="stylesheet" href="../css/utilities.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-panel">
+    <div class="auth-panel-inner">
+      <a href="../index.html" class="auth-logo-wrap">
+        <img src="../images/h2eo-logo.png" alt="H2EO" class="auth-logo" />
+        <span class="auth-logo-name">Hero LMS</span>
+      </a>
+      <div class="auth-header">
+        <h1>Welcome back</h1>
+        <p class="auth-subtitle">Sign in to continue your learning journey.</p>
+        <div style="
+          display:inline-flex;align-items:center;gap:6px;
+          background:linear-gradient(135deg,#f0fdfa,#e0f2fe);
+          border:1px solid #99f6e4;border-radius:20px;
+          padding:6px 14px;margin-top:10px;
+          font-size:0.8rem;color:#0f766e;font-weight:600;
+        ">
+          <span>🎁</span> Module 1 is <strong>free</strong> with any login
+        </div>
+      </div>
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrapper">
+            <input class="form-input has-icon-right" type="password" id="password" name="password" required autocomplete="current-password" placeholder="Your password" />
+            <button type="button" class="password-toggle-btn" id="passwordToggle">👁</button>
+          </div>
+        </div>
+        <div class="form-row-inline">
+          <label class="checkbox-label" style="font-size:var(--text-sm);">
+            <input type="checkbox" name="rememberMe" /><span class="checkbox-box"></span>Remember me
+          </label>
+          <a href="#" class="forgot-link" id="forgotPasswordLink">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+      </form>
+      <div class="auth-divider">or continue with</div>
+      <div class="social-btns">
+        <!-- Google Identity Services renders into this div; falls back to demo button -->
+        <div id="googleLoginBtn" style="min-height:44px;display:flex;align-items:center;"></div>
+        <button class="social-btn" id="microsoftLogin" type="button">
+          <span style="font-size:1.1em;">⊞</span> Microsoft
+        </button>
+      </div>
+      <p class="auth-footer-link">Don't have an account? <a href="register.html">Create account</a></p>
+      <p class="auth-footer-link"><a href="../index.html">← Back to H2EO</a></p>
+    </div>
+  </div>
+  <div class="auth-visual">
+    <div class="av-orb-1 auth-visual-orb"></div>
+    <div class="av-orb-2 auth-visual-orb"></div>
+    <div class="auth-visual-content">
+      <div class="auth-visual-icon">🚀</div>
+      <h2>Hero LMS</h2>
+      <p>Your intelligent learning platform — powered by Academic Superpowers™ and adapted to how you think.</p>
+      <div class="auth-features">
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🎁</div>
+          <div class="auth-feature-text"><strong>Module 1 Free</strong>Start learning immediately — no payment required.</div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">⚡</div>
+          <div class="auth-feature-text"><strong>Superpower-Aligned</strong>Courses tailored to your unique cognitive profile.</div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">📊</div>
+          <div class="auth-feature-text"><strong>Progress Tracking</strong>Visual analytics showing your growth over time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="resetModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:var(--radius-xl);padding:var(--space-8);max-width:440px;width:90%;box-shadow:var(--shadow-2xl);">
+    <h3 style="margin-bottom:var(--space-3);">Reset Password</h3>
+    <p style="font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-6);">Enter your email and we'll send you a reset link.</p>
+    <form id="resetForm" style="display:flex;flex-direction:column;gap:var(--space-4);">
+      <div class="form-group">
+        <label class="form-label" for="resetEmail">Email Address</label>
+        <input class="form-input" type="email" id="resetEmail" required placeholder="you@example.com" />
+      </div>
+      <div style="display:flex;gap:var(--space-3);">
+        <button type="button" id="cancelReset" class="btn btn-secondary" style="flex:1;">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="flex:1;">Send Reset Link</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+<script src="../js/core.js"></script>
+<script src="js/oauth-config.js"></script>
+<script src="js/access-control.js"></script>
+<script>
+  window._loginRedirect = '/hero/index.html';
+</script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activate Your Superpowers™ — Hero Academy</title>
+  <meta name="description" content="An 8-module personalized learning course built around your Academic Superpower. Master reading, note-taking, time management, memory, test-taking, and more." />
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/typography.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/buttons.css" />
+  <link rel="stylesheet" href="/css/cards.css" />
+  <link rel="stylesheet" href="/css/forms.css" />
+  <link rel="stylesheet" href="/css/utilities.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <style>
+    body { background: var(--surface-off); }
+
+    /* ── Course hero ── */
+    .course-hero {
+      background: linear-gradient(135deg, var(--h2eo-navy) 0%, #0f2d52 60%, #0d3d3a 100%);
+      padding: var(--space-16) var(--space-8) var(--space-12);
+      position: relative; overflow: hidden;
+    }
+    .course-hero::before {
+      content: '';
+      position: absolute; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(13,148,136,0.25), transparent 70%);
+      border-radius: 50%; filter: blur(80px);
+      top: -80px; right: -60px; pointer-events: none;
+    }
+    .course-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* ── Archetype pill ── */
+    .archetype-pill {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-full); padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm); font-weight: 600; color: white;
+      margin-bottom: var(--space-5);
+    }
+
+    /* ── Progress bar ── */
+    .hero-progress-bar { height: 8px; background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden; margin-top: var(--space-3); }
+    .hero-progress-fill { height: 100%; background: var(--h2eo-teal); border-radius: 99px; transition: width 0.8s var(--ease-out); }
+
+    /* ── Module grid ── */
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: var(--space-5); }
+    @media (max-width: 768px) { .module-grid { grid-template-columns: 1fr; } }
+
+    .module-card {
+      background: var(--white); border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border-subtle);
+      overflow: hidden; transition: box-shadow var(--duration-base), border-color var(--duration-base), transform var(--duration-base);
+      display: flex; flex-direction: column;
+    }
+    .module-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: var(--h2eo-teal); }
+    .module-card.completed { border-color: var(--h2eo-teal); }
+
+    .module-card-header {
+      padding: var(--space-5) var(--space-6) var(--space-4);
+      display: flex; align-items: flex-start; gap: var(--space-4);
+    }
+    .module-icon-wrap {
+      width: 48px; height: 48px; border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.375rem; flex-shrink: 0;
+    }
+    .module-card-body { padding: 0 var(--space-6) var(--space-5); flex: 1; }
+    .module-card-body p { font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-3); line-height: 1.6; }
+
+    .module-card-footer {
+      padding: var(--space-4) var(--space-6) var(--space-5);
+      border-top: 1px solid var(--border-subtle);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+    }
+    .module-num { font-size: var(--text-xs); color: var(--text-muted); font-weight: 600; }
+
+    /* ── Completion badge ── */
+    .check-badge {
+      width: 22px; height: 22px; background: var(--h2eo-teal); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 12px; flex-shrink: 0;
+    }
+
+    /* ── Framework steps list ── */
+    .framework-strip { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-2); }
+    .framework-step-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(13,148,136,0.07); border-radius: var(--radius-full);
+      padding: 3px var(--space-3); font-size: 11px; font-weight: 600;
+      color: var(--h2eo-teal);
+    }
+    .framework-step-chip strong { color: var(--h2eo-navy); }
+
+    /* ── Sidebar ── */
+    .course-layout { display: flex; min-height: calc(100vh - 64px); }
+    .course-sidebar {
+      width: 260px; flex-shrink: 0;
+      background: var(--white); border-right: 1px solid var(--border-subtle);
+      padding: var(--space-6) var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);
+      position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto;
+    }
+    @media (max-width: 900px) { .course-sidebar { display: none; } }
+    .sidebar-module-link {
+      display: flex; align-items: center; gap: var(--space-3);
+      padding: var(--space-3) var(--space-4); border-radius: var(--radius-md);
+      font-size: var(--text-sm); font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: background var(--duration-fast), color var(--duration-fast);
+    }
+    .sidebar-module-link:hover { background: var(--gray-50); color: var(--text-primary); }
+    .sidebar-module-link.done { color: var(--h2eo-teal); }
+    .sidebar-module-link .num { font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 18px; }
+
+    /* ── Main content ── */
+    .course-main { flex: 1; padding: var(--space-8); max-width: 900px; }
+    @media (max-width: 600px) { .course-main { padding: var(--space-5); } }
+
+    /* ── Stats row ── */
+    .stat-row { display: flex; gap: var(--space-5); flex-wrap: wrap; margin-bottom: var(--space-8); }
+    .stat-item { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); padding: var(--space-4) var(--space-5); flex: 1; min-width: 120px; }
+    .stat-value { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; color: var(--text-primary); }
+    .stat-label { font-size: var(--text-xs); color: var(--text-muted); margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="dashboard-topbar">
+  <a href="/hero/index.html" class="dash-brand">
+    <img src="/images/h2eo-logo.png" alt="H2EO" class="dash-logo" />
+    <span class="dash-brand-name">Hero Academy</span>
+  </a>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:var(--space-4);">
+    <span style="font-size:var(--text-sm);color:var(--text-secondary);" id="userDisplay">Loading…</span>
+    <button id="logoutBtn" class="btn btn-secondary btn-sm">Sign Out</button>
+  </div>
+</header>
+
+<div class="course-layout" style="padding-top:64px;">
+
+  <!-- Sidebar: Module Navigation -->
+  <aside class="course-sidebar" aria-label="Course modules">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);padding:var(--space-2) var(--space-4);margin-bottom:var(--space-1);">Course Modules</div>
+    <div id="sidebarModules"></div>
+    <div style="margin-top:auto;padding-top:var(--space-6);">
+      <a href="/hero/index.html" class="sidebar-module-link" style="color:var(--text-muted);">
+        ← Back to Dashboard
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+
+    <!-- Course Hero -->
+    <div class="course-hero">
+      <div class="course-hero-inner">
+        <div id="archetypePill" class="archetype-pill" style="display:none;">
+          <span id="archetypeEmoji">⚡</span>
+          <span id="archetypeName">Loading…</span>
+        </div>
+        <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Hero Academy — Flagship Course</span>
+        <h1 style="color:white;margin-top:var(--space-3);margin-bottom:var(--space-4);">Activate Your Superpowers™</h1>
+        <p style="color:rgba(255,255,255,0.72);max-width:620px;margin-bottom:var(--space-6);">8 modules. 4 archetypes. One powerful learning system — built around how you naturally think, process, and grow. Content adapts to your Academic Superpower.</p>
+        <div style="display:flex;gap:var(--space-4);align-items:center;flex-wrap:wrap;">
+          <a id="startBtn" href="module.html?m=1" class="btn btn-primary btn-lg">Start Module 1</a>
+          <a href="/profile.html" class="btn btn-outline-white">View My Superpower</a>
+        </div>
+        <!-- Course progress -->
+        <div style="margin-top:var(--space-8);max-width:400px;" id="courseProgressArea" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-2);">
+            <span style="color:rgba(255,255,255,0.7);font-size:var(--text-sm);">Course Progress</span>
+            <span style="color:white;font-size:var(--text-sm);font-weight:700;" id="progressText">0 / 8 modules</span>
+          </div>
+          <div class="hero-progress-bar">
+            <div class="hero-progress-fill" id="progressFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main scroll area -->
+    <div class="course-main" style="overflow-y:auto;flex:1;">
+
+      <!-- Stats row -->
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Modules</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">~12h</div>
+          <div class="stat-label">Est. Learning Time</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">4</div>
+          <div class="stat-label">Archetype Tracks</div>
+        </div>
+        <div class="stat-item" id="completedStat">
+          <div class="stat-value" id="completedCount">0</div>
+          <div class="stat-label">Modules Completed</div>
+        </div>
+      </div>
+
+      <!-- Archetype notice (if no assessment) -->
+      <div id="noAssessmentBanner" style="display:none;background:rgba(212,168,67,0.08);border:1.5px solid rgba(212,168,67,0.25);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-8);display:flex;align-items:center;gap:var(--space-4);">
+        <span style="font-size:1.5rem;">⚡</span>
+        <div style="flex:1;">
+          <strong>Personalize your experience</strong>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:var(--space-1) 0 0;">Complete the Academic Superpowers™ assessment to unlock content tailored to how you learn best.</p>
+        </div>
+        <a href="/profile.html" class="btn btn-secondary btn-sm" style="flex-shrink:0;">Take Assessment</a>
+      </div>
+
+      <!-- Module Grid -->
+      <div style="margin-bottom:var(--space-6);">
+        <h2 style="margin-bottom:var(--space-2);">Course Modules</h2>
+        <p style="color:var(--text-muted);margin-bottom:var(--space-6);">Each module includes universal learning strategies plus a dedicated track personalized to your Academic Superpower archetype.</p>
+      </div>
+      <div class="module-grid" id="moduleGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Archetype tracks section -->
+      <div style="margin-top:var(--space-12);padding:var(--space-8);background:var(--white);border-radius:var(--radius-2xl);border:1px solid var(--border-subtle);">
+        <span class="eyebrow" style="display:block;margin-bottom:var(--space-3);">Personalization Engine</span>
+        <h2 style="margin-bottom:var(--space-4);">Content Adapts to Your Superpower</h2>
+        <p style="color:var(--text-secondary);max-width:620px;margin-bottom:var(--space-8);">Every module delivers strategies matched to your natural learning archetype. You can also browse all four tracks to understand how others learn and collaborate more effectively.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-4);">
+          <div style="background:rgba(26,58,107,0.06);border-radius:var(--radius-lg);padding:var(--space-5);">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">🏛️</div>
+            <div style="font-weight:700;margin-bottom:var(--space-2);">Strategic Architect</div>
+            <div style="font-size:var(--text-sm);color:var(--text-muted);">Structure, planning, and organized systems as the foundation of learning.</div>
+          </div>
+          <div style="background:rgba(13,148,136,0.06);border-radius:var(--radius-lg);padding:var(--space-5);">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">🎯</div>
+            <div style="font-weight:700;margin-bottom:var(--space-2);">Precision Operator</div>
+            <div style="font-size:var(--text-sm);color:var(--text-muted);">Logic, analysis, and depth-first investigation as the path to mastery.</div>
+          </div>
+          <div style="background:rgba(124,58,237,0.06);border-radius:var(--radius-lg);padding:var(--space-5);">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">🔭</div>
+            <div style="font-weight:700;margin-bottom:var(--space-2);">Vision Integrator</div>
+            <div style="font-size:var(--text-sm);color:var(--text-muted);">Creativity, meaning, and connection as the engine of understanding.</div>
+          </div>
+          <div style="background:rgba(212,168,67,0.06);border-radius:var(--radius-lg);padding:var(--space-5);">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">⚡</div>
+            <div style="font-weight:700;margin-bottom:var(--space-2);">Applied Executor</div>
+            <div style="font-size:var(--text-sm);color:var(--text-muted);">Hands-on practice and immediate application as the gateway to retention.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:var(--space-12);"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+<script src="/js/core.js"></script>
+<script src="/hero/js/oauth-config.js"></script>
+<script src="/hero/js/access-control.js"></script>
+<script src="/hero/js/course-data.js"></script>
+<script>
+(function () {
+  const C = window.HERO_COURSE_DATA;
+  if (!C) return;
+
+  /* ── Auth check ── */
+  const user = JSON.parse(localStorage.getItem('heroUser') || 'null');
+  if (!user) {
+    sessionStorage.setItem('heroLoginReturn', window.location.href);
+    window.location.href = '/hero/login.html';
+    return;
+  }
+
+  /* ── Populate user display ── */
+  const uDisplay = document.getElementById('userDisplay');
+  if (uDisplay) uDisplay.textContent = user.name || user.email;
+
+  /* ── Logout ── */
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('heroUser');
+    localStorage.removeItem('heroToken');
+    localStorage.removeItem('heroRefreshToken');
+    window.location.href = '/hero/login.html';
+  });
+
+  /* ── Resolve archetype ── */
+  const archetypeKey = C.getUserArchetype(user.email);
+  const archetype = archetypeKey ? C.archetypes[archetypeKey] : null;
+
+  if (archetype) {
+    const pill = document.getElementById('archetypePill');
+    document.getElementById('archetypeEmoji').textContent = archetype.emoji;
+    document.getElementById('archetypeName').textContent = `${archetype.name} — Your Superpower`;
+    if (pill) pill.style.display = 'inline-flex';
+    document.getElementById('noAssessmentBanner').style.display = 'none';
+  } else {
+    document.getElementById('noAssessmentBanner').style.display = 'flex';
+  }
+
+  /* ── Course progress ── */
+  const progress = C.getCourseProgress(user.email);
+  document.getElementById('completedCount').textContent = progress.completed;
+  document.getElementById('progressText').textContent = `${progress.completed} / ${progress.total} modules`;
+  document.getElementById('progressFill').style.width = `${progress.percent}%`;
+  if (progress.completed > 0) {
+    document.getElementById('courseProgressArea').style.display = 'block';
+  }
+
+  /* ── Find next incomplete module ── */
+  const nextModule = C.modules.find(m => {
+    const prog = C.getModuleProgress(user.email, m.id);
+    return !prog.completed;
+  });
+  const startBtn = document.getElementById('startBtn');
+  if (startBtn && nextModule) {
+    startBtn.href = `module.html?m=${nextModule.number}`;
+    startBtn.textContent = progress.completed > 0 ? `Continue — Module ${nextModule.number}` : 'Start Module 1';
+  } else if (startBtn && !nextModule) {
+    startBtn.textContent = 'Review Course';
+    startBtn.href = 'module.html?m=1';
+  }
+
+  /* ── Accent colors per module ── */
+  const ACCENT_OPACITIES = ['0.07', '0.06', '0.08', '0.07', '0.06', '0.07', '0.08', '0.06'];
+
+  /* ── Render module grid ── */
+  const grid = document.getElementById('moduleGrid');
+  if (grid) {
+    grid.innerHTML = C.modules.map(m => {
+      const prog = C.getModuleProgress(user.email, m.id);
+      const done = prog.completed;
+      const arcContent = archetype ? C.getArchetypeContent(m, archetypeKey) : null;
+      const fwSteps = m.framework.steps.slice(0, 4).map(s =>
+        `<span class="framework-step-chip"><strong>${s.letter}</strong> ${s.word}</span>`
+      ).join('');
+
+      // Check access for this module
+      const access   = window.HeroAccess?.canAccessModule(user.email, m.number, 'activate-superpowers');
+      const isLocked = access && !access.allowed;
+      const lockReason = isLocked ? access.reason : null;
+      const pricingHref = '/hero/pricing.html';
+
+      return `
+        <div class="module-card ${done ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
+             style="${isLocked ? 'opacity:0.75;' : ''}">
+          <div class="module-card-header">
+            <div class="module-icon-wrap" style="background:${m.accentColor}18;">
+              ${isLocked ? '🔒' : m.icon}
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div class="module-num">Module ${m.number} • ${m.framework.name}</div>
+              <h4 style="margin:var(--space-1) 0 0;font-size:var(--text-base);line-height:1.3;">${m.title}</h4>
+              <p style="font-size:var(--text-xs);color:var(--text-muted);margin:var(--space-1) 0 0;">${m.subtitle}</p>
+            </div>
+            ${done ? '<div class="check-badge">✓</div>' : ''}
+            ${isLocked ? `<span style="background:#f1f5f9;border-radius:var(--radius-full);padding:2px 8px;font-size:10px;font-weight:700;color:#94a3b8;flex-shrink:0;">LOCKED</span>` : ''}
+          </div>
+          <div class="module-card-body">
+            <p>${m.objective}</p>
+            ${!isLocked ? `<div class="framework-strip">${fwSteps}</div>` : ''}
+            ${!isLocked && arcContent ? `<div style="margin-top:var(--space-3);padding:var(--space-3) var(--space-4);background:${m.accentColor}0d;border-radius:var(--radius-md);border-left:3px solid ${m.accentColor};font-size:var(--text-xs);color:var(--text-secondary);">
+              <strong style="color:${m.accentColor};">${archetype.emoji} ${archetype.name} Track</strong><br/>
+              ${arcContent.intro}
+            </div>` : ''}
+            ${isLocked ? `<p style="font-size:var(--text-xs);color:var(--h2eo-teal);font-weight:600;">
+              ${lockReason === 'subscription' ? '🔒 Requires K-12 subscription' : '🔒 Requires course purchase'}
+            </p>` : ''}
+          </div>
+          <div class="module-card-footer">
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">~${Math.ceil(60 + m.archetypes.strategicArchitect.strategies.length * 10)} min</span>
+            ${isLocked
+              ? `<a href="${pricingHref}" class="btn btn-secondary btn-sm">Unlock →</a>`
+              : `<a href="module.html?m=${m.number}" class="btn ${done ? 'btn-secondary' : 'btn-primary'} btn-sm">
+                  ${done ? 'Review' : 'Start Module'}
+                </a>`
+            }
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  /* ── Render sidebar ── */
+  const sidebar = document.getElementById('sidebarModules');
+  if (sidebar) {
+    sidebar.innerHTML = C.modules.map(m => {
+      const prog    = C.getModuleProgress(user.email, m.id);
+      const done    = prog.completed;
+      const access  = window.HeroAccess?.canAccessModule(user.email, m.number, 'activate-superpowers');
+      const locked  = access && !access.allowed;
+      const href    = locked ? '/hero/pricing.html' : `module.html?m=${m.number}`;
+      return `
+        <a href="${href}" class="sidebar-module-link ${done ? 'done' : ''}" ${locked ? 'style="opacity:0.6;"' : ''}>
+          <span class="num">${m.number}</span>
+          <span style="flex:1;">${locked ? '🔒' : m.icon} ${m.title}</span>
+          ${done ? '<span style="color:var(--h2eo-teal);font-size:12px;">✓</span>' : ''}
+        </a>`;
+    }).join('');
+  }
+
+})();
+</script>
+</body>
+</html>

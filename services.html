@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — H2EO Learning Intelligence Ecosystem</title>
+  <meta name="description" content="H2EO's full suite of services: assessments, educator training, workforce programs, institutional partnerships, and AI-aligned coaching." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    .page-hero { padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-20); background: linear-gradient(155deg, #f8fbff 0%, #f0f9f7 60%, #edf4f9 100%); position: relative; overflow: hidden; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .services-grid { grid-template-columns: 1fr; } }
+    .service-card { background: var(--white); border-radius: var(--radius-xl); border: 1.5px solid var(--border-subtle); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); transition: box-shadow var(--duration-base), border-color var(--duration-base), transform var(--duration-base); }
+    .service-card:hover { box-shadow: var(--shadow-lg); border-color: var(--h2eo-teal); transform: translateY(-3px); }
+    .service-icon { width: 52px; height: 52px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .process-step { display: flex; gap: var(--space-6); align-items: flex-start; }
+    .process-num { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--h2eo-teal); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: var(--text-lg); color: var(--h2eo-teal); flex-shrink: 0; }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<section class="page-hero">
+  <div style="position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(13,148,136,0.12),transparent 70%);border-radius:50%;filter:blur(80px);top:-100px;right:-100px;pointer-events:none;"></div>
+  <div class="container">
+    <div class="reveal" style="max-width:720px;">
+      <span class="eyebrow">Our Services</span>
+      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-6);">A Full Suite of Learning Intelligence Services</h1>
+      <p class="lead" style="margin-bottom:var(--space-10);">From individual assessments to enterprise-wide training programs, H2EO delivers the full spectrum of services needed to build a high-performing learning culture.</p>
+      <div class="btn-group">
+        <a href="contact.html" class="btn btn-primary btn-lg">Get Started</a>
+        <a href="#service-catalog" class="btn btn-secondary btn-lg">Explore Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-item">Assessment-first methodology</div>
+  <div class="trust-item">Personalized at every scale</div>
+  <div class="trust-item">K-12 through executive level</div>
+</div>
+
+<!-- Core services -->
+<section class="section bg-white" id="service-catalog">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Service Catalog</span>
+      <h2>Everything You Need to Learn Intelligently</h2>
+      <p>Each service is built around the Academic Superpowers™ framework — so every offering starts with who you are as a learner.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal stagger-1">
+        <div class="service-icon" style="background:var(--surface-teal-tint);">⚡</div>
+        <div>
+          <span class="badge badge-teal" style="margin-bottom:var(--space-2);">Core Service</span>
+          <h3 style="font-size:var(--text-xl);">Academic Superpowers™ Assessment</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);flex:1;">A validated, research-informed assessment that identifies each learner's cognitive archetype. Available for K-12 through adult learners, with versions tailored to each age group.</p>
+        <a href="profile.html" class="btn btn-secondary btn-sm" style="margin-top:auto;">Try the Assessment</a>
+      </div>
+
+      <div class="service-card reveal stagger-2">
+        <div class="service-icon" style="background:rgba(26,58,107,0.06);">📐</div>
+        <div>
+          <span class="badge badge-blue" style="margin-bottom:var(--space-2);">Training</span>
+          <h3 style="font-size:var(--text-xl);">Educator Professional Development</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);flex:1;">Facilitated workshops and self-paced modules that train teachers, coaches, and school leaders to apply the H2EO framework in every classroom interaction.</p>
+        <a href="contact.html" class="btn btn-secondary btn-sm" style="margin-top:auto;">Book Training</a>
+      </div>
+
+      <div class="service-card reveal stagger-3">
+        <div class="service-icon" style="background:rgba(212,168,67,0.08);">🏢</div>
+        <div>
+          <span class="badge badge-gold" style="margin-bottom:var(--space-2);">Enterprise</span>
+          <h3 style="font-size:var(--text-xl);">Organizational Learning Programs</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);flex:1;">Custom-built learning programs for organizations — aligned to workforce goals, employee development tracks, and team cognitive diversity insights.</p>
+        <a href="organizations.html" class="btn btn-secondary btn-sm" style="margin-top:auto;">Learn More</a>
+      </div>
+
+      <div class="service-card reveal stagger-1">
+        <div class="service-icon" style="background:rgba(99,102,241,0.06);">🤖</div>
+        <div>
+          <span class="badge" style="background:rgba(99,102,241,0.1);color:#4f46e5;margin-bottom:var(--space-2);">AI Readiness</span>
+          <h3 style="font-size:var(--text-xl);">AI Alignment Coaching</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);flex:1;">Structured programs to help professionals and teams integrate AI tools without losing cognitive edge — built around each learner's profile and work context.</p>
+        <a href="product-1.html" class="btn btn-secondary btn-sm" style="margin-top:auto;">View Product #1</a>
+      </div>
+
+      <div class="service-card reveal stagger-2">
+        <div class="service-icon" style="background:var(--surface-teal-tint);">🎓</div>
+        <div>
+          <span class="badge badge-teal" style="margin-bottom:var(--space-2);">LMS + Content</span>
+          <h3 style="font-size:var(--text-xl);">Hero LMS &amp; Hero Academy</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);flex:1;">Access the Hero LMS platform and browse Hero Academy — H2EO's purchasable course catalog with personalized paths, progress tracking, and AI coaching matched to your archetype.</p>
+        <a href="hero/index.html" class="btn btn-secondary btn-sm" style="margin-top:auto;">Access Hero LMS</a>
+      </div>
+
+      <div class="service-card reveal stagger-3">
+        <div class="service-icon" style="background:rgba(26,58,107,0.06);">🤝</div>
+        <div>
+          <span class="badge badge-blue" style="margin-bottom:var(--space-2);">Partnership</span>
+          <h3 style="font-size:var(--text-xl);">Institutional Partnerships</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);flex:1;">District-level, college, or corporate partnerships that bring H2EO's framework to scale — custom SLAs, implementation support, and ongoing performance analytics.</p>
+        <a href="contact.html" class="btn btn-secondary btn-sm" style="margin-top:auto;">Inquire Now</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Engagement process -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">How It Works</span>
+      <h2>Our Engagement Process</h2>
+      <p>Every engagement follows a four-stage process — from discovery to ongoing optimization.</p>
+    </div>
+    <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-8);">
+      <div class="process-step reveal stagger-1">
+        <div class="process-num">1</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Discovery Call</h4>
+          <p style="color:var(--text-secondary);">We start with a free consultation to understand your goals, context, and learner population. No commitment required.</p>
+        </div>
+      </div>
+      <div class="process-step reveal stagger-2">
+        <div class="process-num">2</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Assessment Deployment</h4>
+          <p style="color:var(--text-secondary);">We deploy the Academic Superpowers™ assessment to your learners — individually, classroom-wide, or organization-wide.</p>
+        </div>
+      </div>
+      <div class="process-step reveal stagger-3">
+        <div class="process-num">3</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Program Design</h4>
+          <p style="color:var(--text-secondary);">Based on results, we design or select the right programs — courses, workshops, coaching, or customized curriculum aligned to your learning objectives.</p>
+        </div>
+      </div>
+      <div class="process-step reveal stagger-4">
+        <div class="process-num">4</div>
+        <div>
+          <h4 style="margin-bottom:var(--space-2);">Ongoing Support &amp; Optimization</h4>
+          <p style="color:var(--text-secondary);">We stay engaged throughout — with check-ins, progress reviews, and program adjustments based on learner outcomes and feedback.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Audience match -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Right Service, Right Audience</span>
+      <h2>Services by Audience</h2>
+    </div>
+    <div class="grid-2" style="gap:var(--space-6);">
+      <a href="organizations.html" class="path-card reveal stagger-1">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">🏢</div>
+        <h3>Organizations</h3>
+        <p>Workforce development, onboarding programs, and cognitive diversity strategies at organizational scale.</p>
+        <div class="card-arrow">See Organization Services <span>→</span></div>
+      </a>
+      <a href="educators.html" class="path-card reveal stagger-2">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">📚</div>
+        <h3>Educators</h3>
+        <p>Classroom frameworks, PD workshops, and school-wide implementation support for the H2EO approach.</p>
+        <div class="card-arrow">See Educator Services <span>→</span></div>
+      </a>
+      <a href="adults.html" class="path-card reveal stagger-3">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">💼</div>
+        <h3>Professionals</h3>
+        <p>AI readiness programs, professional archetypes, and self-directed growth products for working adults.</p>
+        <div class="card-arrow">See Professional Products <span>→</span></div>
+      </a>
+      <a href="k12.html" class="path-card reveal stagger-4">
+        <div class="path-label">For</div>
+        <div class="card-bg-icon">🏫</div>
+        <h3>K–12 Learners</h3>
+        <p>Age-appropriate assessments, parent guides, and school-ready tools for the full K–12 learning lifecycle.</p>
+        <div class="card-arrow">See K–12 Services <span>→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-dark">
+  <div class="container" style="position:relative;z-index:1;text-align:center;">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Let's Build Together</span>
+      <h2 style="color:white;margin-top:var(--space-4);margin-bottom:var(--space-6);">Ready to Design Your Learning Program?</h2>
+      <p class="lead" style="color:rgba(255,255,255,0.7);max-width:540px;margin:0 auto var(--space-10);">Tell us about your learners, your goals, and your timeline — and we'll design a service package that fits.</p>
+      <div class="btn-group flex-center">
+        <a href="contact.html" class="btn btn-primary btn-xl">Book a Discovery Call</a>
+        <a href="profile.html" class="btn btn-outline-white btn-xl">Try the Assessment First</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>
