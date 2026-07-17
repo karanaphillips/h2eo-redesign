@@ -18,9 +18,10 @@
   }
 
   const NAV_HTML = `
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
-  <a href="index.html" class="nav-brand">
-    <img src="images/h2eo-logo.png" alt="H2EO" class="nav-logo" />
+  <a href="index.html" class="nav-brand" aria-label="H2EO Home">
+    <img src="images/h2eo-logo.png" alt="" class="nav-logo" aria-hidden="true" />
   </a>
   <ul class="nav-links" role="list">
     ${navLink('about.html','About')}
@@ -85,9 +86,9 @@
         ">Here to Educate Others, LLC</div>
         <p class="footer-desc">Here to Educate Others (H2EO) is a Learning Intelligence Ecosystem helping organizations, educators, professionals, and learners discover strengths and transform how learning happens.</p>
         <div class="footer-social" aria-label="Social media links">
-          <a href="#" class="footer-social-link" aria-label="Facebook">f</a>
-          <a href="#" class="footer-social-link" aria-label="YouTube">▶</a>
-          <a href="#" class="footer-social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="footer-social-link" aria-label="Facebook"><span aria-hidden="true">f</span></a>
+          <a href="#" class="footer-social-link" aria-label="YouTube"><span aria-hidden="true">▶</span></a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn"><span aria-hidden="true">in</span></a>
         </div>
       </div>
       <div class="footer-col">
@@ -135,7 +136,18 @@
 
   // Inject nav
   const navMount = document.getElementById('nav-mount');
-  if (navMount) navMount.outerHTML = NAV_HTML;
+  if (navMount) {
+    navMount.outerHTML = NAV_HTML;
+    // Set skip-link target on first main/section after nav
+    const target = document.querySelector('main, .page-hero, .survey-hero, section');
+    if (target && !target.id) target.id = 'main-content';
+    else if (!document.getElementById('main-content')) {
+      const marker = document.createElement('div');
+      marker.id = 'main-content';
+      marker.setAttribute('tabindex', '-1');
+      document.body.insertBefore(marker, document.querySelector('.site-nav').nextSibling);
+    }
+  }
 
   // Inject footer
   const footerMount = document.getElementById('footer-mount');
