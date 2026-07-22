@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero LMS — The Learning Platform Built for How You Think</title>
+  <meta name="description" content="Hero LMS is the only learning management system that starts with your Academic Superpowers™ profile — adapting every course, recommendation, and coaching interaction to how you actually learn." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    /* Hero */
+    .hero-lms-page-hero {
+      padding: calc(var(--nav-height) + var(--space-24)) 0 var(--space-24);
+      background: linear-gradient(155deg, var(--h2eo-navy) 0%, #0f2d52 60%, #0d3d3a 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-lms-page-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(13,148,136,0.25), transparent 70%);
+      border-radius: 50%; filter: blur(80px);
+      top: -100px; right: -100px; pointer-events: none;
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+    }
+    .compare-table th {
+      padding: var(--space-4) var(--space-5);
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border-subtle);
+    }
+    .compare-table th:first-child { color: var(--text-primary); }
+    .compare-table th.highlight { color: var(--h2eo-teal); }
+    .compare-table td {
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    .compare-table td:first-child { font-weight: 500; color: var(--text-primary); }
+    .compare-table td.highlight { color: var(--h2eo-teal); font-weight: 600; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: var(--surface-soft); }
+    .check { color: var(--h2eo-teal); font-weight: 700; }
+    .cross { color: var(--gray-400); }
+    .wrap-x { overflow-x: auto; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); }
+
+    /* Step process */
+    .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 48px;
+      bottom: 48px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--h2eo-teal), var(--h2eo-mid-blue));
+    }
+    @media (max-width: 600px) { .steps::before { display: none; } }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: var(--space-6);
+      align-items: flex-start;
+      padding: var(--space-6) 0;
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--h2eo-teal);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-lg);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Feature cards */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-7);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .feature-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-lg);
+      background: rgba(13,148,136,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    /* Audience cards */
+    .audience-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    @media (max-width: 768px) { .audience-row { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .audience-row { grid-template-columns: 1fr; } }
+    .aud-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .aud-card-icon { font-size: 2rem; }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<!-- Hero -->
+<section class="hero-lms-page-hero">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="reveal" style="max-width:760px;">
+      <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Hero LMS</span>
+      <h1 style="color:white;margin-top:var(--space-4);margin-bottom:var(--space-6);">The Only LMS That Starts With How You Think</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.78);margin-bottom:var(--space-10);">Every other learning platform starts with a course catalog. Hero LMS starts with your Academic Superpowers™ profile — then builds your entire learning experience around how you actually process, retain, and apply knowledge.</p>
+      <div class="btn-group">
+        <a href="hero/register.html" class="btn btn-primary btn-xl">Get Started Free</a>
+        <a href="hero/login.html" class="btn btn-outline-white btn-xl">Sign In</a>
+        <a href="contact.html" class="btn btn-ghost btn-xl" style="color:rgba(255,255,255,0.65);">Book a Demo</a>
+      </div>
+    </div>
+    <!-- Floating stat chips -->
+    <div style="display:flex;flex-wrap:wrap;gap:var(--space-4);margin-top:var(--space-14);" class="reveal">
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-full);padding:var(--space-2) var(--space-5);font-size:var(--text-sm);color:rgba(255,255,255,0.8);">🧠 Profile-first learning</div>
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-full);padding:var(--space-2) var(--space-5);font-size:var(--text-sm);color:rgba(255,255,255,0.8);">⚡ AI-powered coaching</div>
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-full);padding:var(--space-2) var(--space-5);font-size:var(--text-sm);color:rgba(255,255,255,0.8);">📚 Archetype-aligned courses</div>
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-full);padding:var(--space-2) var(--space-5);font-size:var(--text-sm);color:rgba(255,255,255,0.8);">🏢 Built for individuals &amp; orgs</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">How It Works</span>
+      <h2>Three Steps to Personalized Learning</h2>
+      <p>Most platforms dump you into a catalog. Hero LMS builds your path before you take a single lesson.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center;">
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Discover Your Superpowers™</h3>
+            <p style="color:var(--text-secondary);margin-top:var(--space-2);">Take the Academic Superpowers™ assessment — 28 forced-choice questions, about 5 minutes. You get a detailed cognitive profile: your archetype, how you process information, and what learning environments bring out your best work.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Get a Profile-Matched Learning Path</h3>
+            <p style="color:var(--text-secondary);margin-top:var(--space-2);">Hero LMS uses your profile to surface courses, sequences, and study strategies that fit how you think — not a generic bestseller list. Every recommendation is tagged to an archetype and explained in terms of why it suits you.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Learn With an AI Coach in Your Corner</h3>
+            <p style="color:var(--text-secondary);margin-top:var(--space-2);">As you progress, your AI coach checks in, adapts suggestions, and helps you apply what you're learning to real situations. It knows your archetype — so the advice actually fits you, not a hypothetical average learner.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="background:linear-gradient(135deg,var(--h2eo-navy),#0f2d52);border-radius:var(--radius-2xl);padding:var(--space-10);position:relative;overflow:hidden;">
+        <div style="position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(13,148,136,0.3),transparent 70%);border-radius:50%;filter:blur(60px);top:-60px;right:-60px;pointer-events:none;"></div>
+        <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:var(--space-6);">
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-xl);padding:var(--space-5);">
+            <div style="font-size:var(--text-xs);color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-2);">Your Profile</div>
+            <div style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:800;color:var(--h2eo-teal-muted);">Vision Integrator</div>
+            <div style="font-size:var(--text-sm);color:rgba(255,255,255,0.6);margin-top:var(--space-1);">Creative · Systems-thinking · Story-driven</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-xl);padding:var(--space-5);">
+            <div style="font-size:var(--text-xs);color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-3);">Recommended For You</div>
+            <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);color:rgba(255,255,255,0.75);">
+                <span style="width:8px;height:8px;background:var(--h2eo-teal);border-radius:50%;flex-shrink:0;"></span>
+                AI Without Losing Your Edge
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);color:rgba(255,255,255,0.75);">
+                <span style="width:8px;height:8px;background:var(--h2eo-teal);border-radius:50%;flex-shrink:0;"></span>
+                Systems Thinking for Leaders
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);color:rgba(255,255,255,0.75);">
+                <span style="width:8px;height:8px;background:var(--h2eo-teal);border-radius:50%;flex-shrink:0;"></span>
+                Creative Problem Framing
+              </div>
+            </div>
+          </div>
+          <div style="background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.3);border-radius:var(--radius-xl);padding:var(--space-4);font-size:var(--text-sm);color:rgba(255,255,255,0.8);">
+            <span style="color:var(--h2eo-teal);font-weight:700;">AI Coach:</span> "As a Vision Integrator, you'll absorb this module faster if you start with the big-picture overview before the step-by-step detail. Try the summary first."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Platform Features</span>
+      <h2>Everything Built Around Your Profile</h2>
+      <p>Every feature in Hero LMS connects back to one thing: helping you learn in the way that actually works for you.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal stagger-1">
+        <div class="feature-icon">⚡</div>
+        <h4>Superpowers™ Assessment</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">28 forced-choice questions surface your true cognitive profile — not what you wish were true, but how you actually think and learn under real conditions.</p>
+      </div>
+      <div class="feature-card reveal stagger-2">
+        <div class="feature-icon">🎯</div>
+        <h4>Archetype-Matched Courses</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Every course in the Hero Academy catalog is tagged by which archetypes benefit most and why — so you spend time on content that fits, not generic filler.</p>
+      </div>
+      <div class="feature-card reveal stagger-3">
+        <div class="feature-icon">🤖</div>
+        <h4>AI Learning Coach</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Your AI coach knows your profile. It doesn't give generic study tips — it tells you how to approach each lesson in a way that fits how you process information.</p>
+      </div>
+      <div class="feature-card reveal stagger-4">
+        <div class="feature-icon">📊</div>
+        <h4>Adaptive Progress Dashboard</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Track completion, streaks, and milestone badges — but also see how your learning patterns compare to your Superpower profile. Insights, not just numbers.</p>
+      </div>
+      <div class="feature-card reveal stagger-5">
+        <div class="feature-icon">🏢</div>
+        <h4>Organization Admin Panel</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Admins can view team-level Superpower distributions, assign courses by archetype, and track L&amp;D ROI across the whole organization in one dashboard.</p>
+      </div>
+      <div class="feature-card reveal stagger-6">
+        <div class="feature-icon">📱</div>
+        <h4>Mobile-First Design</h4>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Hero LMS works wherever you are. Fully responsive across phone, tablet, and desktop — with offline reading for select content so learning doesn't stop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it's different -->
+<section class="section bg-soft">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Why Hero LMS Is Different</span>
+      <h2>Not Another Course Catalog</h2>
+      <p>The LMS market is full of platforms that organize content. Hero LMS organizes content around you.</p>
+    </div>
+    <div class="wrap-x reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="highlight">Hero LMS</th>
+            <th>Typical LMS<br><span style="font-weight:400;font-size:0.9em;">(Canvas, Moodle, etc.)</span></th>
+            <th>Course Marketplace<br><span style="font-weight:400;font-size:0.9em;">(Udemy, Coursera)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cognitive profile assessment</td>
+            <td class="highlight check">✓ Built in</td>
+            <td class="cross">✗ Not available</td>
+            <td class="cross">✗ Not available</td>
+          </tr>
+          <tr>
+            <td>Profile-matched course recommendations</td>
+            <td class="highlight check">✓ Core feature</td>
+            <td class="cross">✗ Manual selection</td>
+            <td class="cross">✗ Popularity-based only</td>
+          </tr>
+          <tr>
+            <td>AI coaching tied to your learning style</td>
+            <td class="highlight check">✓ Archetype-aware</td>
+            <td class="cross">✗ Not available</td>
+            <td class="cross">✗ Generic chatbot</td>
+          </tr>
+          <tr>
+            <td>Organizational archetype mapping</td>
+            <td class="highlight check">✓ Team dashboards</td>
+            <td class="cross">✗ Not available</td>
+            <td class="cross">✗ Not available</td>
+          </tr>
+          <tr>
+            <td>Progress tracking beyond completion %</td>
+            <td class="highlight check">✓ Profile-relative insights</td>
+            <td class="cross">✗ Completion only</td>
+            <td class="cross">✗ Completion only</td>
+          </tr>
+          <tr>
+            <td>Content delivery &amp; course catalog</td>
+            <td class="highlight check">✓ Hero Academy</td>
+            <td class="check">✓ Self-hosted content</td>
+            <td class="check">✓ Marketplace courses</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Who it's for -->
+<section class="section cta-dark">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-header reveal" style="max-width:600px;margin-bottom:var(--space-12);">
+      <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Who It's For</span>
+      <h2 style="color:white;">Hero LMS Works For Every Type of Learner</h2>
+    </div>
+    <div class="audience-row">
+      <div class="aud-card reveal stagger-1">
+        <div class="aud-card-icon">🎓</div>
+        <h4 style="color:white;">Students</h4>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);">Know how you learn before you sit for exams. Aligned study strategies, course recommendations, and a profile to carry into college or your career.</p>
+      </div>
+      <div class="aud-card reveal stagger-2">
+        <div class="aud-card-icon">💼</div>
+        <h4 style="color:white;">Professionals</h4>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);">Grow your skills without wasting time on courses that don't fit how you think. Hero LMS turns professional development into something that actually sticks.</p>
+      </div>
+      <div class="aud-card reveal stagger-3">
+        <div class="aud-card-icon">🎓</div>
+        <h4 style="color:white;">Educators</h4>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);">Use Hero LMS for your own professional development or deploy it for your students. Either way, learning starts with a profile, not a catalog.</p>
+      </div>
+      <div class="aud-card reveal stagger-4">
+        <div class="aud-card-icon">🏢</div>
+        <h4 style="color:white;">Organizations</h4>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);">Deploy Hero LMS across your team. Map cognitive diversity, assign archetype-matched training, and track L&amp;D outcomes from a unified admin dashboard.</p>
+      </div>
+      <div class="aud-card reveal stagger-5">
+        <div class="aud-card-icon">🌱</div>
+        <h4 style="color:white;">Adult Learners</h4>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);">Return to learning with confidence. Whether you're changing careers, learning a new skill, or just curious — Hero LMS builds a path around how you think now.</p>
+      </div>
+      <div class="aud-card reveal stagger-6">
+        <div class="aud-card-icon">👨‍👩‍👧</div>
+        <h4 style="color:white;">K-12 Families</h4>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.65);">Help your child discover how they learn before school does. Parent-friendly profile reports, home learning activities, and progress insights — all in one place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="reveal" style="max-width:600px;margin:0 auto;text-align:center;">
+      <span class="eyebrow">Get Started</span>
+      <h2 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Your Profile. Your Path. Your Platform.</h2>
+      <p style="color:var(--text-secondary);margin-bottom:var(--space-10);">Take the free Academic Superpowers™ assessment and log in to Hero LMS to see your personalized learning path in under 10 minutes.</p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="profile.html" class="btn btn-primary btn-xl">Take the Assessment Free</a>
+        <a href="hero/pricing.html" class="btn btn-secondary btn-xl">View Plans &amp; Pricing</a>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--space-6);">Individual plans from $0 · Organization pricing available · No credit card required to start</p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>

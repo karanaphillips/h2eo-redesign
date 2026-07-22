@@ -223,26 +223,30 @@ function initContactForms() {
       btn.disabled = true;
       btn.textContent = 'Sending…';
 
+      // Replace FORMSPREE_FORM_ID with your ID from formspree.io (e.g. 'xyzabc12')
+      const FORMSPREE_ENDPOINT = 'https://formspree.io/f/FORMSPREE_FORM_ID';
+
       try {
         const fd = new FormData(form);
         const body = {};
         fd.forEach((v, k) => { body[k] = v; });
         body.newsletter = form.querySelector('[name="newsletter"]')?.checked ?? false;
 
-        const res = await fetch('/api/v1/contact/inquiries', {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(body),
         });
 
-        if (res.ok) {
+        const data = await res.json();
+        if (res.ok && data.ok !== false) {
           Toast.success('Message sent!', 'We\'ll be in touch within 1–2 business days.');
           form.reset();
         } else {
-          throw new Error('Server error');
+          throw new Error(data.error || 'Server error');
         }
       } catch {
-        Toast.error('Unable to send', 'Please try again or email us directly.');
+        Toast.error('Unable to send', 'Please try again or email hello@heretoeducateothers.com directly.');
       } finally {
         btn.disabled = false;
         btn.textContent = originalText;

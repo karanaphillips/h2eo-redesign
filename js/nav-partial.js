@@ -25,21 +25,11 @@
   </a>
   <ul class="nav-links" role="list">
     ${navLink('about.html','About')}
-    ${navLink('#solutions','Solutions',[
-      ['organizations.html','Organizations','Enterprise & institutional learning'],
-      ['educators.html','Educators','Classroom & training tools'],
-      ['professionals.html','Professionals','Career growth & workforce dev'],
-      ['adults.html','Adult Learners','Lifelong learning pathways'],
-      ['students.html','Students','Personalized student learning paths'],
-      ['k12.html','K–12 & Parents','Student & parent resources'],
-    ])}
+    ${navLink('solutions.html','Solutions')}
     ${navLink('profile.html','Superpowers™')}
-    ${navLink('hero/index.html','Hero LMS')}
+    ${navLink('hero-lms.html','Hero LMS')}
     ${navLink('services.html','Services')}
-    ${navLink('#resources','Resources',[
-      ['resources.html','Resources','Guides, tools & downloads'],
-      ['insights.html','Insights','Learning science articles & news'],
-    ])}
+    ${navLink('resources.html','Resources')}
     ${navLink('contact.html','Contact')}
   </ul>
   <div class="nav-actions">
@@ -54,17 +44,11 @@
   <ul role="list">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="organizations.html">Organizations</a></li>
-    <li><a href="educators.html">Educators</a></li>
-    <li><a href="professionals.html">Professionals</a></li>
-    <li><a href="adults.html">Adult Learners</a></li>
-    <li><a href="students.html">Students</a></li>
-    <li><a href="k12.html">K–12</a></li>
+    <li><a href="solutions.html">Solutions</a></li>
     <li><a href="profile.html">Academic Superpowers™</a></li>
-    <li><a href="hero/index.html">Hero LMS</a></li>
+    <li><a href="hero-lms.html">Hero LMS</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="resources.html">Resources</a></li>
-    <li><a href="insights.html">Insights</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="mobile-menu-footer">

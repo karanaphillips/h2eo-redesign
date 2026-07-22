@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resources — H2EO Learning Intelligence Ecosystem</title>
-  <meta name="description" content="Books, courses, assessments, tools, and downloads from H2EO to support your learning journey." />
+  <title>Resources &amp; Insights — H2EO Learning Intelligence Ecosystem</title>
+  <meta name="description" content="Tools, guides, assessments, and learning science insights from H2EO — for learners, educators, professionals, and organizations." />
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/typography.css" />
   <link rel="stylesheet" href="css/animations.css" />
@@ -14,29 +14,188 @@
   <link rel="stylesheet" href="css/forms.css" />
   <link rel="stylesheet" href="css/utilities.css" />
   <style>
-    .page-hero { padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-16); background: linear-gradient(155deg, #f8fbff 0%, #edf4f9 60%, #e8f6f4 100%); }
-    .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-    @media (max-width: 900px) { .resources-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .resources-grid { grid-template-columns: 1fr; } }
-    .resource-card {
-      background: var(--white); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle);
-      overflow: hidden; display: flex; flex-direction: column;
-      transition: box-shadow var(--duration-base), transform var(--duration-base);
+    .page-hero {
+      padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-14);
+      background: linear-gradient(155deg, #f8fbff 0%, #edf4f9 60%, #e8f6f4 100%);
     }
-    .resource-card:hover { box-shadow: var(--shadow-xl); transform: translateY(-4px); }
-    .resource-thumb {
-      height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
+
+    /* Top-level section tabs */
+    .section-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border-subtle);
+      margin-bottom: var(--space-10);
     }
-    .resource-body { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
-    .resource-type { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+    .section-tab {
+      padding: var(--space-3) var(--space-7);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: color var(--duration-fast), border-color var(--duration-fast);
+    }
+    .section-tab:hover { color: var(--text-primary); }
+    .section-tab.active { color: var(--h2eo-teal); border-bottom-color: var(--h2eo-teal); }
+
+    /* Resource filter chips */
     .filter-tabs { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-10); }
     .filter-tab {
-      padding: var(--space-2) var(--space-5); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500;
-      border: 1.5px solid var(--gray-300); background: var(--white); cursor: pointer; color: var(--text-secondary);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      border: 1.5px solid var(--gray-300);
+      background: var(--white);
+      cursor: pointer;
+      color: var(--text-secondary);
       transition: border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast);
       font-family: var(--font-body);
     }
-    .filter-tab.active, .filter-tab:hover { border-color: var(--h2eo-teal); color: var(--h2eo-teal); background: rgba(13,148,136,0.05); }
+    .filter-tab.active, .filter-tab:hover {
+      border-color: var(--h2eo-teal);
+      color: var(--h2eo-teal);
+      background: rgba(13,148,136,0.05);
+    }
+
+    /* Resource cards */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 900px) { .resources-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .resources-grid { grid-template-columns: 1fr; } }
+    .resource-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--duration-base), transform var(--duration-base);
+    }
+    .resource-card:hover { box-shadow: var(--shadow-xl); transform: translateY(-4px); }
+    .resource-card[hidden] { display: none; }
+    .resource-thumb {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+    .resource-body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      flex: 1;
+    }
+    .resource-type {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Insight cards */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+    @media (max-width: 700px) { .insights-grid { grid-template-columns: 1fr; } }
+    .insight-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--duration-base), transform var(--duration-base);
+    }
+    .insight-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .insight-card[hidden] { display: none; }
+    .insight-card-img {
+      width: 100%;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .insight-card-body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      flex: 1;
+    }
+    .insight-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .insight-card-footer {
+      padding: var(--space-4) var(--space-6);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topic-pill {
+      display: inline-flex;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: background var(--duration-fast), border-color var(--duration-fast);
+    }
+    .topic-pill.active, .topic-pill:hover {
+      background: var(--h2eo-teal);
+      color: var(--white);
+      border-color: var(--h2eo-teal);
+    }
+    .topic-pill:not(.active) {
+      background: var(--surface-off);
+      color: var(--text-secondary);
+      border-color: var(--border-subtle);
+    }
+
+    /* Featured insight banner */
+    .featured-insight {
+      background: linear-gradient(135deg, var(--h2eo-navy), #0f2d52);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-10);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-10);
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: var(--space-10);
+    }
+    @media (max-width: 700px) { .featured-insight { grid-template-columns: 1fr; } }
+    .featured-insight::before {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(13,148,136,0.3), transparent 70%);
+      border-radius: 50%; filter: blur(60px);
+      top: -80px; right: -60px; pointer-events: none;
+    }
+
+    /* Panel visibility */
+    #resourcesPanel, #insightsPanel { display: none; }
+    #resourcesPanel.active, #insightsPanel.active { display: block; }
   </style>
 </head>
 <body>
@@ -45,82 +204,202 @@
 <section class="page-hero">
   <div class="container">
     <div class="reveal" style="max-width:680px;">
-      <span class="eyebrow">Resources</span>
-      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Tools &amp; Resources for Every Learner</h1>
-      <p class="lead">Books, assessments, guides, and tools to support your learning journey — whether you're a student, educator, professional, or organization.</p>
+      <span class="eyebrow">Resources &amp; Insights</span>
+      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Everything You Need to Learn Smarter</h1>
+      <p class="lead">Tools, guides, assessments, and research-informed articles — all grounded in the Academic Superpowers™ framework.</p>
     </div>
   </div>
 </section>
 
 <section class="section bg-white">
   <div class="container">
-    <!-- Filters -->
-    <div class="filter-tabs reveal">
-      <button class="filter-tab active">All Resources</button>
-      <button class="filter-tab">Assessments</button>
-      <button class="filter-tab">Guides</button>
-      <button class="filter-tab">Tools</button>
-      <button class="filter-tab">Downloads</button>
-      <button class="filter-tab">For Educators</button>
+
+    <!-- Section tabs -->
+    <div class="section-tabs reveal" role="tablist" aria-label="Content type">
+      <button class="section-tab active" role="tab" aria-selected="true" aria-controls="resourcesPanel" data-panel="resourcesPanel">Tools &amp; Resources</button>
+      <button class="section-tab" role="tab" aria-selected="false" aria-controls="insightsPanel" data-panel="insightsPanel">Insights &amp; Articles</button>
     </div>
 
-    <!-- Resources grid -->
-    <div class="resources-grid">
-      <div class="resource-card reveal stagger-1">
-        <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(13,148,136,0.1),rgba(26,58,107,0.08));">📊</div>
-        <div class="resource-body">
-          <span class="resource-type">Assessment</span>
-          <h3>Academic Superpowers™ Assessment</h3>
-          <p style="font-size:var(--text-sm);flex:1;">Discover your unique learning archetype across 28 research-informed questions. Get your full profile, career insights, and a personalized learning plan.</p>
-          <a href="profile.html" class="btn btn-primary">Take Free Assessment</a>
-        </div>
+    <!-- ── Resources Panel ── -->
+    <div id="resourcesPanel" role="tabpanel" class="active">
+      <!-- Type filter chips -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-rfilter="all">All Resources</button>
+        <button class="filter-tab" data-rfilter="assessment">Assessments</button>
+        <button class="filter-tab" data-rfilter="guide">Guides</button>
+        <button class="filter-tab" data-rfilter="tool">Tools</button>
+        <button class="filter-tab" data-rfilter="platform">Platform</button>
+        <button class="filter-tab" data-rfilter="educators">For Educators</button>
       </div>
-      <div class="resource-card reveal stagger-2">
-        <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(212,168,67,0.1),rgba(13,148,136,0.06));">🤖</div>
-        <div class="resource-body">
-          <span class="resource-type">Guide · Professional</span>
-          <h3>AI Without Losing Your Edge</h3>
-          <p style="font-size:var(--text-sm);flex:1;">Understand your AI alignment profile, identify cognitive risks, and build a 30-day plan to stay mentally sharp while leveraging AI tools.</p>
-          <a href="product-1.html" class="btn btn-secondary">Open Guide</a>
+
+      <div class="resources-grid" id="resourcesGrid">
+        <div class="resource-card" data-rtype="assessment">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(13,148,136,0.1),rgba(26,58,107,0.08));">📊</div>
+          <div class="resource-body">
+            <span class="resource-type">Assessment</span>
+            <h3>Academic Superpowers™ Assessment</h3>
+            <p style="font-size:var(--text-sm);flex:1;">Discover your unique learning archetype across 28 research-informed questions. Get your full profile, career insights, and a personalized learning plan.</p>
+            <a href="profile.html" class="btn btn-primary">Take Free Assessment</a>
+          </div>
         </div>
-      </div>
-      <div class="resource-card reveal stagger-3">
-        <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(26,58,107,0.06));">📚</div>
-        <div class="resource-body">
-          <span class="resource-type">Framework · Educators</span>
-          <h3>Academic Superpowers™ Educator Guide</h3>
-          <p style="font-size:var(--text-sm);flex:1;">Practical classroom strategies for identifying and nurturing each of the four Superpower archetypes in your students.</p>
-          <a href="educators.html" class="btn btn-secondary">View Framework</a>
+        <div class="resource-card" data-rtype="guide">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(212,168,67,0.1),rgba(13,148,136,0.06));">🤖</div>
+          <div class="resource-body">
+            <span class="resource-type">Guide · Professional</span>
+            <h3>AI Without Losing Your Edge</h3>
+            <p style="font-size:var(--text-sm);flex:1;">Understand your AI alignment profile, identify cognitive risks, and build a 30-day plan to stay mentally sharp while leveraging AI tools.</p>
+            <a href="product-1.html" class="btn btn-secondary">Open Guide</a>
+          </div>
         </div>
-      </div>
-      <div class="resource-card reveal stagger-4">
-        <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(13,148,136,0.08));">📋</div>
-        <div class="resource-body">
-          <span class="resource-type">Tool · Parents</span>
-          <h3>Family Learning Support Toolkit</h3>
-          <p style="font-size:var(--text-sm);flex:1;">At-home strategies, conversation guides, and routine builders to support your child's unique learning style and build school-home connection.</p>
-          <a href="k12-parents.html" class="btn btn-secondary">View Toolkit</a>
+        <div class="resource-card" data-rtype="guide educators">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(26,58,107,0.06));">📚</div>
+          <div class="resource-body">
+            <span class="resource-type">Framework · Educators</span>
+            <h3>Academic Superpowers™ Educator Guide</h3>
+            <p style="font-size:var(--text-sm);flex:1;">Practical classroom strategies for identifying and nurturing each of the four Superpower archetypes in your students.</p>
+            <a href="educators.html" class="btn btn-secondary">View Framework</a>
+          </div>
         </div>
-      </div>
-      <div class="resource-card reveal stagger-5">
-        <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(26,58,107,0.08),rgba(13,148,136,0.06));">🏢</div>
-        <div class="resource-body">
-          <span class="resource-type">Guide · Organizations</span>
-          <h3>Building a Learning-Intelligent Organization</h3>
-          <p style="font-size:var(--text-sm);flex:1;">A leadership guide to implementing the Academic Superpowers™ framework across teams — reducing training friction and improving outcomes.</p>
-          <a href="organizations.html" class="btn btn-secondary">Learn More</a>
+        <div class="resource-card" data-rtype="tool">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(13,148,136,0.08));">📋</div>
+          <div class="resource-body">
+            <span class="resource-type">Tool · Parents</span>
+            <h3>Family Learning Support Toolkit</h3>
+            <p style="font-size:var(--text-sm);flex:1;">At-home strategies, conversation guides, and routine builders to support your child's unique learning style and build school-home connection.</p>
+            <a href="k12.html" class="btn btn-secondary">View Toolkit</a>
+          </div>
         </div>
-      </div>
-      <div class="resource-card reveal stagger-6">
-        <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(212,168,67,0.08),rgba(239,68,68,0.05));">🚀</div>
-        <div class="resource-body">
-          <span class="resource-type">Platform · All Learners</span>
-          <h3>Hero LMS — Personalized Learning</h3>
-          <p style="font-size:var(--text-sm);flex:1;">Access your personalized course dashboard, AI coach, progress tracking, and superpower-aligned learning paths in one platform.</p>
-          <a href="hero/login.html" class="btn btn-primary">Access Platform</a>
+        <div class="resource-card" data-rtype="guide">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(26,58,107,0.08),rgba(13,148,136,0.06));">🏢</div>
+          <div class="resource-body">
+            <span class="resource-type">Guide · Organizations</span>
+            <h3>Building a Learning-Intelligent Organization</h3>
+            <p style="font-size:var(--text-sm);flex:1;">A leadership guide to implementing the Academic Superpowers™ framework across teams — reducing training friction and improving outcomes.</p>
+            <a href="organizations.html" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="resource-card" data-rtype="platform">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,rgba(212,168,67,0.08),rgba(239,68,68,0.05));">🚀</div>
+          <div class="resource-body">
+            <span class="resource-type">Platform · All Learners</span>
+            <h3>Hero LMS — Personalized Learning</h3>
+            <p style="font-size:var(--text-sm);flex:1;">Access your personalized course dashboard, AI coach, progress tracking, and superpower-aligned learning paths in one platform.</p>
+            <a href="hero-lms.html" class="btn btn-primary">Learn About Hero LMS</a>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- ── Insights Panel ── -->
+    <div id="insightsPanel" role="tabpanel">
+      <!-- Featured -->
+      <div class="featured-insight">
+        <div style="position:relative;z-index:1;">
+          <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Featured Insight</span>
+          <h2 style="color:white;margin-top:var(--space-4);margin-bottom:var(--space-4);">Why One-Size-Fits-All Learning Fails — And What to Do Instead</h2>
+          <p style="color:rgba(255,255,255,0.72);line-height:1.7;margin-bottom:var(--space-6);">Decades of learning science research point to a simple truth: people process, retain, and apply knowledge in fundamentally different ways. The Academic Superpowers™ framework puts that research to work.</p>
+          <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-6);">
+            <span style="font-size:var(--text-sm);color:rgba(255,255,255,0.6);">By the H2EO Editorial Team</span>
+            <span style="color:rgba(255,255,255,0.3);">·</span>
+            <span style="font-size:var(--text-sm);color:rgba(255,255,255,0.6);">8 min read</span>
+          </div>
+          <a href="contact.html" class="btn btn-primary">Read Full Article</a>
+        </div>
+        <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;">
+          <div style="background:rgba(255,255,255,0.08);border-radius:var(--radius-2xl);padding:var(--space-10);text-align:center;border:1px solid rgba(255,255,255,0.1);">
+            <div style="font-size:4rem;margin-bottom:var(--space-4);">🧠</div>
+            <div style="font-family:var(--font-display);font-size:var(--text-5xl);font-weight:800;color:var(--h2eo-teal-muted);line-height:1;">4</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:var(--text-sm);margin-top:var(--space-2);">learning archetypes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic filter -->
+      <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-10);">
+        <button class="topic-pill active" data-ifilter="all">All</button>
+        <button class="topic-pill" data-ifilter="learning-science">Learning Science</button>
+        <button class="topic-pill" data-ifilter="ai-education">AI &amp; Education</button>
+        <button class="topic-pill" data-ifilter="educators">Educators</button>
+        <button class="topic-pill" data-ifilter="organizations">Organizations</button>
+        <button class="topic-pill" data-ifilter="assessments">Assessments</button>
+      </div>
+
+      <div class="insights-grid" id="insightsGrid">
+        <div class="insight-card" data-itopic="learning-science">
+          <div class="insight-card-img" style="background:linear-gradient(135deg,rgba(13,148,136,0.08),rgba(26,58,107,0.08));">🎯</div>
+          <div class="insight-card-body">
+            <span class="insight-label" style="color:var(--h2eo-teal);">Learning Science</span>
+            <h3 style="font-size:var(--text-xl);">The Hands-on Hero in the Classroom: What Research Says</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);">Project-based learning and experiential techniques dramatically improve outcomes for kinesthetic learners — here's the evidence and how to apply it.</p>
+          </div>
+          <div class="insight-card-footer">
+            <span style="font-size:var(--text-sm);color:var(--text-muted);">5 min read</span>
+            <a href="contact.html" class="btn btn-ghost btn-sm">Read →</a>
+          </div>
+        </div>
+        <div class="insight-card" data-itopic="ai-education">
+          <div class="insight-card-img" style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(26,58,107,0.06));">🤖</div>
+          <div class="insight-card-body">
+            <span class="insight-label" style="color:#4f46e5;">AI &amp; Education</span>
+            <h3 style="font-size:var(--text-xl);">AI Won't Replace Good Thinking — Unless You Let It</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);">The professionals who thrive with AI are those who know their own cognitive strengths. A profile-first approach to AI adoption protects critical thinking.</p>
+          </div>
+          <div class="insight-card-footer">
+            <span style="font-size:var(--text-sm);color:var(--text-muted);">7 min read</span>
+            <a href="contact.html" class="btn btn-ghost btn-sm">Read →</a>
+          </div>
+        </div>
+        <div class="insight-card" data-itopic="educators">
+          <div class="insight-card-img" style="background:linear-gradient(135deg,rgba(13,148,136,0.06),rgba(26,58,107,0.1));">📐</div>
+          <div class="insight-card-body">
+            <span class="insight-label" style="color:var(--h2eo-mid-blue);">Educators</span>
+            <h3 style="font-size:var(--text-xl);">Differentiated Instruction Without Extra Work: A Framework</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);">Most differentiation frameworks add hours of prep. The H2EO approach starts with archetypes — one assessment gives you a roadmap for every student.</p>
+          </div>
+          <div class="insight-card-footer">
+            <span style="font-size:var(--text-sm);color:var(--text-muted);">6 min read</span>
+            <a href="contact.html" class="btn btn-ghost btn-sm">Read →</a>
+          </div>
+        </div>
+        <div class="insight-card" data-itopic="organizations">
+          <div class="insight-card-img" style="background:linear-gradient(135deg,rgba(212,168,67,0.08),rgba(26,58,107,0.06));">🏢</div>
+          <div class="insight-card-body">
+            <span class="insight-label" style="color:var(--h2eo-gold, #c89b2a);">Organizations</span>
+            <h3 style="font-size:var(--text-xl);">Cognitive Diversity Is Your Team's Competitive Advantage</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);">Teams that understand how their members process information make better decisions, innovate faster, and experience less conflict.</p>
+          </div>
+          <div class="insight-card-footer">
+            <span style="font-size:var(--text-sm);color:var(--text-muted);">9 min read</span>
+            <a href="contact.html" class="btn btn-ghost btn-sm">Read →</a>
+          </div>
+        </div>
+        <div class="insight-card" data-itopic="assessments">
+          <div class="insight-card-img" style="background:linear-gradient(135deg,rgba(13,148,136,0.1),rgba(99,102,241,0.06));">⚡</div>
+          <div class="insight-card-body">
+            <span class="insight-label" style="color:var(--h2eo-teal);">Assessments</span>
+            <h3 style="font-size:var(--text-xl);">Why Forced-Choice Assessments Are More Honest Than Likert Scales</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);">Self-report assessments are prone to social desirability bias. The Academic Superpowers™ forced-choice design reduces this and surfaces truer cognitive patterns.</p>
+          </div>
+          <div class="insight-card-footer">
+            <span style="font-size:var(--text-sm);color:var(--text-muted);">4 min read</span>
+            <a href="contact.html" class="btn btn-ghost btn-sm">Read →</a>
+          </div>
+        </div>
+        <div class="insight-card" data-itopic="learning-science">
+          <div class="insight-card-img" style="background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(13,148,136,0.08));">🌱</div>
+          <div class="insight-card-body">
+            <span class="insight-label" style="color:var(--h2eo-mid-blue);">Learning Science</span>
+            <h3 style="font-size:var(--text-xl);">From Assessment to Action: Making Results Matter in 30 Days</h3>
+            <p style="font-size:var(--text-sm);color:var(--text-muted);">An assessment is only as valuable as what happens next. A structured 30-day follow-through plan turns insights into lasting behavioral change.</p>
+          </div>
+          <div class="insight-card-footer">
+            <span style="font-size:var(--text-sm);color:var(--text-muted);">5 min read</span>
+            <a href="contact.html" class="btn btn-ghost btn-sm">Read →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -129,8 +408,8 @@
   <div class="container">
     <div class="reveal" style="max-width:560px;margin:0 auto;text-align:center;">
       <span class="eyebrow">Stay Updated</span>
-      <h2 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Get New Resources in Your Inbox</h2>
-      <p style="margin-bottom:var(--space-8);">Join educators, professionals, and learners who receive H2EO's insights, new tools, and program announcements.</p>
+      <h2 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Get Resources &amp; Insights in Your Inbox</h2>
+      <p style="margin-bottom:var(--space-8);">Join educators, professionals, and learners who receive H2EO's new tools, insights, and program announcements.</p>
       <form data-contact-form style="display:flex;gap:var(--space-3);flex-wrap:wrap;justify-content:center;">
         <input type="hidden" name="interest" value="newsletter" />
         <input type="hidden" name="message" value="Newsletter signup from Resources page" />
@@ -147,5 +426,60 @@
 <div id="footer-mount"></div>
 <script src="js/nav-partial.js"></script>
 <script src="js/core.js"></script>
+<script>
+(function () {
+  // ── Section tabs ────────────────────────────────────────────────────────────
+  const sectionTabs = document.querySelectorAll('.section-tab');
+  const panels = { resourcesPanel: document.getElementById('resourcesPanel'), insightsPanel: document.getElementById('insightsPanel') };
+
+  function activatePanel(panelId, tab) {
+    sectionTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+    Object.values(panels).forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    panels[panelId].classList.add('active');
+  }
+
+  sectionTabs.forEach(tab => {
+    tab.addEventListener('click', () => activatePanel(tab.dataset.panel, tab));
+  });
+
+  // URL hash: resources.html#insights switches to Insights tab
+  if (window.location.hash === '#insights') {
+    const insightsTab = document.querySelector('[data-panel="insightsPanel"]');
+    if (insightsTab) activatePanel('insightsPanel', insightsTab);
+  }
+
+  // ── Resource type filter ─────────────────────────────────────────────────────
+  const rFilterBtns = document.querySelectorAll('[data-rfilter]');
+  const rCards = document.querySelectorAll('#resourcesGrid .resource-card');
+
+  rFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      rFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.rfilter;
+      rCards.forEach(card => {
+        card.hidden = f !== 'all' && !card.dataset.rtype.includes(f);
+      });
+    });
+  });
+
+  // ── Insights topic filter ────────────────────────────────────────────────────
+  const iFilterBtns = document.querySelectorAll('[data-ifilter]');
+  const iCards = document.querySelectorAll('#insightsGrid .insight-card');
+
+  iFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      iFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.ifilter;
+      iCards.forEach(card => {
+        card.hidden = f !== 'all' && card.dataset.itopic !== f;
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>

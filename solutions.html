@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions — H2EO Learning Intelligence Ecosystem</title>
+  <meta name="description" content="H2EO serves organizations, educators, professionals, adult learners, students, and K-12 families with personalized learning intelligence solutions." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    .page-hero {
+      padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-16);
+      background: linear-gradient(155deg, #f8fbff 0%, #edf4f9 60%, #e8f6f4 100%);
+      position: relative; overflow: hidden;
+    }
+
+    /* Audience filter bar */
+    .audience-filters {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-12);
+    }
+    .aud-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      border: 1.5px solid var(--gray-300);
+      background: var(--white);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast), box-shadow var(--duration-fast);
+    }
+    .aud-btn:hover { border-color: var(--h2eo-teal); color: var(--h2eo-teal); }
+    .aud-btn.active {
+      border-color: var(--h2eo-teal);
+      background: var(--h2eo-teal);
+      color: var(--white);
+      box-shadow: var(--shadow-teal);
+    }
+
+    /* Solutions grid */
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 960px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .solutions-grid { grid-template-columns: 1fr; } }
+
+    .sol-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border-subtle);
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      transition: box-shadow var(--duration-base), border-color var(--duration-base), transform var(--duration-base);
+    }
+    .sol-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); border-color: var(--h2eo-teal); }
+    .sol-card[hidden] { display: none; }
+
+    .sol-icon { font-size: 2.5rem; line-height: 1; }
+    .sol-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+    }
+    .sol-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .sol-features li::before {
+      content: '✓';
+      color: var(--h2eo-teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--space-16);
+      color: var(--text-muted);
+      display: none;
+    }
+    .no-results.visible { display: block; }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<section class="page-hero">
+  <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:0.3;width:500px;height:500px;background:radial-gradient(circle,var(--h2eo-teal-muted),transparent 70%);top:-100px;right:-100px;pointer-events:none;"></div>
+  <div class="container">
+    <div class="reveal" style="max-width:680px;">
+      <span class="eyebrow">Solutions</span>
+      <h1 style="margin-top:var(--space-4);margin-bottom:var(--space-5);">Learning Intelligence for Every Audience</h1>
+      <p class="lead">H2EO serves learners at every stage — from students and families to educators, professionals, and entire organizations. Filter below to find what fits you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+
+    <!-- Filter bar -->
+    <div class="audience-filters reveal" role="group" aria-label="Filter by audience">
+      <button class="aud-btn active" data-filter="all">All Audiences</button>
+      <button class="aud-btn" data-filter="organizations">🏢 Organizations</button>
+      <button class="aud-btn" data-filter="educators">🎓 Educators</button>
+      <button class="aud-btn" data-filter="professionals">💼 Professionals</button>
+      <button class="aud-btn" data-filter="adults">🌱 Adult Learners</button>
+      <button class="aud-btn" data-filter="students">📖 Students</button>
+      <button class="aud-btn" data-filter="k12">👨‍👩‍👧 K-12 &amp; Parents</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="solutions-grid" id="solutionsGrid">
+
+      <!-- Organizations -->
+      <div class="sol-card reveal stagger-1" data-audience="organizations">
+        <div class="sol-icon">🏢</div>
+        <span class="badge badge-blue" style="align-self:flex-start;">Organizations</span>
+        <h3>Enterprise &amp; Institutional Learning</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Build a learning-intelligent workforce. H2EO maps cognitive diversity across your teams and aligns training to how people actually process information.</p>
+        <ul class="sol-features">
+          <li>Team-wide Academic Superpowers™ mapping</li>
+          <li>Customized L&amp;D programs by archetype</li>
+          <li>Reduced training friction &amp; improved retention</li>
+          <li>Admin dashboard &amp; progress reporting</li>
+        </ul>
+        <a href="organizations.html" class="btn btn-secondary" style="margin-top:auto;">Explore for Organizations →</a>
+      </div>
+
+      <div class="sol-card reveal stagger-2" data-audience="organizations">
+        <div class="sol-icon">⚙️</div>
+        <span class="badge badge-blue" style="align-self:flex-start;">Organizations</span>
+        <h3>Workforce Development &amp; AI Readiness</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Prepare your people for AI without sacrificing critical thinking. Profile-matched AI adoption roadmaps protect cognitive independence while boosting output.</p>
+        <ul class="sol-features">
+          <li>AI alignment profiles for every team member</li>
+          <li>Skill Stagnation Audit at the org level</li>
+          <li>Leader facilitation guides</li>
+          <li>30/60/90-day implementation plans</li>
+        </ul>
+        <a href="organizations.html#workforce" class="btn btn-secondary" style="margin-top:auto;">Learn More →</a>
+      </div>
+
+      <!-- Educators -->
+      <div class="sol-card reveal stagger-1" data-audience="educators">
+        <div class="sol-icon">🎓</div>
+        <span class="badge badge-teal" style="align-self:flex-start;">Educators</span>
+        <h3>Classroom Differentiation Framework</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">One assessment gives you a roadmap for every student. Know how each learner processes information — and teach to strengths instead of gaps.</p>
+        <ul class="sol-features">
+          <li>Student Superpowers™ profiles in minutes</li>
+          <li>Archetype-specific instruction strategies</li>
+          <li>Reduces prep time for differentiation</li>
+          <li>Works for K-12 and higher education</li>
+        </ul>
+        <a href="educators.html" class="btn btn-secondary" style="margin-top:auto;">Explore for Educators →</a>
+      </div>
+
+      <div class="sol-card reveal stagger-2" data-audience="educators">
+        <div class="sol-icon">📐</div>
+        <span class="badge badge-teal" style="align-self:flex-start;">Educators</span>
+        <h3>Curriculum &amp; Training Design</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Design learning experiences that work for all four archetypes simultaneously — without creating four separate lesson plans.</p>
+        <ul class="sol-features">
+          <li>Multi-modal instructional templates</li>
+          <li>Assessment design aligned to archetypes</li>
+          <li>PD workshops for teaching teams</li>
+          <li>Classroom implementation guides</li>
+        </ul>
+        <a href="educators.html#curriculum" class="btn btn-secondary" style="margin-top:auto;">Learn More →</a>
+      </div>
+
+      <!-- Professionals -->
+      <div class="sol-card reveal stagger-1" data-audience="professionals">
+        <div class="sol-icon">💼</div>
+        <span class="badge badge-gold" style="align-self:flex-start;">Professionals</span>
+        <h3>Professional Growth Series</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Career growth aligned to your cognitive strengths. Understand how you learn, where AI poses risk to your thinking, and how to advance with intention.</p>
+        <ul class="sol-features">
+          <li>Professional Superpowers™ assessment</li>
+          <li>AI alignment &amp; cognitive risk audit</li>
+          <li>30-day personal development plan</li>
+          <li>Archetype-matched career pathways</li>
+        </ul>
+        <a href="professionals.html" class="btn btn-secondary" style="margin-top:auto;">Explore for Professionals →</a>
+      </div>
+
+      <div class="sol-card reveal stagger-2" data-audience="professionals">
+        <div class="sol-icon">🤖</div>
+        <span class="badge badge-gold" style="align-self:flex-start;">Professionals</span>
+        <h3>Using AI Without Losing Your Edge</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">The first professional workbook built around your AI alignment profile — so you integrate AI tools without letting them erode the thinking that makes you valuable.</p>
+        <ul class="sol-features">
+          <li>4 AI interaction profiles explained</li>
+          <li>Forced-choice alignment assessment</li>
+          <li>Skill stagnation detection</li>
+          <li>Personalized 30-day action plan</li>
+        </ul>
+        <a href="product-1.html" class="btn btn-secondary" style="margin-top:auto;">View Workbook →</a>
+      </div>
+
+      <!-- Adult Learners -->
+      <div class="sol-card reveal stagger-1" data-audience="adults">
+        <div class="sol-icon">🌱</div>
+        <span class="badge" style="align-self:flex-start;background:rgba(99,102,241,0.1);color:#4f46e5;">Adult Learners</span>
+        <h3>Lifelong Learning Pathways</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Learning doesn't stop at graduation. H2EO supports adults re-entering education, pursuing new skills, or simply growing in areas that matter to them.</p>
+        <ul class="sol-features">
+          <li>Adult learning profile assessment</li>
+          <li>Self-paced courses matched to your archetype</li>
+          <li>Personal learning plan builder</li>
+          <li>Progress tracking &amp; milestone recognition</li>
+        </ul>
+        <a href="adults.html" class="btn btn-secondary" style="margin-top:auto;">Explore for Adults →</a>
+      </div>
+
+      <div class="sol-card reveal stagger-2" data-audience="adults">
+        <div class="sol-icon">🔄</div>
+        <span class="badge" style="align-self:flex-start;background:rgba(99,102,241,0.1);color:#4f46e5;">Adult Learners</span>
+        <h3>Career Transition Support</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Changing careers or re-entering the workforce? Understanding how you learn is the most underestimated advantage in any transition.</p>
+        <ul class="sol-features">
+          <li>Cognitive strengths inventory</li>
+          <li>Transferable skill identification</li>
+          <li>Industry-mapped learning paths</li>
+          <li>Coaching resources &amp; support tools</li>
+        </ul>
+        <a href="adults.html#career" class="btn btn-secondary" style="margin-top:auto;">Learn More →</a>
+      </div>
+
+      <!-- Students -->
+      <div class="sol-card reveal stagger-1" data-audience="students">
+        <div class="sol-icon">📖</div>
+        <span class="badge badge-teal" style="align-self:flex-start;">Students</span>
+        <h3>Personalized Student Learning Paths</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Students learn differently. H2EO helps them discover their Academic Superpowers™ and get coursework, study strategies, and resources that actually match how they think.</p>
+        <ul class="sol-features">
+          <li>Student Superpowers™ profile</li>
+          <li>Study strategy guide by archetype</li>
+          <li>Archetype-aligned course recommendations</li>
+          <li>Motivation &amp; engagement tools</li>
+        </ul>
+        <a href="students.html" class="btn btn-secondary" style="margin-top:auto;">Explore for Students →</a>
+      </div>
+
+      <div class="sol-card reveal stagger-2" data-audience="students">
+        <div class="sol-icon">🎯</div>
+        <span class="badge badge-teal" style="align-self:flex-start;">Students</span>
+        <h3>College &amp; Career Readiness</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Help students enter higher education or the workforce knowing exactly how they learn best — and how to advocate for themselves in any environment.</p>
+        <ul class="sol-features">
+          <li>Portfolio-ready Superpowers™ summary</li>
+          <li>Self-advocacy communication tools</li>
+          <li>Goal-setting aligned to archetype</li>
+          <li>Hero LMS course access</li>
+        </ul>
+        <a href="students.html#readiness" class="btn btn-secondary" style="margin-top:auto;">Learn More →</a>
+      </div>
+
+      <!-- K-12 & Parents -->
+      <div class="sol-card reveal stagger-1" data-audience="k12">
+        <div class="sol-icon">👨‍👩‍👧</div>
+        <span class="badge badge-blue" style="align-self:flex-start;">K-12 &amp; Parents</span>
+        <h3>Family Learning Support</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Help your child thrive at home and at school. Understand their learning archetype and get practical strategies that support how they actually learn.</p>
+        <ul class="sol-features">
+          <li>Parent guide to Academic Superpowers™</li>
+          <li>At-home learning routine builders</li>
+          <li>School-home communication strategies</li>
+          <li>Age-appropriate activity guides</li>
+        </ul>
+        <a href="k12.html" class="btn btn-secondary" style="margin-top:auto;">Explore for Families →</a>
+      </div>
+
+      <div class="sol-card reveal stagger-2" data-audience="k12">
+        <div class="sol-icon">🏫</div>
+        <span class="badge badge-blue" style="align-self:flex-start;">K-12 &amp; Parents</span>
+        <h3>K-12 Educator Toolkit</h3>
+        <p style="font-size:var(--text-sm);color:var(--text-muted);">Purpose-built for the K-12 classroom. Student-appropriate assessments, classroom strategies, and parent communication tools — all aligned to the Superpowers™ framework.</p>
+        <ul class="sol-features">
+          <li>Age-appropriate student assessments</li>
+          <li>Classroom management by archetype</li>
+          <li>Parent report templates</li>
+          <li>IEP &amp; accommodation alignment</li>
+        </ul>
+        <a href="k12.html#educators" class="btn btn-secondary" style="margin-top:auto;">Learn More →</a>
+      </div>
+
+      <p class="no-results" id="noResults">No solutions found for that filter. Try "All Audiences" to see everything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-dark">
+  <div class="container" style="position:relative;z-index:1;text-align:center;">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--h2eo-teal-muted);">Not sure where to start?</span>
+      <h2 style="color:white;margin-top:var(--space-4);margin-bottom:var(--space-6);">Start With Your Learning Profile</h2>
+      <p class="lead" style="color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto var(--space-10);">The Academic Superpowers™ assessment takes 5 minutes and gives you a personalized roadmap — no matter which solution you need.</p>
+      <div class="btn-group flex-center">
+        <a href="profile.html" class="btn btn-primary btn-xl">Take the Assessment</a>
+        <a href="contact.html" class="btn btn-outline-white btn-xl">Talk to Our Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+<script>
+(function () {
+  const btns = document.querySelectorAll('.aud-btn');
+  const cards = document.querySelectorAll('.sol-card');
+  const noResults = document.getElementById('noResults');
+
+  // Support URL hash pre-selection: solutions.html#educators
+  const hashFilter = window.location.hash.replace('#', '') || 'all';
+  const matchingBtn = document.querySelector(`.aud-btn[data-filter="${hashFilter}"]`);
+  if (matchingBtn) applyFilter(hashFilter, matchingBtn);
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyFilter(btn.dataset.filter, btn);
+    });
+  });
+
+  function applyFilter(filter, activeBtn) {
+    btns.forEach(b => b.classList.remove('active'));
+    activeBtn.classList.add('active');
+
+    let visible = 0;
+    cards.forEach(card => {
+      const match = filter === 'all' || card.dataset.audience === filter;
+      card.hidden = !match;
+      if (match) visible++;
+    });
+
+    noResults.classList.toggle('visible', visible === 0);
+  }
+})();
+</script>
+</body>
+</html>
