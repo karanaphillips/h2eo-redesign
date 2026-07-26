@@ -27,7 +27,7 @@
     ${navLink('about.html','About')}
     ${navLink('solutions.html','Solutions')}
     ${navLink('profile.html','Superpowers™')}
-    ${navLink('hero-lms.html','Hero LMS')}
+    ${navLink('hero-lms.html','H2EO Academy')}
     ${navLink('services.html','Services')}
     ${navLink('resources.html','Resources')}
     ${navLink('contact.html','Contact')}
@@ -46,7 +46,7 @@
     <li><a href="about.html">About</a></li>
     <li><a href="solutions.html">Solutions</a></li>
     <li><a href="profile.html">Academic Superpowers™</a></li>
-    <li><a href="hero-lms.html">Hero LMS</a></li>
+    <li><a href="hero-lms.html">H2EO Academy</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="resources.html">Resources</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -90,7 +90,7 @@
         <h5>Platform</h5>
         <ul class="footer-links-list">
           <li><a href="profile.html">Academic Superpowers™</a></li>
-          <li><a href="hero/index.html">Hero LMS</a></li>
+          <li><a href="hero/index.html">H2EO Academy</a></li>
           <li><a href="dashboard.html">Dashboard</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="resources.html">Resources</a></li>
