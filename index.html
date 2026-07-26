@@ -447,99 +447,7 @@
   </style>
 </head>
 <body>
-
-<!-- ── Navigation ─────────────────────────────────────────────────────────── -->
-<nav class="site-nav" role="navigation" aria-label="Main navigation">
-  <a href="index.html" class="nav-brand">
-    <img src="images/h2eo-logo.png" alt="H2EO" class="nav-logo" />
-  </a>
-
-  <ul class="nav-links" role="list">
-    <li><a href="about.html">About</a></li>
-    <li>
-      <a href="#solutions">Solutions
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </a>
-      <div class="nav-dropdown" role="menu">
-        <a href="organizations.html" role="menuitem">
-          Organizations
-          <span>Enterprise &amp; institutional learning</span>
-        </a>
-        <a href="educators.html" role="menuitem">
-          Educators
-          <span>Classroom &amp; training tools</span>
-        </a>
-        <a href="professionals.html" role="menuitem">
-          Professionals
-          <span>Career growth &amp; workforce dev</span>
-        </a>
-        <a href="adults.html" role="menuitem">
-          Adult Learners
-          <span>Lifelong learning pathways</span>
-        </a>
-        <a href="students.html" role="menuitem">
-          Students
-          <span>Personalized student learning paths</span>
-        </a>
-        <a href="k12.html" role="menuitem">
-          K–12 &amp; Parents
-          <span>Student &amp; parent resources</span>
-        </a>
-      </div>
-    </li>
-    <li><a href="profile.html">Superpowers™</a></li>
-    <li><a href="https://h2-e0.vercel.app/login">Hero LMS</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li>
-      <a href="#resources">Resources
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </a>
-      <div class="nav-dropdown" role="menu">
-        <a href="resources.html" role="menuitem">
-          Resources
-          <span>Guides, tools &amp; downloads</span>
-        </a>
-        <a href="insights.html" role="menuitem">
-          Insights
-          <span>Learning science articles &amp; news</span>
-        </a>
-      </div>
-    </li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-
-  <div class="nav-actions">
-    <a href="https://h2-e0.vercel.app/login" class="nav-login">Sign In</a>
-    <a href="contact.html" class="nav-cta btn">Book Consultation</a>
-    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
-  <ul role="list">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="organizations.html">Organizations</a></li>
-    <li><a href="educators.html">Educators</a></li>
-    <li><a href="professionals.html">Professionals</a></li>
-    <li><a href="adults.html">Adult Learners</a></li>
-    <li><a href="students.html">Students</a></li>
-    <li><a href="k12.html">K–12</a></li>
-    <li><a href="profile.html">Academic Superpowers™</a></li>
-    <li><a href="https://h2-e0.vercel.app/login">Hero LMS</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="resources.html">Resources</a></li>
-    <li><a href="insights.html">Insights</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="mobile-menu-footer">
-    <a href="https://h2-e0.vercel.app/login" class="btn btn-secondary btn-block">Sign In</a>
-    <a href="contact.html" class="btn btn-primary btn-block">Book Consultation</a>
-  </div>
-</div>
+<div id="nav-mount"></div>
 
 <!-- ── Hero ───────────────────────────────────────────────────────────────── -->
 <section class="hero" aria-label="Hero">
@@ -605,14 +513,6 @@
     </div>
   </div>
 </section>
-
-<!-- ── Trust Strip ─────────────────────────────────────────────────────────── -->
-<div class="trust-strip" role="list" aria-label="Trust indicators">
-  <div class="trust-item" role="listitem">Designed by educators</div>
-  <div class="trust-item" role="listitem">Informed by learning science</div>
-  <div class="trust-item" role="listitem">Built for real people, real lives</div>
-  <div class="trust-item" role="listitem">Education should adapt to the learner</div>
-</div>
 
 <!-- ── Stats ───────────────────────────────────────────────────────────────── -->
 <section class="section-sm bg-white">
@@ -857,51 +757,6 @@
           <li>Institutional and community partnerships</li>
         </ul>
         <p style="font-size:var(--text-sm); color: var(--text-muted); font-style:italic; margin-top:auto;">H2EO is growing intentionally — with learners at the center.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Testimonials ────────────────────────────────────────────────────────── -->
-<section class="section bg-soft" id="testimonials">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="eyebrow">Stories</span>
-      <h2>Learners &amp; Educators Transformed</h2>
-    </div>
-
-    <div class="testimonials-track">
-      <div class="testimonial-card reveal stagger-1">
-        <p class="testimonial-text">The Academic Superpowers assessment changed how I understand my students. I now design lessons that actually connect with how they naturally think.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">MJ</div>
-          <div>
-            <div class="testimonial-name">M. Johnson</div>
-            <div class="testimonial-role">Middle School Educator</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal stagger-2">
-        <p class="testimonial-text">I finally understand why I struggled in traditional school. Discovering I'm a Hands-on Hero completely reframed how I approach professional development.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">TP</div>
-          <div>
-            <div class="testimonial-name">T. Patterson</div>
-            <div class="testimonial-role">Operations Manager</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal stagger-3">
-        <p class="testimonial-text">The H2EO framework gave our organization a shared language for how our team learns. Training outcomes improved significantly within one quarter.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">KR</div>
-          <div>
-            <div class="testimonial-name">K. Reynolds</div>
-            <div class="testimonial-role">Learning &amp; Development Director</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
