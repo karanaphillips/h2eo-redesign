@@ -109,12 +109,15 @@
 </div>
 
 <div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
-<script src="../js/core.js"></script>
 <script src="js/oauth-config.js"></script>
-<script src="js/access-control.js"></script>
 <script>
-  window._loginRedirect = '/hero/index.html';
+  // Send users to the real Hero LMS — all Sign In links on the H2EO site
+  // point here, so this page acts as a bridge. Update heroLmsUrl in
+  // oauth-config.js when you have a production domain.
+  var lmsUrl = (window.HERO_AUTH_CONFIG && window.HERO_AUTH_CONFIG.heroLmsUrl)
+    ? window.HERO_AUTH_CONFIG.heroLmsUrl
+    : 'https://h2-e0.vercel.app';
+  window.location.replace(lmsUrl + '/login');
 </script>
-<script src="../js/auth.js"></script>
 </body>
 </html>

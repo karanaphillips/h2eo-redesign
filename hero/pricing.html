@@ -382,7 +382,7 @@
     const user = getUser();
     if (!user?.email) {
       sessionStorage.setItem('heroLoginReturn', returnPath || window.location.href);
-      window.location.href = '/hero/login.html';
+      window.location.href = 'https://h2-e0.vercel.app/login';
       return null;
     }
     return user;

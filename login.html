@@ -62,7 +62,7 @@
         </button>
       </div>
 
-      <p class="auth-footer-link">Don't have an account? <a href="hero/register.html">Sign up here</a></p>
+      <p class="auth-footer-link">Don't have an account? <a href="https://h2-e0.vercel.app/register">Sign up here</a></p>
       <p class="auth-footer-link">Need help? <a href="contact.html">Contact Support</a></p>
     </div>
   </div>
@@ -122,7 +122,12 @@
 
 <div id="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
 
-<script src="js/core.js"></script>
-<script src="js/auth.js"></script>
+<script src="hero/js/oauth-config.js"></script>
+<script>
+  var lmsUrl = (window.HERO_AUTH_CONFIG && window.HERO_AUTH_CONFIG.heroLmsUrl)
+    ? window.HERO_AUTH_CONFIG.heroLmsUrl
+    : 'https://h2-e0.vercel.app';
+  window.location.replace(lmsUrl + '/login');
+</script>
 </body>
 </html>

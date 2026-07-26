@@ -33,7 +33,7 @@
     ${navLink('contact.html','Contact')}
   </ul>
   <div class="nav-actions">
-    <a href="hero/login.html" class="nav-login">Sign In</a>
+    <a href="https://h2-e0.vercel.app/login" class="nav-login">Sign In</a>
     <a href="contact.html" class="nav-cta btn">Book Consultation</a>
     <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -52,7 +52,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="mobile-menu-footer">
-    <a href="hero/login.html" class="btn btn-secondary btn-block">Sign In</a>
+    <a href="https://h2-e0.vercel.app/login" class="btn btn-secondary btn-block">Sign In</a>
     <a href="contact.html" class="btn btn-primary btn-block">Book Consultation</a>
   </div>
 </div>`;
@@ -102,7 +102,7 @@
         <ul class="footer-links-list">
           <li><a href="about.html">About H2EO</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="hero/login.html">Sign In</a></li>
+          <li><a href="https://h2-e0.vercel.app/login">Sign In</a></li>
         </ul>
       </div>
     </div>

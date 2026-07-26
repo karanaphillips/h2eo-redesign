@@ -273,7 +273,7 @@
   const user = JSON.parse(localStorage.getItem('heroUser') || 'null');
   if (!user) {
     sessionStorage.setItem('heroLoginReturn', window.location.href);
-    window.location.href = '/hero/login.html';
+    window.location.href = 'https://h2-e0.vercel.app/login';
     return;
   }
   const uDisplay = document.getElementById('userDisplay');
@@ -324,7 +324,7 @@
     } else {
       // Shouldn't happen if user is logged in, but handle gracefully
       sessionStorage.setItem('heroLoginReturn', window.location.href);
-      window.location.href = '/hero/login.html';
+      window.location.href = 'https://h2-e0.vercel.app/login';
       return;
     }
 
