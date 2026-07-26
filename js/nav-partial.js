@@ -109,9 +109,9 @@
     <div class="footer-bottom">
       <p class="footer-copyright">&copy; 2025 Here to Educate Others (H2EO), LLC. All rights reserved.</p>
       <nav class="footer-legal" aria-label="Legal links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Accessibility</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="accessibility.html">Accessibility</a>
       </nav>
     </div>
   </div>
