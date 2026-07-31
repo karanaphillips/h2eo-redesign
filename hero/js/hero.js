@@ -48,7 +48,7 @@
   function requireAuth() {
     const user = storage.getCurrent();
     if (!user) {
-      window.location.href = 'https://h2-e0.vercel.app/login';
+      window.location.href = 'https://h2eoacademy.com/login';
       return false;
     }
 
@@ -81,7 +81,7 @@
         storage.clearCurrent();
         localStorage.removeItem('heroToken');
         localStorage.removeItem('heroRefreshToken');
-        window.location.href = 'https://h2-e0.vercel.app/login';
+        window.location.href = 'https://h2eoacademy.com/login';
       });
     }
 

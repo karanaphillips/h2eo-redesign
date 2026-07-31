@@ -271,7 +271,7 @@
   const user = JSON.parse(localStorage.getItem('heroUser') || 'null');
   if (!user) {
     sessionStorage.setItem('heroLoginReturn', window.location.href);
-    window.location.href = 'https://h2-e0.vercel.app/login';
+    window.location.href = 'https://h2eoacademy.com/login';
     return;
   }
 
@@ -285,7 +285,7 @@
     localStorage.removeItem('heroUser');
     localStorage.removeItem('heroToken');
     localStorage.removeItem('heroRefreshToken');
-    window.location.href = 'https://h2-e0.vercel.app/login';
+    window.location.href = 'https://h2eoacademy.com/login';
   });
 
   /* ── Resolve archetype ── */

@@ -27,7 +27,7 @@
 window.HERO_AUTH_CONFIG = {
 
   /* ── Hero LMS URL ───────────────────────────────────── */
-  heroLmsUrl: 'https://h2-e0.vercel.app',
+  heroLmsUrl: 'https://h2eoacademy.com',
 
   /* ── Google OAuth ───────────────────────────────────── */
   google: {
