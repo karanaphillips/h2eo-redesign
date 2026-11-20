@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>H2EO Learning Lab | Learn by doing</title>
+  <meta name="description" content="Online courses where you build real projects, check your work live, and earn a verifiable certificate. Try Week 1 of any course free." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <style>
+    /* ── Lab design tokens ── */
+    :root {
+      --lab-dark-teal:   #1d3a3f;
+      --lab-teal-mid:    #174048;  /* slightly darker for hover states */
+      --lab-teal-muted:  rgba(29,58,63,0.08);
+      --lab-teal-border: rgba(29,58,63,0.18);
+      --lab-amber:       #b86e12;
+      --lab-amber-light: #f0a830;  /* for text on dark backgrounds */
+      --lab-amber-muted: rgba(184,110,18,0.10);
+      --lab-heading:     'Bricolage Grotesque', sans-serif;
+      --lab-body:        'Atkinson Hyperlegible', sans-serif;
+    }
+
+    /* ── Base overrides for lab pages ── */
+    .lab-page { font-family: var(--lab-body); }
+    .lab-page h1, .lab-page h2, .lab-page h3, .lab-page h4 { font-family: var(--lab-heading); }
+
+    /* ── Identity banner (sits under main nav) ── */
+    .lab-banner {
+      background: var(--lab-dark-teal);
+      padding: calc(var(--nav-height, 72px) + 10px) 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .lab-banner-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .lab-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .lab-mark-icon { width: 30px; height: 30px; flex-shrink: 0; }
+    .lab-mark-text {
+      font-family: var(--lab-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .lab-mark-text small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.65rem;
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+    .lab-banner-note {
+      font-family: var(--lab-body);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .lab-banner-note a { color: rgba(255,255,255,0.85); text-decoration: underline; }
+
+    /* ── Hero ── */
+    .lab-hero {
+      background: linear-gradient(148deg, #1d3a3f 0%, #142a2e 65%, #0d1f22 100%);
+      padding: 80px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .lab-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 55% 60% at 85% 55%, rgba(184,110,18,0.13), transparent 70%);
+      pointer-events: none;
+    }
+    .lab-hero-inner { position: relative; z-index: 1; max-width: 660px; }
+    .lab-eyebrow {
+      display: inline-block;
+      font-family: var(--lab-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lab-amber-light);
+      margin-bottom: 18px;
+    }
+    .lab-hero h1 {
+      font-family: var(--lab-heading);
+      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.04;
+      margin: 0 0 20px;
+      letter-spacing: -0.03em;
+    }
+    .lab-hero p {
+      font-size: clamp(1rem, 1.8vw, 1.175rem);
+      line-height: 1.65;
+      color: rgba(255,255,255,0.78);
+      margin: 0 0 36px;
+      max-width: 540px;
+    }
+    .lab-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Shared Lab buttons */
+    .btn-amber {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      background: var(--lab-amber);
+      color: white;
+      border-radius: 8px;
+      font-family: var(--lab-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background .15s, transform .15s;
+      border: 2px solid transparent;
+    }
+    .btn-amber:hover  { background: #9a5c0f; transform: translateY(-1px); }
+    .btn-amber:focus-visible { outline: 3px solid var(--lab-amber-light); outline-offset: 3px; }
+
+    .btn-ghost-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      background: transparent;
+      color: white;
+      border-radius: 8px;
+      font-family: var(--lab-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.38);
+      transition: border-color .15s, background .15s;
+    }
+    .btn-ghost-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+    .btn-ghost-white:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+
+    .btn-teal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      background: var(--lab-dark-teal);
+      color: white;
+      border-radius: 8px;
+      font-family: var(--lab-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background .15s;
+    }
+    .btn-teal:hover { background: var(--lab-teal-mid); }
+    .btn-teal:focus-visible { outline: 3px solid var(--lab-dark-teal); outline-offset: 3px; }
+
+    /* ── Generic lab section ── */
+    .lab-sec { padding: 80px 0; }
+    .lab-sec-bg-soft { background: #f7f9f8; }
+    .lab-sec-bg-muted { background: var(--lab-teal-muted); }
+
+    .lab-h2 {
+      font-family: var(--lab-heading);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 800;
+      color: var(--lab-dark-teal);
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .lab-lead {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: #4b5563;
+      max-width: 560px;
+      margin: 0 0 44px;
+    }
+
+    /* ── How it works ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    .step { display: flex; flex-direction: column; gap: 12px; }
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: var(--lab-teal-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--lab-heading);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--lab-dark-teal);
+      flex-shrink: 0;
+    }
+    .step h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--lab-dark-teal);
+      margin: 0;
+    }
+    .step p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin: 0;
+    }
+
+    /* ── Course cards ── */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+    }
+    .course-card {
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      transition: box-shadow .15s, border-color .15s, transform .15s;
+    }
+    .course-card:hover {
+      border-color: var(--lab-dark-teal);
+      box-shadow: 0 8px 28px rgba(29,58,63,0.11);
+      transform: translateY(-2px);
+    }
+    .course-card:focus-visible { outline: 3px solid var(--lab-dark-teal); outline-offset: 3px; }
+    .course-track {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--lab-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .track-py   { background: var(--lab-teal-muted);  color: var(--lab-dark-teal); }
+    .track-math { background: var(--lab-amber-muted); color: #7c4a0c; }
+    .track-lib  { background: rgba(99,102,241,.10);   color: #3730a3; }
+    .track-exam { background: rgba(5,150,105,.10);    color: #065f46; }
+    .course-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #172628;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .course-card p {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: #4b5563;
+      margin: 0;
+      flex: 1;
+    }
+    .course-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--lab-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--lab-dark-teal);
+      margin-top: 4px;
+    }
+
+    .lab-disclaimer {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 22px;
+      line-height: 1.55;
+    }
+    .lab-more-paths {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+    .lab-more-paths a { color: var(--lab-dark-teal); font-weight: 700; text-decoration: underline; }
+
+    /* ── Certificates ── */
+    .cert-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 720px) { .cert-layout { grid-template-columns: 1fr; } }
+
+    .cert-features { display: flex; flex-direction: column; gap: 22px; }
+    .cert-feat { display: flex; gap: 14px; align-items: flex-start; }
+    .cert-feat-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--lab-teal-muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .cert-feat h4 {
+      font-size: 0.925rem;
+      font-weight: 700;
+      color: var(--lab-dark-teal);
+      margin: 0 0 4px;
+    }
+    .cert-feat p {
+      font-size: 0.85rem;
+      color: #4b5563;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .cert-card {
+      background: var(--lab-dark-teal);
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .cert-badge-svg { width: 68px; height: 68px; }
+    .cert-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+    }
+    .cert-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.72);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .cert-verify-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--lab-heading);
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--lab-amber-light);
+      text-decoration: none;
+      margin-top: 4px;
+    }
+    .cert-verify-link:hover { text-decoration: underline; }
+    .cert-verify-link:focus-visible { outline: 3px solid var(--lab-amber-light); outline-offset: 2px; border-radius: 3px; }
+
+    /* ── B2B section ── */
+    .b2b-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 720px) { .b2b-layout { grid-template-columns: 1fr; } }
+
+    .b2b-feats { display: flex; flex-direction: column; gap: 18px; margin-bottom: 30px; }
+    .b2b-feat { display: flex; gap: 12px; align-items: flex-start; }
+    .b2b-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--lab-dark-teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .b2b-feat p { font-size: 0.9rem; color: #4b5563; margin: 0; line-height: 1.6; }
+    .b2b-feat p strong { color: #172628; }
+
+    .doc-card {
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .doc-card-heading {
+      font-family: var(--lab-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--lab-dark-teal);
+      margin: 0 0 18px;
+    }
+    .doc-rows { display: flex; flex-direction: column; gap: 8px; }
+    .doc-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      background: #f7f9f8;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #374151;
+    }
+    .doc-row-icon { font-size: 1rem; flex-shrink: 0; }
+
+    /* ── FAQ ── */
+    .faq-wrap {
+      max-width: 760px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .faq-item { border-top: 1.5px solid #e2e8f0; }
+    .faq-item:first-child { border-top: none; }
+    .faq-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 19px 22px;
+      background: white;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--lab-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #172628;
+      transition: background .1s;
+    }
+    .faq-btn:hover { background: #f7f9f8; }
+    .faq-btn:focus-visible { outline: 3px solid var(--lab-dark-teal); outline-offset: -3px; }
+    .faq-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--lab-teal-muted);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform .2s, background .2s;
+    }
+    .faq-btn[aria-expanded="true"] .faq-icon {
+      background: var(--lab-dark-teal);
+      transform: rotate(45deg);
+    }
+    .faq-btn[aria-expanded="true"] .faq-icon path { stroke: white; }
+    .faq-answer {
+      display: none;
+      padding: 0 22px 20px;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #4b5563;
+      background: white;
+    }
+    .faq-answer.open { display: block; }
+    .faq-answer a { color: var(--lab-dark-teal); font-weight: 700; }
+
+    /* ── Closing CTA ── */
+    .lab-cta-section {
+      background: linear-gradient(140deg, #1d3a3f 0%, #142a2e 100%);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .lab-cta-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 70% at 50% 50%, rgba(184,110,18,0.10), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: var(--lab-heading);
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: white;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+    .cta-inner p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin: 0 0 30px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .lab-sec  { padding: 60px 0; }
+      .lab-hero { padding: 60px 0 70px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 380px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<div class="lab-page">
+
+  <!-- Lab identity banner -->
+  <div class="lab-banner">
+    <div class="container">
+      <div class="lab-banner-row">
+        <a href="learning-lab.html" class="lab-mark" aria-label="H2EO Learning Lab home">
+          <!-- Logo: outlined triangle with dot inside -->
+          <svg class="lab-mark-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M18 4L33 31H3L18 4Z" stroke="#f0a830" stroke-width="2.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="18" cy="21" r="3.4" fill="#f0a830"/>
+          </svg>
+          <div class="lab-mark-text">
+            H2EO Learning Lab
+            <small>heretoeducateothers.com/learning-lab</small>
+          </div>
+        </a>
+        <p class="lab-banner-note">A separate platform from <a href="https://h2eoacademy.com" target="_blank" rel="noopener">H2EO Academy</a>, which serves K–12 schools.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="lab-hero" aria-labelledby="hero-heading">
+    <div class="container">
+      <div class="lab-hero-inner">
+        <span class="lab-eyebrow">H2EO Learning Lab</span>
+        <h1 id="hero-heading">Learn by doing.</h1>
+        <p>Courses where you build real projects, check your work live, and earn a certificate anyone can verify.</p>
+        <div class="lab-btn-row">
+          <a href="https://h2eo-adventure-quest.vercel.app" class="btn-amber">Try Week 1 free</a>
+          <a href="https://h2eo-adventure-quest.vercel.app/#/courses" class="btn-ghost-white">Browse courses</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="lab-sec" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 class="lab-h2" id="how-heading">How it works</h2>
+      <p class="lab-lead">Every course follows the same four-step loop — from first concept to finished project.</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3>Read a short lesson</h3>
+          <p>Each unit opens with a focused reading — just the concept you need for the lab ahead, without detours.</p>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3>Check your understanding</h3>
+          <p>A quick knowledge check confirms you caught the key idea before you write a line of code or solve a problem.</p>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3>Solve labs as you go</h3>
+          <p>Hands-on labs run and check your work right in the browser — nothing to install. You see whether it works immediately.</p>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">4</div>
+          <h3>Build your course project</h3>
+          <p>Each lab adds the next piece to one continuing project you carry through the entire course from start to finish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COURSES ── -->
+  <section class="lab-sec lab-sec-bg-soft" id="courses" aria-labelledby="courses-heading">
+    <div class="container">
+      <h2 class="lab-h2" id="courses-heading">Courses open now</h2>
+      <p class="lab-lead">Every course is self-paced. Week 1 is free with an account — no credit card required.</p>
+
+      <div class="courses-grid">
+
+        <a href="https://h2eo-adventure-quest.vercel.app/#/c/python" class="course-card"
+           aria-label="Python Programming I — build Adventure Quest, a text adventure game, in 16 weeks">
+          <span class="course-track track-py">Python · 16 weeks</span>
+          <h3>Python Programming I</h3>
+          <p>Build <em>Adventure Quest</em>, a text adventure game, while learning the fundamentals of Python from the ground up.</p>
+          <span class="course-cta" aria-hidden="true">View course →</span>
+        </a>
+
+        <a href="https://h2eo-adventure-quest.vercel.app/#/c/python2" class="course-card"
+           aria-label="Python Programming II — rebuild Adventure Quest as a full game engine">
+          <span class="course-track track-py">Python · Intermediate</span>
+          <h3>Python Programming II</h3>
+          <p>Rebuild <em>Adventure Quest</em> as a full game engine — covering classes, automated tests, data structures, and a database.</p>
+          <span class="course-cta" aria-hidden="true">View course →</span>
+        </a>
+
+        <a href="https://h2eo-adventure-quest.vercel.app/#/c/algebra" class="course-card"
+           aria-label="College Algebra: The Launch Plan — algebra through planning a food-truck business">
+          <span class="course-track track-math">Mathematics</span>
+          <h3>College Algebra · The Launch Plan</h3>
+          <p>Work through algebra by planning a real food-truck business — budgets, breakeven points, and growth models grounded in real decisions.</p>
+          <span class="course-cta" aria-hidden="true">View course →</span>
+        </a>
+
+        <a href="https://h2eo-adventure-quest.vercel.app/#/c/scholar1" class="course-card"
+           aria-label="Foundations of Knowing — The Scholar's Path, Course 1">
+          <span class="course-track track-lib">The Scholar's Path · Course 1</span>
+          <h3>Foundations of Knowing</h3>
+          <p>The first course of The Scholar's Path: evidence, reasoning, and the history of words — the bedrock of learning anything else well.</p>
+          <span class="course-cta" aria-hidden="true">View course →</span>
+        </a>
+
+        <a href="https://h2eo-adventure-quest.vercel.app/#/c/pcepready" class="course-card"
+           aria-label="PCEP Exam Readiness — practice exams and bridge lessons for the Python Institute PCEP certification">
+          <span class="course-track track-exam">Exam Readiness</span>
+          <h3>PCEP Exam Readiness</h3>
+          <p>Practice exams and bridge lessons to prepare for the Python Institute's Certified Entry-Level Python Programmer exam.</p>
+          <span class="course-cta" aria-hidden="true">View course →</span>
+        </a>
+
+        <a href="https://h2eo-adventure-quest.vercel.app/#/c/pcapready" class="course-card"
+           aria-label="PCAP Exam Readiness — practice exams and bridge lessons for the Python Institute PCAP certification">
+          <span class="course-track track-exam">Exam Readiness</span>
+          <h3>PCAP Exam Readiness</h3>
+          <p>Practice exams and bridge lessons to prepare for the Python Institute's Certified Associate in Python Programming exam.</p>
+          <span class="course-cta" aria-hidden="true">View course →</span>
+        </a>
+
+      </div>
+
+      <p class="lab-disclaimer">
+        H2EO is not affiliated with or endorsed by the Python Institute.
+        PCEP and PCAP exams are booked and paid for separately through the Python Institute.
+      </p>
+      <p class="lab-more-paths">
+        More learning paths are coming in programming, IT and cybersecurity, data, AI, cloud, web development, mathematics, science and English.
+        <a href="https://h2eo-adventure-quest.vercel.app/#/paths">See all paths →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CERTIFICATES ── -->
+  <section class="lab-sec" aria-labelledby="certs-heading">
+    <div class="container">
+      <div class="cert-layout">
+        <div>
+          <h2 class="lab-h2" id="certs-heading">Certificates you can prove</h2>
+          <p class="lab-lead">Finish a course and earn a Certificate of Completion that is real, verifiable, and portable.</p>
+          <div class="cert-features">
+            <div class="cert-feat">
+              <div class="cert-feat-icon" aria-hidden="true">🔑</div>
+              <div>
+                <h4>Unique verification ID</h4>
+                <p>Every certificate has its own ID and a public verification page — anyone can confirm it is genuine at any time.</p>
+              </div>
+            </div>
+            <div class="cert-feat">
+              <div class="cert-feat-icon" aria-hidden="true">🏅</div>
+              <div>
+                <h4>Open Badge for LinkedIn</h4>
+                <p>Earn a digital Open Badge you can add directly to your LinkedIn profile and other credential wallets.</p>
+              </div>
+            </div>
+            <div class="cert-feat">
+              <div class="cert-feat-icon" aria-hidden="true">📋</div>
+              <div>
+                <h4>Instructor-reviewed projects</h4>
+                <p>Courses with a final project require an instructor to review and approve your work before the certificate is issued.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-card" role="img" aria-label="Certificate of Completion card preview">
+          <!-- Badge SVG -->
+          <svg class="cert-badge-svg" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="34" cy="34" r="32" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <path d="M34 10L40 26L58 28L46 40L49 58L34 50L19 58L22 40L10 28L28 26L34 10Z"
+                  stroke="#f0a830" stroke-width="2.2" fill="rgba(240,168,48,0.15)" stroke-linejoin="round"/>
+            <text x="34" y="38" text-anchor="middle"
+                  font-family="'Bricolage Grotesque', sans-serif"
+                  font-weight="800" font-size="9" fill="white" letter-spacing="0.5">CERT</text>
+          </svg>
+          <h3>Certificate of Completion</h3>
+          <p>Issued upon finishing the course. Courses with a final project require instructor approval before the certificate is released.</p>
+          <a href="https://h2eo-adventure-quest.vercel.app/#/verify" class="cert-verify-link">
+            Verify a certificate →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOR SCHOOLS & EMPLOYERS ── -->
+  <section class="lab-sec lab-sec-bg-muted" id="schools" aria-labelledby="b2b-heading">
+    <div class="container">
+      <div class="b2b-layout">
+        <div>
+          <span class="lab-eyebrow" style="color: var(--lab-dark-teal);">Schools &amp; Employers</span>
+          <h2 class="lab-h2" id="b2b-heading" style="margin-top: 10px;">Built to work with your institution</h2>
+          <p class="lab-lead">Each course comes ready to support credit reviews, group enrollments, and progress tracking.</p>
+          <div class="b2b-feats">
+            <div class="b2b-feat">
+              <div class="b2b-check" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p><strong>Documentation packet included.</strong> Every course ships with a syllabus, learning outcomes, assessment methods, and a learner completion record — ready for credit-for-prior-learning review.</p>
+            </div>
+            <div class="b2b-feat">
+              <div class="b2b-check" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p><strong>Instructor visibility.</strong> Instructors can view each learner's progress and review their final project work.</p>
+            </div>
+            <div class="b2b-feat">
+              <div class="b2b-check" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p><strong>Group access available.</strong> Enroll a cohort of students or employees under a single arrangement.</p>
+            </div>
+            <div class="b2b-feat">
+              <div class="b2b-check" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p><strong>LMS integration in development.</strong> Connection to platforms such as Canvas is under development. Contact us to discuss your institution's needs.</p>
+            </div>
+          </div>
+          <a href="mailto:hello@heretoeducateothers.com" class="btn-teal">Talk with us</a>
+        </div>
+
+        <div class="doc-card" aria-label="Documentation packet contents">
+          <p class="doc-card-heading">Documentation Packet</p>
+          <div class="doc-rows">
+            <div class="doc-row"><span class="doc-row-icon" aria-hidden="true">📄</span> Syllabus &amp; course outline</div>
+            <div class="doc-row"><span class="doc-row-icon" aria-hidden="true">🎯</span> Learning outcomes</div>
+            <div class="doc-row"><span class="doc-row-icon" aria-hidden="true">📊</span> Assessment methods</div>
+            <div class="doc-row"><span class="doc-row-icon" aria-hidden="true">✅</span> Learner completion record</div>
+            <div class="doc-row"><span class="doc-row-icon" aria-hidden="true">🏅</span> Certificate with verification ID</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="lab-sec" aria-labelledby="faq-heading">
+    <div class="container">
+      <h2 class="lab-h2" id="faq-heading" style="margin-bottom: 32px;">Common questions</h2>
+      <div class="faq-wrap">
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-free">
+            Is the first week really free?
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2V10M2 6H10" stroke="#1d3a3f" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div id="faq-free" class="faq-answer" role="region" aria-label="Is the first week really free?">
+            Yes. Week 1 of every course is free when you create an account — no credit card required. You can read the first lessons and try a live lab before committing to anything.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-install">
+            Do I need to install anything?
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2V10M2 6H10" stroke="#1d3a3f" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div id="faq-install" class="faq-answer" role="region" aria-label="Do I need to install anything?">
+            Nothing at all. All programming labs run directly in your web browser. There is no software to download, no development environment to configure, and no command line to open.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-credit">
+            Is the certificate college credit?
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2V10M2 6H10" stroke="#1d3a3f" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div id="faq-credit" class="faq-answer" role="region" aria-label="Is the certificate college credit?">
+            No. H2EO certificates are Certificates of Completion, not college credit. Each institution decides whether to recognize prior learning — many do so through a formal credit-for-prior-learning process, and the documentation packet included with every course is designed to support that review.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-exam">
+            Do the exam-readiness courses include the exam?
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2V10M2 6H10" stroke="#1d3a3f" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div id="faq-exam" class="faq-answer" role="region" aria-label="Do the exam-readiness courses include the exam?">
+            No. The PCEP and PCAP exam-readiness courses include practice exams and bridge lessons only. The actual certification exam is booked and paid for separately, directly through the Python Institute. H2EO is not affiliated with or endorsed by the Python Institute.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-pace">
+            Are courses self-paced?
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2V10M2 6H10" stroke="#1d3a3f" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div id="faq-pace" class="faq-answer" role="region" aria-label="Are courses self-paced?">
+            Yes. All courses are self-paced — work through the material when it fits your schedule. Final-project courses require an instructor to review your work before the certificate is issued, but there is no deadline for submission.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false" aria-controls="faq-academy">
+            How is this different from H2EO Academy?
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2V10M2 6H10" stroke="#1d3a3f" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div id="faq-academy" class="faq-answer" role="region" aria-label="How is this different from H2EO Academy?">
+            <a href="https://h2eoacademy.com" target="_blank" rel="noopener">H2EO Academy</a> is an adaptive K–12 school platform for students, teachers, parents, and administrators. The Learning Lab is a separate course platform for teens through adults, focused on project-based learning and verifiable credentials. The two platforms are independent of each other.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLOSING CTA ── -->
+  <section class="lab-cta-section" aria-labelledby="cta-heading">
+    <div class="cta-inner">
+      <div style="display:flex; justify-content:center; margin-bottom:20px;" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4L33 31H3L18 4Z" stroke="#f0a830" stroke-width="2.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="18" cy="21" r="3.4" fill="#f0a830"/>
+        </svg>
+      </div>
+      <h2 id="cta-heading">Start with Week 1 free.</h2>
+      <p>No credit card. Nothing to install. Open a course and build something.</p>
+      <a href="https://h2eo-adventure-quest.vercel.app" class="btn-amber">Go to the Learning Lab →</a>
+    </div>
+  </section>
+
+</div><!-- /.lab-page -->
+
+<div id="footer-mount"></div>
+<script src="js/nav-partial.js"></script>
+<script src="js/core.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('.faq-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('open', !expanded);
+    });
+  });
+})();
+</script>
+</body>
+</html>
